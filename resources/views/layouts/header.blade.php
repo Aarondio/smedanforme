@@ -49,7 +49,7 @@
                                   @if (Auth::user() == null)
                                   <a class="nav-link fw-normal" href="/">Home</a>
                                   @else
-                                  <a class="nav-link fw-normal" href="{{route('home')}}">Home</a>
+                                  <a class="nav-link fw-normal" href="{{route('home')}}">Dashboard</a>
                                   @endif
                                 </li>
                                 <li class="nav-item"><a class="nav-link fw-normal" href="/calculator">Loan

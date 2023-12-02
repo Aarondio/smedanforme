@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
         data-image-src="{{ asset('assets/img/photos/bg20.png') }}">
         {{-- <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg4.jpg')}}"> --}}
@@ -48,13 +47,43 @@
             <div class="row justify-content-center ">
                 <div class="col-md-10 card shadow-lg">
                     <div class="card-body">
-                        <h2>Product information for {{$product->name}}</h2>
-                        <form action="{{ route('saveproductioncost') }}"  method="POST">
+                        <p class="text-danger">
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+                        </p>
+                        <h2>Product information for {{ $product->name }}</h2>
+                        <form action="{{ route('saveproductioncost') }}" method="POST">
                             @csrf
-                            {{-- <input type="text" name="id" value="{{ $user->id }}" hidden> --}}
-                            <div class="row text-dark">
-                                <div class="col-md-4">
-                                    <div class=" mb-4">
+                            <input type="text" name="id" value="{{ $product->id }}">
+                            <input type="number" class="form-control" name="jan_price" placeholder="Jan Price">
+                            @error('jan_price')
+                                <p class="small text-danger"> {{ $message }}</p>
+                            @enderror
+                            <br>
+                            <input type="number" class="form-control" name="jan_cost" placeholder="Jan Cost">
+                            @error('jan_cost')
+                                <p class="small text-danger"> {{ $message }}</p>
+                            @enderror
+                            <br>
+                            <input type="number" class="form-control" name="jan_qty" placeholder="Jan Qty">
+                            @error('jan_qty')
+                                <p class="small text-danger"> {{ $message }}</p>
+                            @enderror
+                            <br>
+                            <div class="col-md-6">
+                                <button class="btn btn-grape" type="submit">Save information</button>
+
+                            </div>
+                        </form>
+
+                        {{-- <input type="text" name="id" value="{{ $user->id }}" hidden> --}}
+                        <div class="row text-dark">
+                            <div class="col-md-4">
+
+                                {{-- <div class=" mb-4">
                                         <label for="jan_price" class="mb-3">Product price in January</label>
                                         <input id="jan_price" name="jan_price" type="text" value=""
                                             class="form-control" placeholder="Price in january" required>
@@ -65,9 +94,9 @@
                                             <input class="form-check-input" type="checkbox" name="proprice" value="" id="proprice">
                                             <label class="form-check-label small" for="proprice" > Click on the check box if the price of product is the same from <b>January</b> to <b>December</b>. </label>
                                           </div>
-                                    </div>
+                                    </div> --}}
 
-                                    <div class="position-relative p-0 px-4">
+                                {{-- <div class="position-relative p-0 px-4">
                                         <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
                                             href="#collapse-price">Other months</a>
                                     </div>
@@ -163,11 +192,10 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
-                                </div>
-                          
-                                <div class="col-md-4">
+
+                                {{-- <div class="col-md-4">
                                     <div class=" mb-4">
                                         <label for="jan_cost" class="mb-3">Cost of producing one product</label>
                                         <input id="jan_cost" name="jan_cost" type="number" value=""
@@ -175,8 +203,8 @@
                                         @error('jan_cost')
                                             <p class="small text-danger"> {{ $message }}</p>
                                         @enderror
-
-                                        <div class="form-check mt-2">
+                                    </div> --}}
+                                {{-- <div class="form-check mt-2">
                                             <input class="form-check-input" type="checkbox" name="procost" value="" id="procost">
                                             <label class="form-check-label small" for="procost" > Click on the check box if the cost of production is the same from <b>January</b> to <b>December</b>. </label>
                                           </div>
@@ -269,7 +297,7 @@
                                                 @enderror
                                             </div>
                                             <div class=" mb-2">
-                                                <label for="dec_cost" class="">Cost of producing in November</label>
+                                                <label for="dec_cost" class="">Cost of producing in December</label>
                                                 <input id="dec_cost" name="dec_cost" type="number" value=""
                                                     class="form-control" placeholder="December cost" >
                                                 @error('dec_cost')
@@ -278,8 +306,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
+                                </div> --}}
+                                {{-- <div class="col-md-4">
                                     <div class=" mb-4">
                                         <label for="jan_qty" class="mb-3">Quantity sold in january</label>
                                         <input id="jan_qty" name="jan_qty" type="number" value=""
@@ -287,8 +315,11 @@
                                         @error('jan_qty')
                                             <p class="small text-danger"> {{ $message }}</p>
                                         @enderror
-                                    </div>
+                                    </div> --}}
 
+                                {{-- <div class="form-check mt-2">
+                                        <label class="form-check-label small">Click on Other months to add the quantity sold from <b>Febuary</b> to <b>December</b>. </label>
+                                      </div>
 
                                     <div class="position-relative p-0 px-4">
                                         <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
@@ -388,33 +419,31 @@
                                         </div>
                                     </div>
 
-                                </div>
-                              
-                                <div class="col-md-6">
-                                    <button class="btn btn-grape"  type="submit">Save information</button>
+                                </div> --}}
 
-                                </div>
-                                
+                                {{-- <div class="col-md-6">
+                                        <button class="btn btn-grape" type="submit">Save information</button>
+
+                                    </div> --}}
+
                                 <!-- /.form-floating -->
-                        </form>
+                                {{-- </form> --}}
 
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div class="justify-content-between d-flex">
-                        <div class="col-md-6">
-                            <a href="{{route('myproducts')}}" class="btn btn-outline-danger btn-sm">Back</a>
+                            </div>
                         </div>
-                        {{-- <div class="col-md-6">
+                        <div class="card-footer">
+                            <div class="justify-content-between d-flex">
+                                <div class="col-md-6">
+                                    <a href="{{ route('myproducts') }}" class="btn btn-outline-danger btn-sm">Back</a>
+                                </div>
+                                {{-- <div class="col-md-6">
                             <a href="{{ route('myproducts') }}" class="float-end btn btn-outline-primary btn-sm">View Products</a>
                         </div> --}}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
     </section>
     <script>
-        
-    
-@endsection
+    @endsection

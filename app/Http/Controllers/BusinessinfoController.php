@@ -10,6 +10,8 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\BusinessinfoStoreRequest;
 use App\Http\Requests\BusinessinfoUpdateRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Paystack;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BusinessinfoController extends Controller
 {
@@ -102,7 +104,39 @@ class BusinessinfoController extends Controller
     //         return response()->json(['statusCode' => 401]);
     //     }
     // }
+    public function application(Request $request, $bizno)
+    {
+        // $bizno = $request->input('application_number'); // Not needed anymore
+    
+        $businessinfo = Businessinfo::where('business_no', $bizno)->first();
+    
+        if ($businessinfo) {
+            $biz_user = $businessinfo->user_id;
+            $user = User::where('id', $biz_user)->first();
+    
+            if ($user) {
+                return view('application', compact('businessinfo', 'user'));
+            }
+        }
+    
+        return redirect()->route('application')->withErrors('Invalid application number');
+    }
+    
 
+    // public function application(Request $request,$bizno)
+    // {
+    //     $bizno = $request->input('application_number');
+    //     $businessinfo = Businessinfo::where('business_no', $bizno)->first();
+    //     if ($businessinfo) {
+    //         $biz_user = $businessinfo->user_id;
+    //         $user = User::where('id', $biz_user)->first();
+    //         if ($user) {
+    //             return view('application', compact('businessinfo', 'user'));
+    //         }
+    //     } else {
+    //         return redirect()->route('application')->withErrors('Invalid application number');
+    //     }
+    // }
     public function audience_need(Request $request, Businessinfo $businessinfo)
     {
         $validated = $request->validate([
@@ -110,7 +144,9 @@ class BusinessinfoController extends Controller
         ]);
         $user = Auth::user();
         if ($user) {
-            $businessinfo = Businessinfo::where('user_id', $user->id)->first();
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
             $businessinfo->update(['audience_need' => $request->audience_need]);
             if ($businessinfo) {
                 return json_encode(array('statusCode' => 200, 'data' => $request->audience_need));
@@ -126,7 +162,9 @@ class BusinessinfoController extends Controller
         ]);
         $user = Auth::user();
         if ($user) {
-            $businessinfo = Businessinfo::where('user_id', $user->id)->first();
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
             $businessinfo->update(['business_model' => $request->business_model]);
             if ($businessinfo) {
                 return json_encode(array('statusCode' => 200, 'data' => $request->business_model));
@@ -142,7 +180,9 @@ class BusinessinfoController extends Controller
         ]);
         $user = Auth::user();
         if ($user) {
-            $businessinfo = Businessinfo::where('user_id', $user->id)->first();
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
             $businessinfo->update(['target_market' => $request->target_market]);
             if ($businessinfo) {
                 return json_encode(array('statusCode' => 200, 'data' => $request->target_market));
@@ -158,7 +198,9 @@ class BusinessinfoController extends Controller
         ]);
         $user = Auth::user();
         if ($user) {
-            $businessinfo = Businessinfo::where('user_id', $user->id)->first();
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
             $businessinfo->update(['competition_ad' => $request->competition_ad]);
             if ($businessinfo) {
                 return json_encode(array('statusCode' => 200, 'data' => $request->competition_ad));
@@ -174,7 +216,9 @@ class BusinessinfoController extends Controller
         ]);
         $user = Auth::user();
         if ($user) {
-            $businessinfo = Businessinfo::where('user_id', $user->id)->first();
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
             $businessinfo->update(['management_team' => $request->management_team]);
             if ($businessinfo) {
                 return json_encode(array('statusCode' => 200, 'data' => $request->management_team));
@@ -190,7 +234,9 @@ class BusinessinfoController extends Controller
         ]);
         $user = Auth::user();
         if ($user) {
-            $businessinfo = Businessinfo::where('user_id', $user->id)->first();
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
             $businessinfo->update(['loan_amount' => $request->loan_amount]);
             if ($businessinfo) {
                 return json_encode(array('statusCode' => 200, 'data' => $request->loan_amount));
@@ -199,6 +245,30 @@ class BusinessinfoController extends Controller
             }
         }
     }
+
+    public function finalsubmission(Request $request, Businessinfo $businessinfo)
+    {
+        $user = Auth::user();
+        $randomNumber = mt_rand(1000, 9999);
+        $randomAlphabet = chr(mt_rand(65, 90));
+        $bizno = 'SB' . $randomNumber . $randomAlphabet;
+        $id = $request->id;
+        $businessinfo = Businessinfo::where('id', $id)->first();
+
+
+        // $paystack = Paystack::where('user_id', $user->id)->first();
+        if (empty($businessinfo->business_no)) {
+            $businessinfo->update(['business_no' => $bizno, 'status' => 'Completed']);
+            return view('app.dashboard.success', compact('user', 'businessinfo'));
+        }
+        if (empty($businessinfo->status)) {
+            $businessinfo->update(['status' => 'Completed']);
+        }
+        return view('app.dashboard.success', compact('user', 'businessinfo'));
+        //    if($businessinfo){
+        //      return view('home');
+        //    }
+    }
     public function loan_reason(Request $request, Businessinfo $businessinfo)
     {
         $validated = $request->validate([
@@ -206,7 +276,9 @@ class BusinessinfoController extends Controller
         ]);
         $user = Auth::user();
         if ($user) {
-            $businessinfo = Businessinfo::where('user_id', $user->id)->first();
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
             $businessinfo->update(['loan_reason' => $request->loan_reason]);
             if ($businessinfo) {
                 return json_encode(array('statusCode' => 200, 'data' => $request->loan_reason));
@@ -217,6 +289,33 @@ class BusinessinfoController extends Controller
     }
 
 
+    public function updatebusiness(Request $request, User $user, Businessinfo $businessinfo)
+    {
+        try {
+            // Validate the incoming request data
+            $businessinfo = Businessinfo::find($request->id);
+            $validated = $request->validate([
+                'business_name' => ['required', 'max:255', 'string'],
+                // 'business_type' => ['required', 'max:255', 'string'],
+                'is_registered' => ['required'],
+                'suin' => 'required',
+                'register_type' => 'required',
+                'business_age' => 'required',
+                // 'register_year' => 'required',
+                'emp_no' => 'required',
+                'loan_amount' => 'required',
+                'sector' => 'required',
+                'address' => 'required',
+
+            ]);
+            $businessinfo->update($validated);
+            return redirect()
+                ->route('nanoplan', $businessinfo)
+                ->withSuccess("Business information has been saved successfully");
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
     public function updatebusinessinfo(Request $request, User $user, Businessinfo $businessinfo)
     {
         try {
@@ -234,13 +333,12 @@ class BusinessinfoController extends Controller
                 'loan_amount' => 'required',
                 'sector' => 'required',
                 'address' => 'required',
-     
+
             ]);
             $businessinfo->update($validated);
             return redirect()
                 ->route('nanoplaninfo', $businessinfo)
                 ->withSuccess("Personal information has been saved successfully");
-    
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

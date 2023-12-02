@@ -12,6 +12,7 @@ use App\Http\Requests\ProductUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Rules\UniqueProductName;
 use App\Models\Paystack;
+use App\Models\Salesforcast;
 
 class ProductController extends Controller
 {
@@ -92,7 +93,7 @@ class ProductController extends Controller
             if (empty($paystack->user_id)) {
                 return view('app.dashboard.nbp');
             } else {
-                $businessinfo = Businessinfo::where('user_id', $user->id)->first();
+                $businessinfo = Businessinfo::where('user_id', $user->id)->where('plan_type',1)->first();
                 $products = Product::where('businessinfo_id', $businessinfo->id)->get();
                 if ($businessinfo && $businessinfo->exists()) {
                     return view('app.dashboard.myproducts', compact('user', 'businessinfo', 'products'));
@@ -105,7 +106,7 @@ class ProductController extends Controller
         }
     }
 
-    public function add_product(Request $request, Product $product)
+    public function add_product(Request $request, Product $product, Salesforcast $salesforcast)
     {
         try {
             $user = Auth::user();
@@ -130,6 +131,7 @@ class ProductController extends Controller
             $validated['businessinfo_id'] = $businessinfo->id;
 
             $createdProduct = $product->create($validated);
+            $salesforcast->create(['product_id' => $createdProduct->id]);
 
             if (!$createdProduct) {
                 throw new \Exception('Failed to add product');

@@ -229,7 +229,7 @@
                             </div>
                             <div class="col-md-6">
                                 <a href="{{ route('businessinfo') }}"
-                                    class="float-end btn btn-outline-primary btn-sm ">Next</a>
+                                    class="float-end btn btn-outline-grape btn-sm ">Next</a>
                             </div>
                         </div>
                     </div>

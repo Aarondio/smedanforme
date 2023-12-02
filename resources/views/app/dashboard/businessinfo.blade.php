@@ -250,7 +250,7 @@
                                 <a href="{{ route('personalinfo') }}" class="btn btn-outline-danger btn-sm">Back</a>
                             </div>
                             <div class="col-md-6">
-                                <a href="nanoplaninfo" class="float-end btn btn-outline-primary btn-sm">Next</a>
+                                <a href="nanoplaninfo" class="float-end btn btn-outline-grape btn-sm">Next</a>
                             </div>
                         </div>
                     </div>

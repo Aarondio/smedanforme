@@ -21,6 +21,11 @@ class SiteController extends Controller
         return view('mbp');
     }
 
+    public function success(Request $request)
+    {
+        return view('app.dashboard.success');
+    }
+
     public function calculator(Request $request)
     {
         return view('calculator');
@@ -65,10 +70,12 @@ class SiteController extends Controller
     {
         $id = $request->id;
         $user = Auth::user();
-        $businessinfo = Businessinfo::where('user_id', $user->id)->first();
+
         if ($user) {
             $product = Product::where('id', $id)->first();
-
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', 1)
+                ->first();
             if ($product) {
                 if ($businessinfo->id == $product->businessinfo_id) {
                     return view('app.dashboard.fixedprojection', compact('product', 'user'));
@@ -81,24 +88,43 @@ class SiteController extends Controller
         }
     }
 
+    // public function previewinfo(Request $request)
+    // {
+    //     $user = Auth::user();
+    //     $businessinfo = Businessinfo::where('user_id', $user->id)->first();
+    //     if ($user) {
+    //         return view('app.dashboard.previewinfo', compact('businessinfo', 'user'));
+    //     } else {
+    //         return view('app.dashboard.nbp');
+    //     }
+    // }
     public function previewinfo(Request $request)
     {
         $user = Auth::user();
-        $businessinfo = Businessinfo::where('user_id', $user->id)->first();
-        if ($user) {
-            return view('app.dashboard.previewinfo', compact('businessinfo', 'user'));
-        } else {
+
+        // Check if the user is authenticated
+        if (!$user) {
             return view('app.dashboard.nbp');
         }
+
+        // User is authenticated, fetch business info
+        $businessinfo = Businessinfo::where('user_id', $user->id)
+            ->where('plan_type', 2)
+            ->first();
+
+        return view('app.dashboard.previewinfo', compact('businessinfo', 'user'));
     }
 
     public function purchasenbp(Request $request)
     {
         $user = Auth::user();
         if ($user) {
-            $paystack = Paystack::where('user_id', $user->id)->first();
+            $paystack = Paystack::where('user_id', $user->id)
+                ->where('plan_type', 1)
+                ->first();
             if ($paystack) {
-                return view('home', compact('paystack', 'user'));
+                return view('personal');
+                // return view('home', compact('paystack', 'user'));
             } else {
                 return view('app.dashboard.nbp');
             }
@@ -115,7 +141,9 @@ class SiteController extends Controller
         $user = Auth::user();
         if ($user) {
             $paystack = Paystack::where('user_id', $user->id)->first();
-            $businessinfo = Businessinfo::where('user_id', $user->id)->first();
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', 1)
+                ->first();
             if (empty($paystack->user_id)) {
                 return view('app.dashboard.nbp');
             } else {
@@ -129,7 +157,9 @@ class SiteController extends Controller
         $user = Auth::user();
         if ($user) {
             $paystack = Paystack::where('user_id', $user->id)->first();
-            $businessinfo = Businessinfo::where('user_id', $user->id)->first();
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', 2)
+                ->first();
             if (empty($paystack->user_id)) {
                 return view('app.dashboard.nbp');
             } else {

@@ -7,7 +7,7 @@
         <div class="container pt-13 pb-15 pt-md-15 pb-md-16 text-center">
             <h1 class="display-3 text-white mb-10">Learning Hub</h1>
             <div class="row mb-11">
-                <div class="col-md-3 col-lg-3 col-xxl-3 mx-auto" data-cues="zoomIn" data-group="page-title"
+                <div class="col-md-3 col-lg-3 col-xxl-3 mx-auto mt-3" data-cues="zoomIn" data-group="page-title"
                     data-interval="-200">
                     <div class="card px-0">
                         <div class="card-body text-center px-0">
@@ -17,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-lg-3 col-xxl-3 mx-auto" data-cues="zoomIn" data-group="page-title"
+                <div class="col-md-3 col-lg-3 col-xxl-3 mx-auto mt-3" data-cues="zoomIn" data-group="page-title"
                     data-interval="-200">
                     <div class="card px-0">
                         <div class="card-body text-center px-0">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-lg-3 col-xxl-3 mx-auto" data-cues="zoomIn" data-group="page-title"
+                <div class="col-md-3 col-lg-3 col-xxl-3 mx-auto mt-3" data-cues="zoomIn" data-group="page-title"
                     data-interval="-200">
                     <div class="card px-0">
                         <div class="card-body text-center px-0">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-lg-3 col-xxl-3 mx-auto" data-cues="zoomIn" data-group="page-title"
+                <div class="col-md-3 col-lg-3 col-xxl-3 mx-auto mt-3" data-cues="zoomIn" data-group="page-title"
                     data-interval="-200">
                     <div class="card px-0">
                         <div class="card-body text-center px-0">

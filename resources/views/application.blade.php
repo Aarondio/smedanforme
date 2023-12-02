@@ -6,54 +6,19 @@
             text-align: justify;
         }
     </style>
-    <section class="wrapper bg-light my-5">
-        <div class="container">
-            <div class="row  justify-content-center">
-                <div class="col-md-12 col-lg-10">
-                    @if ($businessinfo->status == 'Completed')
-                        <a href="{{ route('home') }}" class=" btn btn-outline-danger btn-sm">Back</a>
-                    @else
-                        <a href="{{ route('personalinfo') }}" class=" btn btn-outline-danger btn-sm">Back</a>
-                    @endif
-                </div>
-            </div>
-    </section>
-    @if ($businessinfo->status == 'Completed')
-        <section class=" bg-light">
-            <div class="container">
-                <div class="row  justify-content-center">
-                    <div class="col-md-12 col-lg-10">
 
-                        <div class="text-center mb-8">
-                            {!! QrCode::size(200)->generate(asset('application/'.$businessinfo->business_no)) !!}
-                        </div>
-                        <h3 class="text-center">Application number: {{ $businessinfo->business_no }}</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @else
-        <section class="wrapper image-wrapper bg-image bg-overlay text-white"
-            data-image-src="{{ asset('assets/img/photos/bg20.png') }}">
-            <div class="wrapper py-10">
-                <div class="container p-0">
-                    <div class="row">
-                        <div class="col-lg-12 col-xxl-12 text-center">
-                            <h1 class="display-2 mb-1 text-white">Preview your application before submission</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif
+
     <section class="wrapper bg-light pb-5 pb-md-5">
         <div class="container">
-
+            <div class="mt-10 text-center">
+                {!! QrCode::size(200)->generate(asset('application/'.$businessinfo->business_no)) !!}
+                
+            </div>
             <div class="row  gy-6 mt-2 justify-content-center">
 
                 <div class="col-md-12 col-lg-10">
 
-                    <div class="card">
+                    <div class="card my-5">
                         <div class="card-body">
 
 
@@ -171,7 +136,7 @@
                     </div>
 
 
-                    <div class="card mt-8">
+                    <div class="card">
                         <div class="card-body">
                             {{-- <h1>Personal information</h1> --}}
 
@@ -190,18 +155,7 @@
                             <h3 class="fw-light">Profit Generation</h3>
                             <p class="text-dark text-justify">{{ $businessinfo->business_model }}</p>
 
-                            <div class="float-end">
-                                <form action="{{ route('finalsubmission') }}" method="post">
-                                    @csrf
-                                    <input type="text" name="id" value="{{ $businessinfo->id }}" hidden>
-                                    @if ($businessinfo->status == 'Completed')
-                                        <h4>Your application was Submitted</h4>
-                                    @else
-                                        <button class="btn btn-grape btn-lg">Submit Application</button>
-                                    @endif
-                                </form>
-
-                            </div>
+                        
                         </div>
 
                     </div>

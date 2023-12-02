@@ -193,9 +193,9 @@
                                         class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
                                         <div class="code-wrapper">
                                             <div class="code-wrapper-inner px-10 py-5">
-                                                We require a total of £10,000 in financing. Oliver is contributing £1500
-                                                worth of personal savings and seeking an additional investment of £9500. Of
-                                                the total £10,000, we'll use 75% to liaise with boat owners in the region to
+                                                We require a total of ₦10,000 in financing. Oliver is contributing ₦1500
+                                                worth of personal savings and seeking an additional investment of ₦9500. Of
+                                                the total ₦10,000, we'll use 75% to liaise with boat owners in the region to
                                                 build a rental fleet of high-quality, carefully selected motorboats and
                                                 yachts.
                                             </div>
@@ -262,7 +262,7 @@
             //         }
             //     });
             // }
-            function limitWordCount(element, wordLimit, counter, saveRoute, input) {
+            function limitWordCount(element, wordLimit, counter, saveRoute, input,plan) {
                 element.on('input', function() {
                     var content = $(this).val();
                     var words = content.match(/\S+/g) || [];
@@ -281,6 +281,7 @@
                             method: 'POST',
                             data: {
                                 [input]: content,
+                                [plan]: 1
                             },
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -298,17 +299,17 @@
 
 
             // Apply the word count limit to specific elements
-            limitWordCount($('#audience'), 100, $('#counter'), '{{ route('audience_need') }}', 'audience_need');
+            limitWordCount($('#audience'), 100, $('#counter'), '{{ route('audience_need') }}', 'audience_need','plan');
             limitWordCount($('#business_model'), 100, $('#counter1'), '{{ route('business_model') }}',
-                'business_model');
+                'business_model','plan');
             limitWordCount($('#target_market'), 100, $('#counter2'), '{{ route('target_market') }}',
-                'target_market');
+                'target_market','plan');
             limitWordCount($('#competition_ad'), 100, $('#counter3'), '{{ route('competition_ad') }}',
-                'competition_ad');
+                'competition_ad','plan');
             limitWordCount($('#management_team'), 100, $('#counter4'), '{{ route('management_team') }}',
-                'management_team');
-            limitWordCount($('#loan_reason'), 100, $('#counter6'), '{{ route('loan_reason') }}', 'loan_reason');
-            limitWordCount($('#loan_amount'), 1, $('#counter7'), '{{ route('loan_amount') }}', 'loan_amount');
+                'management_team','plan');
+            limitWordCount($('#loan_reason'), 100, $('#counter6'), '{{ route('loan_reason') }}', 'loan_reason','plan');
+            limitWordCount($('#loan_amount'), 1, $('#counter7'), '{{ route('loan_amount') }}', 'loan_amount','plan');
 
             // limitWordCount($('#competition_ad'), 100, $('#counter3'));
             // limitWordCount($('#management_team'), 100, $('#counter4'));

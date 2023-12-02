@@ -40,7 +40,7 @@
                             @endif
                         </p>
                         <h2 class="">Business information</h2>
-                        <form action="{{ route('updatebusinessinfo') }}" method="POST">
+                        <form action="{{ route('updatebusiness') }}" method="POST">
                             @csrf
                             <input type="text" name="id" value="{{ $businessinfo->id }}" hidden>
                             <div class="row text-dark">
@@ -135,7 +135,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class=" mb-4">
                                         <label for="register_year" class="mb-3">When was the business registered?</label>
                                         <input id="register_year" name="register_year" type="date" class="form-control"
@@ -145,7 +145,7 @@
                                             <p class="small text-danger"> {{ $message }}</p>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <label for="sector" class="mb-3">Business Sector</label>

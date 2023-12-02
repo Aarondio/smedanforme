@@ -72,13 +72,13 @@
                             <div class="pricing card text-center">
                               <div class="card-body">
                                 <img src="{{asset('assets/img/icons/lineal/briefcase-2.svg')}}" class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
-                                <h4 class="card-title">Credit compare</h4>
+                                <h4 class="card-title">Sterling Bank Loan</h4>
                                 <div class="prices text-dark my-8">
-                                  <div class="price price-show"><span class="price-value display-4">Free</span> </div>
+                                  <div class="price price-show"><span class="price-value display-4">₦5,000</span> </div>
                                 </div>
                                 <!--/.prices -->
                                
-                                <a href="#" class="btn btn-disabled btn-secondary rounded-pill">Coming soon</a>
+                                <a href="https://paystack.com/pay/smecreditsfee" class="btn btn-grape rounded-pill">Pay now</a>
                               </div>
                               <!--/.card-body -->
                             </div>

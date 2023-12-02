@@ -35,6 +35,7 @@ class Businessinfo extends Model
         'sector',
         'address',
         'business_no',
+        'status',
 
     ];
 

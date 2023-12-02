@@ -9,6 +9,8 @@ use App\Http\Controllers\BusinessinfoController;
 use App\Http\Controllers\PaystackController;
 use App\Http\Controllers\SalesforcastController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\PdfController;
+use App\Models\Businessinfo;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
+Route::get('pdf', [PdfController::class, 'index']);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/nbp',[SiteController::class, 'nbp'])->name('nbp');
@@ -40,6 +43,7 @@ Route::get('purchase/nbp',[SiteController::class,'purchasenbp'])->name('purchase
 Route::get('nanoplan',[SiteController::class,'nanoplan'])->name('nanoplan');
 Route::get('nanoplaninfo',[SiteController::class,'nanoplaninfo'])->name('nanoplaninfo');
 Route::get('previewinfo',[SiteController::class,'previewinfo'])->name('previewinfo');
+Route::get('application/{bizno}',[BusinessinfoController::class,'application'])->name('application');
 Route::get('product',[SiteController::class,'product'])->name('product');
 Route::get('contact',[SiteController::class,'contact'])->name('contact');
 Route::get('comingsoon',[SiteController::class,'comingsoon'])->name('comingsoon');
@@ -47,10 +51,13 @@ Route::get('comingsoon',[SiteController::class,'comingsoon'])->name('comingsoon'
 Route::get('myproducts',[ProductController::class,'myproducts'])->name('myproducts');
 Route::get('extrainfo',[CashflowController::class,'extrainfo'])->name('extrainfo');
 Route::get('fixedprojection',[SiteController::class,'fixedprojection'])->name('fixedprojection');
+Route::get('success',[SiteController::class,'success'])->name('success');
+Route::post('finalsubmission',[BusinessinfoController::class,'finalsubmission'])->name('finalsubmission');
 
 Route::get('business',[SiteController::class,'business'])->name('business');
 Route::get('businessinfo',[SiteController::class,'businessinfo'])->name('businessinfo');
 Route::get('payment',[PaystackController::class,'store'])->name('payment');
+Route::get('sbpayment',[PaystackController::class,'sbpayment'])->name('sbpayment');
 
 Route::post('audience_need',[BusinessinfoController::class,'audience_need'])->name('audience_need');
 Route::post('business_model',[BusinessinfoController::class,'business_model'])->name('business_model');
@@ -65,8 +72,9 @@ Route::post('add_product',[ProductController::class,'add_product'])->name('add_p
 Route::post('updateinfo',[UserController::class,'updateinfo'])->name('updateinfo');
 Route::post('updatepersonalinfo',[UserController::class,'updatepersonalinfo'])->name('updatepersonalinfo');
 Route::post('updatebusinessinfo',[BusinessinfoController::class,'updatebusinessinfo'])->name('updatebusinessinfo');
+Route::post('updatebusiness',[BusinessinfoController::class,'updatebusiness'])->name('updatebusiness');
 // Route::post('audience_need',[BusinessinfoController::class,'audience_need'])->name('audience_need');
-
+Route::post('saveproductioncost',[SalesforcastController::class,'updatesales'])->name('saveproductioncost');
 Route::prefix('/')
     ->middleware('auth')
     ->group(function () {
@@ -79,5 +87,5 @@ Route::prefix('/')
         Route::get('personalinfo',[SiteController::class,'personalinfo'])->name('personalinfo');
         Route::get('dashboard',[SiteController::class,'dashboard'])->name('dashboard');
         Route::get('loanamount',[SiteController::class,'loanamount'])->name('loanamount');
-        Route::post('saveproductioncost',[SalesforcastController::class,'updatesales'])->name('saveproductioncost');
+       
     });
