@@ -8,7 +8,8 @@
                     {{-- <div class="card-header text-dark">{{ __('Welcome back,') . Auth::user()->firstname }}</div> --}}
                     <div class="card-header text-dark">
                         <h4>Welcome,
-                            {{ Auth::user()->firstname . ' ' . Auth::user()->surname. ' ('. Auth::user()->email . ')' }}</h4>
+                            {{ Auth::user()->firstname . ' ' . Auth::user()->surname . ' (' . Auth::user()->email . ')' }}
+                        </h4>
                     </div>
 
                     <div class="card-body">
@@ -90,22 +91,28 @@
                             <div class="row">
 
                                 @foreach ($business_plans as $business_plan)
-                                    <div class="col-md-6 col-lg-4 ">
+                                    <div class="col-md-6 col-lg-4 mt-5">
                                         <div class=" card text-center card-border-start border-grape">
                                             <div class="card-body bg-pale-primary">
 
                                                 <h4 class="card-title mt-5">
                                                     <p class="m-0 fs-16">You've applied for a</p>
                                                     @if ($business_plan->plan_type == 2)
-                                                       <span class="text-grape"> {{ 'Sterling Bank Loan' }}</span>
+                                                        <span class="text-grape"> {{ 'Sterling Bank Loan' }}</span>
                                                     @else
                                                         {{ 'Matching fund Loan' }}
                                                     @endif
-                                                    For your company <span class="text-grape">{{  $business_plan->business_name }}</span> 
+                                                    For your company <span
+                                                        class="text-grape">{{ $business_plan->business_name }}</span>
                                                 </h4>
                                                 <h5 class="text-primary">{{ $business_plan->business_no }}</h5>
 
-                                                <a href="{{route('previewinfo')}}" class="btn btn-grape">Preview</a>
+                                                @if ($business_plan->plan_type == 2)
+                                                    <a href="{{ route('previewinfo') }}" class="btn btn-grape">Preview</a>
+                                                @else
+                                                    <a href="{{ route('preview') }}" class="btn btn-grape">Preview</a>
+                                                @endif
+
                                             </div>
                                             <!--/.card-body -->
                                         </div>

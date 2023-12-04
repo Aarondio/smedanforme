@@ -65,18 +65,18 @@
                                   </tr> --}}
                                         <tr class="fs-14">
                                             <th scope="row">{{ 'Q.Sold' }}</th>
-                                            <td>₦{{number_format( $qtypermonth, 0, '.', ',') }}</td>
-                                            <td>₦{{number_format( $qtypermonth, 0, '.', ',') }}</td>
-                                            <td>₦{{number_format( $qtypermonth, 0, '.', ',') }}</td>
-                                            <td>₦{{number_format( $qtypermonth, 0, '.', ',') }}</td>
-                                            <td>₦{{number_format( $qtypermonth, 0, '.', ',') }}</td>
-                                            <td>₦{{number_format( $qtypermonth, 0, '.', ',') }}</td>
-                                            <td>₦{{number_format( $qtypermonth, 0, '.', ',') }}</td>
-                                            <td>₦{{number_format( $qtypermonth, 0, '.', ',') }}</td>
-                                            <td>₦{{number_format( $qtypermonth, 0, '.', ',') }}</td>
-                                            <td>₦{{number_format( $qtypermonth, 0, '.', ',') }}</td>
-                                            <td>₦{{number_format( $qtypermonth, 0, '.', ',') }}</td>
-                                            <td>₦{{number_format( $qtypermonth, 0, '.', ',') }}</td>
+                                            <td>{{number_format( $qtypermonth, 0, '.', ',') }}</td>
+                                            <td>{{number_format( $qtypermonth, 0, '.', ',') }}</td>
+                                            <td>{{number_format( $qtypermonth, 0, '.', ',') }}</td>
+                                            <td>{{number_format( $qtypermonth, 0, '.', ',') }}</td>
+                                            <td>{{number_format( $qtypermonth, 0, '.', ',') }}</td>
+                                            <td>{{number_format( $qtypermonth, 0, '.', ',') }}</td>
+                                            <td>{{number_format( $qtypermonth, 0, '.', ',') }}</td>
+                                            <td>{{number_format( $qtypermonth, 0, '.', ',') }}</td>
+                                            <td>{{number_format( $qtypermonth, 0, '.', ',') }}</td>
+                                            <td>{{number_format( $qtypermonth, 0, '.', ',') }}</td>
+                                            <td>{{number_format( $qtypermonth, 0, '.', ',') }}</td>
+                                            <td>{{number_format( $qtypermonth, 0, '.', ',') }}</td>
                                          
                                         </tr>
                                         <tr class="fs-14">

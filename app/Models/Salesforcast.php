@@ -13,6 +13,7 @@ class Salesforcast extends Model
 
     protected $fillable = [
         'product_id',
+        'businessinfo_id',
         'jan_price',
         'feb_price',
         'mar_price',
@@ -59,4 +60,9 @@ class Salesforcast extends Model
     {
         return $this->belongsTo(Product::class);
     }
+    public function businessinfo()
+    {
+        return $this->belongsTo(Businessinfo::class);
+    }
+
 }

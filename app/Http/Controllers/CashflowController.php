@@ -67,13 +67,14 @@ class CashflowController extends Controller
 
             $salesforcast->product_id = $request->id;
             $salesforcast->save();
+            $saleforcast = Salesforcast::where('product_id', $request->id)->first();
 
-
-            return view('app.dashboard.extrainfo', compact('product'));
+            return view('app.dashboard.extrainfo', compact('product','salesforcast'));
         } else {
             // Redirect back with an error message
             // return redirect()->back()->with('error', 'Sales forecast already exists for this product.');
-            return view('app.dashboard.extrainfo', compact('product'));
+            $saleforcast = Salesforcast::where('product_id', $request->id)->first();
+            return view('app.dashboard.extrainfo', compact('product','existingSalesForecast'));
         }
     }
 

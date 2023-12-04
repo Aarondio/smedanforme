@@ -7,6 +7,7 @@ use App\Models\Paystack;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
+use App\Models\Salesforcast;
 
 class SiteController extends Controller
 {
@@ -21,6 +22,19 @@ class SiteController extends Controller
         return view('mbp');
     }
 
+    public function applicants(Request $request, Businessinfo $businessinfos)
+    {
+        $businessinfos = Businessinfo::where('plan_type', 2)->get();
+        $completed = Businessinfo::where('plan_type', 2)
+            ->where('status', 'Completed')
+            ->count();
+        $incompleted = Businessinfo::where('plan_type', 2)
+            ->where('status', 'Pending')
+            ->count();
+        $all = Businessinfo::where('plan_type', 2)
+            ->count();
+        return view('applicants', compact('businessinfos', 'completed','all','incompleted'));
+    }
     public function success(Request $request)
     {
         return view('app.dashboard.success');
@@ -114,6 +128,25 @@ class SiteController extends Controller
 
         return view('app.dashboard.previewinfo', compact('businessinfo', 'user'));
     }
+    public function preview(Request $request, Salesforcast $salesforcast)
+    {
+        $user = Auth::user();
+
+        // Check if the user is authenticated
+        if (!$user) {
+            return view('app.dashboard.nbp');
+        }
+
+
+        $businessinfo = Businessinfo::where('user_id', $user->id)
+            ->where('plan_type', 1)
+            ->first();
+
+
+        $salesforcasts = Salesforcast::where('businessinfo_id', $businessinfo->id)->get();
+
+        return view('app.dashboard.preview', compact('businessinfo', 'user', 'salesforcasts'));
+    }
 
     public function purchasenbp(Request $request)
     {
@@ -124,17 +157,12 @@ class SiteController extends Controller
                 ->first();
             if ($paystack) {
                 return view('personal');
-                // return view('home', compact('paystack', 'user'));
             } else {
                 return view('app.dashboard.nbp');
             }
+        } else {
+            return redirect()->route('login');
         }
-        // $user = Auth::user();
-        // if ($user) {
-        //     return view('app.dashboard.nbp');
-        // } else {
-        //     return redirect()->route('login');
-        // }
     }
     public function nanoplan(Request $request, Businessinfo $businessinfo)
     {

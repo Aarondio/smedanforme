@@ -27,47 +27,58 @@
                 @php
                     $sn = 1;
                 @endphp
-                @foreach ($products as $product)
-                    <div class="col-md-8 col-lg-8">
+                @if ($products->isNotEmpty())
+                    @foreach ($products as $product)
+                        <div class="col-md-8 col-lg-8">
 
-                        <div class="card mt-3 shadow-lg ">
-                            <div class="card-body py-2 px-4">
-                                <div class="row justify-content-between">
-                                    <div class="col-md-8 col-lg-6">
-                                        <div class="d-flex justify-content-between">
-                                            <div>
-                                                <p class="text-muted p-0 m-0">Product Name</p>
-                                                <p class="p-0 m-0"> {{ $sn++ . '. ' . $product->name }}</p>
-                                            </div>
-                                            <div>
-                                                <p class="text-muted p-0 m-0">Product cost</p>
-                                                <p class="p-0 m-0"> {{ $product->cost }}</p>
-                                            </div>
-                                            <div>
-                                                <p class="text-muted p-0 m-0">Product Price</p>
-                                                <p class="p-0 m-0"> {{ $product->price }}</p>
+                            <div class="card mt-3 shadow-lg ">
+                                <div class="card-body py-2 px-4">
+                                    <div class="row justify-content-between">
+                                        <div class="col-md-8 col-lg-6">
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <p class="text-muted p-0 m-0">Product Name</p>
+                                                    <p class="p-0 m-0"> {{ $sn++ . '. ' . $product->name }}</p>
+                                                </div>
+                                                <div>
+                                                    <p class="text-muted p-0 m-0">Product cost</p>
+                                                    <p class="p-0 m-0"> {{ $product->cost }}</p>
+                                                </div>
+                                                <div>
+                                                    <p class="text-muted p-0 m-0">Product Price</p>
+                                                    <p class="p-0 m-0"> {{ $product->price }}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4 col-lg-6 align-self-center">
-                                        <div class="d-flex justify-content-end">
-                                            <form action="{{route('fixedprojection')}}" method="GET">
-                                                <input type="text" name="id" value="{{$product->id}}" hidden>
-                                                <button class="btn btn-dark btn-sm text-white">Fixed projection</button>
-                                            </form>
-                                            <form action="{{route('extrainfo')}}" method="GET">
-                                                <input type="text" name="id" value="{{$product->id}}" hidden>
-                                                <button class="btn ms-3 btn-success btn-sm text-white">Add  More info</button>
-                                            </form>
-                                            {{-- <a class="btn btn-success btn-sm text-white" href="{{ route('extrainfo') }}">Add
+                                        <div class="col-md-4 col-lg-6 align-self-center">
+                                            <div class="d-flex justify-content-end">
+                                                <form action="{{ route('fixedprojection') }}" method="GET">
+                                                    <input type="text" name="id" value="{{ $product->id }}" hidden>
+                                                    <button class="btn btn-dark btn-sm text-white">Fixed projection</button>
+                                                </form>
+                                                <form action="{{ route('extrainfo') }}" method="GET">
+                                                    <input type="text" name="id" value="{{ $product->id }}" hidden>
+                                                    <button class="btn ms-3 btn-success btn-sm text-white">Add More
+                                                        info</button>
+                                                </form>
+                                                {{-- <a class="btn btn-success btn-sm text-white" href="{{ route('extrainfo') }}">Add
                                                 More info</a> --}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    @endforeach
+                @else
+                    <div class="col-md-8">
+                       
+                            <div class=" alert alert-danger">
+                                <p class="m-0">You have not added a product</p>
+                            </div>
+                      
                     </div>
-                @endforeach
+                @endif
                 {{-- @endif --}}
             </div>
 

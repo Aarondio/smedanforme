@@ -44,7 +44,7 @@ class SalesforcastController extends Controller
         return view('app.salesforcasts.create', compact('products'));
     }
 
- 
+
     /**
      * Store a newly created resource in storage.
      */
@@ -301,19 +301,70 @@ class SalesforcastController extends Controller
     public function updatesales(Request $request, Salesforcast $salesforcast)
     {
 
+
         $validated = $request->validate([
-            'product_id' => ['required', 'exists:products,id'],
-            'jan_cost' => ['required'],
-            'jan_qty' => ['required'],
-            'jan_price' => ['required'],
+            // 'product_id' => 'required|exists:products,id',
+            'jan_cost' => 'required',
+            'feb_cost' => 'nullable',
+            'mar_cost' => 'nullable',
+            'apr_cost' => 'nullable',
+            'may_cost' => 'nullable',
+            'jun_cost' => 'nullable',
+            'jul_cost' => 'nullable',
+            'aug_cost' => 'nullable',
+            'sep_cost' => 'nullable',
+            'oct_cost' => 'nullable',
+            'nov_cost' => 'nullable',
+            'dec_cost' => 'nullable',
+
+            'jan_price' => 'required',
+            'feb_price' => 'nullable',
+            'mar_price' => 'nullable',
+            'apr_price' => 'nullable',
+            'may_price' => 'nullable',
+            'jun_price' => 'nullable',
+            'jul_price' => 'nullable',
+            'aug_price' => 'nullable',
+            'sep_price' => 'nullable',
+            'oct_price' => 'nullable',
+            'nov_price' => 'nullable',
+            'dec_price' => 'nullable',
+
+            'jan_qty' => 'required',
+            'feb_qty' => 'nullable',
+            'mar_qty' => 'nullable',
+            'apr_qty' => 'nullable',
+            'may_qty' => 'nullable',
+            'jun_qty' => 'nullable',
+            'jul_qty' => 'nullable',
+            'aug_qty' => 'nullable',
+            'sep_qty' => 'nullable',
+            'oct_qty' => 'nullable',
+            'nov_qty' => 'nullable',
+            'dec_qty' => 'nullable',
         ]);
-        // $id = $request->id;
-        $salesforcast = Salesforcast::find(56);
+
+
+        if ($request->has('proprice')) {
+            $validated['feb_price'] = $validated['mar_price'] = $validated['apr_price'] = $validated['may_price'] =
+            $validated['jun_price'] = $validated['jul_price'] = $validated['aug_price'] = $validated['sep_price'] =
+            $validated['oct_price'] = $validated['nov_price'] = $validated['dec_price'] = $validated['jan_price'];
+        }
+        
+
+        if ($request->has('proprice')) {
+            $validated['feb_cost'] = $validated['mar_cost'] = $validated['apr_cost'] = $validated['may_cost'] =
+            $validated['jun_cost'] = $validated['jul_cost'] = $validated['aug_cost'] = $validated['sep_cost'] =
+            $validated['oct_cost'] = $validated['nov_cost'] = $validated['dec_cost'] = $validated['jan_cost'];
+        }
+        
+        $id = $request->salesid;
+        $salesforcast = Salesforcast::find($id);
         if ($salesforcast) {
             $salesforcast->update($validated);
             return redirect()->route('myproducts')->withSuccess("Saved");
         } else {
-            return redirect()->back()->withError("Error Message");
+            return redirect()->route('home');
         }
     }
 

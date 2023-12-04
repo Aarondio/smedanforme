@@ -121,6 +121,23 @@ class BusinessinfoController extends Controller
     
         return redirect()->route('application')->withErrors('Invalid application number');
     }
+    public function applications(Request $request, $bizno)
+    {
+        // $bizno = $request->input('application_number'); // Not needed anymore
+    
+        $businessinfo = Businessinfo::where('business_no', $bizno)->first();
+    
+        if ($businessinfo) {
+            $biz_user = $businessinfo->user_id;
+            $user = User::where('id', $biz_user)->first();
+    
+            if ($user) {
+                return view('application', compact('businessinfo', 'user'));
+            }
+        }
+    
+        return redirect()->route('application')->withErrors('Invalid application number');
+    }
     
 
     // public function application(Request $request,$bizno)

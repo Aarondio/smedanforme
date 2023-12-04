@@ -29,9 +29,10 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
-Route::get('pdf', [PdfController::class, 'index']);
+Route::get('pdf/{bizno}', [PdfController::class, 'index']);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/applicants', [SiteController::class, 'applicants'])->name('applicants');
 Route::get('/nbp',[SiteController::class, 'nbp'])->name('nbp');
 Route::get('/mbp',[SiteController::class, 'mbp'])->name('mbp');
 Route::get('/calculator',[SiteController::class, 'calculator'])->name('calculator');
@@ -43,7 +44,9 @@ Route::get('purchase/nbp',[SiteController::class,'purchasenbp'])->name('purchase
 Route::get('nanoplan',[SiteController::class,'nanoplan'])->name('nanoplan');
 Route::get('nanoplaninfo',[SiteController::class,'nanoplaninfo'])->name('nanoplaninfo');
 Route::get('previewinfo',[SiteController::class,'previewinfo'])->name('previewinfo');
+Route::get('preview',[SiteController::class,'preview'])->name('preview');
 Route::get('application/{bizno}',[BusinessinfoController::class,'application'])->name('application');
+Route::get('applications/{bizno}',[BusinessinfoController::class,'applications'])->name('applications');
 Route::get('product',[SiteController::class,'product'])->name('product');
 Route::get('contact',[SiteController::class,'contact'])->name('contact');
 Route::get('comingsoon',[SiteController::class,'comingsoon'])->name('comingsoon');

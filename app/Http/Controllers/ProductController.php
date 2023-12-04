@@ -131,7 +131,7 @@ class ProductController extends Controller
             $validated['businessinfo_id'] = $businessinfo->id;
 
             $createdProduct = $product->create($validated);
-            $salesforcast->create(['product_id' => $createdProduct->id]);
+            $salesforcast->create(['product_id' => $createdProduct->id,'businessinfo_id' => $businessinfo->id]);
 
             if (!$createdProduct) {
                 throw new \Exception('Failed to add product');

@@ -36,6 +36,7 @@ class Businessinfo extends Model
         'address',
         'business_no',
         'status',
+   
 
     ];
 
@@ -52,6 +53,9 @@ class Businessinfo extends Model
     public function cashlows()
     {
         return $this->hasMany(Cashflow::class);
+    }
+    public function salesforcast(){
+        return $this->hasMany(Product::class);
     }
 
     public function products()
