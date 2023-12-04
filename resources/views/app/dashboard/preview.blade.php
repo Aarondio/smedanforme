@@ -6,14 +6,20 @@
             text-align: justify;
         }
     </style>
-    <section class="wrapper bg-light my-5">
+    <section class="wrapper bg-light my-10">
         <div class="container">
-            <div class="row  justify-content-center">
-                <div class="col-md-12 col-lg-10">
+            <div class="d-flex  justify-content-between">
+                <div class="">
                     @if ($businessinfo->status == 'Completed')
                         <a href="{{ route('home') }}" class=" btn btn-outline-danger btn-sm">Back</a>
                     @else
                         <a href="{{ route('personalinfo') }}" class=" btn btn-outline-danger btn-sm">Back</a>
+                    @endif
+                </div>
+                <div class="">
+                    @if ($businessinfo->status == 'Completed')
+                        <a href="{{ route('pdf',$businessinfo->business_no) }}" class=" btn btn-grape btn-sm">Download</a>
+                   
                     @endif
                 </div>
             </div>

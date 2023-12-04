@@ -29,7 +29,8 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
-Route::get('pdf/{bizno}', [PdfController::class, 'index']);
+Route::get('pdf/{bizno}', [PdfController::class, 'index'])->name('pdf');
+Route::get('test', [PdfController::class, 'test'])->name('test');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/applicants', [SiteController::class, 'applicants'])->name('applicants');
