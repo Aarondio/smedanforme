@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CashflowController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BusinessinfoController;
+use App\Http\Controllers\LgaController;
 use App\Http\Controllers\PaystackController;
 use App\Http\Controllers\SalesforcastController;
 use App\Http\Controllers\SiteController;
@@ -79,6 +80,7 @@ Route::post('updatebusinessinfo',[BusinessinfoController::class,'updatebusinessi
 Route::post('updatebusiness',[BusinessinfoController::class,'updatebusiness'])->name('updatebusiness');
 // Route::post('audience_need',[BusinessinfoController::class,'audience_need'])->name('audience_need');
 Route::post('saveproductioncost',[SalesforcastController::class,'updatesales'])->name('saveproductioncost');
+Route::get('/get-lgas/{stateId}', [LgaController::class, 'getLGAs'])->name('get-lgas');
 Route::prefix('/')
     ->middleware('auth')
     ->group(function () {

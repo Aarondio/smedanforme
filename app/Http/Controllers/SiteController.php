@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Salesforcast;
-
+use App\Models\State;
+use Illuminate\Support\Facades\DB;
 class SiteController extends Controller
 {
     //
@@ -74,10 +75,22 @@ class SiteController extends Controller
     {
         $user = Auth::user();
         if ($user) {
-            return view('app.dashboard.mbp');
+            $paystack = Paystack::where('user_id', $user->id)
+                ->where('plan_type', 1)
+                ->first();
+            if ($paystack) {
+                return redirect()->route('home');
+            } else {
+                return view('app.dashboard.mbp');
+            }
         } else {
             return redirect()->route('login');
         }
+        // if ($user) {
+        //     return view('app.dashboard.nbp');
+        // } else {
+        //     return redirect()->route('login');
+        // }
     }
 
     public function fixedprojection(Request $request)
@@ -156,7 +169,7 @@ class SiteController extends Controller
                 ->where('plan_type', 1)
                 ->first();
             if ($paystack) {
-                return view('personal');
+                return redirect()->route('home');
             } else {
                 return view('app.dashboard.nbp');
             }
@@ -198,12 +211,14 @@ class SiteController extends Controller
     public function personal(Request $request)
     {
         $user = Auth::user();
+        $states =  State::all();
+
         if ($user) {
             $paystack = Paystack::where('user_id', $user->id)->first();
             if (empty($paystack->user_id)) {
                 return view('app.dashboard.nbp');
             } else {
-                return view('app.dashboard.personal', compact('user', 'paystack'));
+                return view('app.dashboard.personal', compact('user', 'paystack','states'));
             }
         }
     }
@@ -214,12 +229,13 @@ class SiteController extends Controller
         //      return view('app.dashboard.personalinfo', compact('user'));
         // }
         $user = Auth::user();
+        $states =  State::all();
         if ($user) {
             $paystack = Paystack::where('user_id', $user->id)->first();
             if (empty($paystack->user_id)) {
                 return view('app.dashboard.nbp');
             } else {
-                return view('app.dashboard.personalinfo', compact('user', 'paystack'));
+                return view('app.dashboard.personalinfo', compact('user', 'paystack','states'));
             }
         }
     }

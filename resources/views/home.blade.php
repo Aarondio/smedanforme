@@ -30,10 +30,10 @@
                                             alt="" />
                                         <h4 class="card-title mt-5">Sterling Bank Loan</h4>
                                         @if (empty($plan_two->user_id))
-                                            <a href="{{ route('purchase') }}" class="btn btn-grape ">Apply now</a>
+                                            <a href="{{ route('purchasenbp') }}" class="btn btn-grape ">Apply now</a>
                                         @else
                                             @if ($business_two && $business_two->status == 'Completed')
-                                                <a class="btn btn-grape ">Application Submitted</a>
+                                                <a class="btn btn-grape disabled">Application Submitted</a>
                                             @else
                                                 <a href="{{ route('personalinfo') }}" class="btn btn-grape ">Continue
                                                     now</a>
@@ -53,7 +53,7 @@
                                             <a href="{{ route('purchasenbp') }}" class="btn btn-grape ">Apply now</a>
                                         @else
                                             @if ($business_one && $business_one->status == 'Completed')
-                                                <a class="btn btn-grape ">Application Submitted</a>
+                                                <a class="btn btn-grape disabled">Application Submitted</a>
                                             @else
                                                 <a href="{{ route('personal') }}" class="btn btn-grape ">Continue now</a>
                                             @endif

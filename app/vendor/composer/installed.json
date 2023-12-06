@@ -1,6 +1,9 @@
 {
     "packages": [
         {
+
+
+
             "name": "setasign/fpdf",
             "version": "1.8.4",
             "version_normalized": "1.8.4.0",
@@ -48,6 +51,14 @@
                 "source": "https://github.com/Setasign/FPDF/tree/1.8.4"
             },
             "install-path": "../setasign/fpdf"
+
+
+
+
+
+
+
+            
         }
     ],
     "dev": true,

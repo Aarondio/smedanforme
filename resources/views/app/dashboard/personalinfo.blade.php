@@ -3,8 +3,8 @@
 @section('content')
     <style>
         /* *{
-                                    border: 1px solid red;
-                                } */
+                                        border: 1px solid red;
+                                    } */
     </style>
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
         data-image-src="{{ asset('assets/img/photos/bg20.png') }}">
@@ -147,7 +147,7 @@
                                             @error('gender')
                                                 <p class="small text-danger"> {{ $message }}</p>
                                             @enderror
-                                       
+
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +155,8 @@
                                     <div class=" mb-4">
                                         <div class="form-select-wrapper mb-4">
                                             <label for="gender" class="mb-3">Marital Status</label>
-                                            <select class="form-select" name="marital_status" id="marital_status" aria-label="marital_status">
+                                            <select class="form-select" name="marital_status" id="marital_status"
+                                                aria-label="marital_status">
                                                 <option disabled @if ($user->marital_status == '') selected @endif>Select
                                                     Marital Status</option>
                                                 <option value="Single" @if ($user->marital_status === 'Single') selected @endif>
@@ -170,15 +171,16 @@
                                             @error('gender')
                                                 <p class="small text-danger"> {{ $message }}</p>
                                             @enderror
-                                       
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <label for="nationality" class="mb-3">Nationality</label>
-                                        <input id="nationality" name="nationality" value="{{ $user->nationality ?? '' }}"
-                                            type="text" class="form-control" placeholder="Nationality">
+                                        <input id="nationality" name="nationality"
+                                            value="{{ $user->nationality ?? '' }}" type="text" class="form-control"
+                                            placeholder="Nationality">
                                         @error('nationality')
                                             <p class="small text-danger"> {{ $message }}</p>
                                         @enderror
@@ -187,23 +189,41 @@
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <label for="state" class="mb-3">State</label>
-                                        <input id="state" name="state" value="{{ $user->state ?? '' }}"
+                                        {{-- <input id="state" name="state" value="{{ $user->state ?? '' }}"
                                             type="text" class="form-control" placeholder="State/Province/Region">
+                                        @error('state')
+                                            <p class="small text-danger"> {{ $message }}</p>
+                                        @enderror  --}}
+                                        <select name="state" id="state" class="form-select">
+                                            <option disabled @if ($user->state == '') selected @endif>Select
+                                                State</option>
+                                            @foreach ($states as $state)
+                                                <option value="{{ $state->id }}"
+                                                    @if ($user->state == $state->id) selected @endif> {{ $state->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                         @error('state')
                                             <p class="small text-danger"> {{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
-                             
+
                                 <div class="col-md-6 ">
                                     <div class=" mb-4">
                                         <label for="lga" class="mb-3">Local Government</label>
-                                        <input id="lga" name="lga" type="text"
+                                        <select name="lga" id="lga" class="form-select">
+                                            <!-- Options will be populated dynamically using JavaScript -->
+                                        </select>
+                                        @error('lga')
+                                            <p class="small text-danger"> {{ $message }}</p>
+                                        @enderror
+                                        {{-- <input id="lga" name="lga" type="text"
                                             value="{{ $user->lga ?? '' }}" class="form-control"
                                             placeholder="Local government">
                                         @error('lga')
                                             <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -237,6 +257,44 @@
             </div>
         </div>
     </section>
+    <script>
+        $(document).ready(function() {
+            $('#state').on('change', function() {
+                var stateId = $(this).val();
+                if (stateId) {
+                    $.ajax({
+                        url: '/get-lgas/' + stateId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            console.log(data);
+                            var lgaSelect = $('#lga');
+                            lgaSelect.empty();
+                            lgaSelect.append(
+                                '<option value="">Select Local Government</option>');
+                            $.each(data, function(key, value) {
+                                var option = $('<option></option>').attr('value', value
+                                    .name).text(value.name);
+                                if ('{{ $user->lga }}' === value
+                                    .name) { // Check if user lga matches current option
+                                    option.prop('selected', true);
+                                }
+                                lgaSelect.append(option);
+                            });
+                        }
+                    });
+                } else {
+                    $('#lga').empty();
+                }
+            });
+
+            // Trigger change event on page load if $user->lga is not empty
+            var userLga = '{{ $user->lga ?? '' }}';
+            if (userLga !== '') {
+                $('#state').trigger('change');
+            }
+        });
+    </script>
     {{-- <script>
         $(document).ready(function() {
             // Function to limit word count for an input element

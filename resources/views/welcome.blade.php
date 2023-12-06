@@ -30,8 +30,8 @@
     <section class="wrapper bg-light py-10 py-md-12">
       {{-- <div class="container py-14 py-md-16"> --}}
          <div class="text-center px-xl-20">
-          <h3>ALL IN ONE PLATFORM FOR BUSINESS EXPANSION</h3>
-        <p>SME Credit offers dynamic tools for viability assessment, business planning, post-credit monitoring and financial management, with a free extensive credit compare service at its core.</p>
+          <h3 class="text-uppercase">A comprehensive platform designed to support business growth</h3>
+        <p>SME Credit provides a range of dynamic tools. These tools cover viability assessment, business planning, post-credit monitoring, and financial management. At its core, SME Credit also offers a free and comprehensive service for comparing credits.</p>
          </div>
       {{-- </div> --}}
         {{-- <h2 class="display-5 mb-7 text-center">Our Pricing</h2> --}}
@@ -54,7 +54,8 @@
                   <div class="text-center">
                     <div class="icon btn btn-circle btn-lg btn-grape pe-none"> <i class="uil uil-chart-line"></i> </div>
                     <h4 class="card-title">Nano business plan</h4>
-                    <p class="fs-14">Evaluate the feasibility and sustainability of micro businesses.</p>
+                    <p class="fs-14">
+                      Assess the viability and endurance of micro-enterprises..</p>
                     <div class="text-secodn">
                       <h3 class="fs-16">Features</h3>
                     </div>
@@ -62,10 +63,10 @@
              
                   <!--/.prices -->
                   <ul class="icon-list bullet-bg bullet-grape mt-3 mb-8 text-left">
-                    <li><i class="uil uil-check"></i><span> Low cost assessment</span></li>
-                    <li><i class="uil uil-check"></i><span>Quick feasibility evaluation </span></li>
-                    <li><i class="uil uil-check"></i><span>Industry analysis</span></li>
-                    <li><i class="uil uil-check"></i><span> Financial projections</span></li>
+                    <li><i class="uil uil-check"></i><span> Affordable assessment</span></li>
+                    <li><i class="uil uil-check"></i><span>Rapid feasibility appraisal </span></li>
+                    <li><i class="uil uil-check"></i><span>Sector analysis</span></li>
+                    <li><i class="uil uil-check"></i><span> Financial forecasts</span></li>
                     
                   </ul>
                   <a href="#" class="btn btn-grape rounded-pill btn-sm">Learn more</a>
@@ -87,10 +88,11 @@
                   </div>
                   <!--/.prices -->
                   <ul class="icon-list bullet-bg bullet-grape mt-3 mb-8 text-left">
-                    <li><i class="uil uil-check"></i><span>Affordable planning </span></li>
-                    <li><i class="uil uil-check"></i><span>Customizable formatting </span></li>
-                    <li><i class="uil uil-check"></i><span>Industry analysis</span></li>
-                    <li><i class="uil uil-check"></i><span>financial projections</span></li>
+                    <li><i class="uil uil-check"></i><span>
+                      Affordable business strategy</span></li>
+                    <li><i class="uil uil-check"></i><span>Tailored formatting options</span></li>
+                    <li><i class="uil uil-check"></i><span>Macro-level industry review</span></li>
+                    <li><i class="uil uil-check"></i><span>Extensive financial forecasts</span></li>
                     {{-- <li><i class="uil uil-check"></i><span> 7/24 <strong>Support</strong></span></li> --}}
                   </ul>
                   <a href="#" class="btn btn-grape rounded-pill btn-sm">Learn more</a>
