@@ -193,9 +193,9 @@
                                         class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
                                         <div class="code-wrapper">
                                             <div class="code-wrapper-inner px-10 py-5">
-                                                We require a total of ₦10,000 in financing. Oliver is contributing ₦1500
-                                                worth of personal savings and seeking an additional investment of ₦9500. Of
-                                                the total ₦10,000, we'll use 75% to liaise with boat owners in the region to
+                                                We require a total of 10,000 in financing. Oliver is contributing 1500
+                                                worth of personal savings and seeking an additional investment of 9500. Of
+                                                the total 10,000, we'll use 75% to liaise with boat owners in the region to
                                                 build a rental fleet of high-quality, carefully selected motorboats and
                                                 yachts.
                                             </div>

@@ -10,8 +10,6 @@ use App\Models\Businessinfo;
 use Illuminate\Support\Facades\Auth;
 
 // require_once __DIR__ . '/../autoload.php';
-require_once __DIR__ . '/../vendor/autoload.php';
-
 
 use Interpid\PdfLib\Multicell;
 use Interpid\PdfExamples\PdfFactory;
@@ -72,6 +70,7 @@ class PdfController extends Controller
         $this->fpdf->Cell(0, 30, '', 0, 1);
 
         $this->fpdf->SetFont('Arial', '', 12);
+
         $this->fpdf->Cell(0, 10, ($user->firstname ?? '') . ' ' . ($user->middlename ?? '') . ' ' . ($user->surname ?? ''), 0, 1);
         // $this->fpdf->Cell(0, 10, ($user->address ?? ''), 0, 1);
         $this->fpdf->Cell(0, 10, ($businessinfo->address ?? ''), 0, 1);
@@ -170,56 +169,13 @@ class PdfController extends Controller
         $loanAmount = number_format($businessinfo->loan_amount ?? 0, 0, '.', ',');
         $this->fpdf->MultiCell(0, 10, $loanAmount, 0, 'L');
 
-           $this->fpdf->Output('application.pdf', 'D');
-        // $this->fpdf->Output();
+        //    $this->fpdf->Output('application.pdf', 'D');
+        $this->fpdf->Output();
 
         exit;
     }
 
     public function test(Request $request){
-        $factory = new PdfFactory();
-
-        //get the PDF object
-        $pdf = PdfFactory::newPdf('multicell');
-        
-        // Create the Advanced Multicell Object and inject the PDF object
-        $multicell = new Multicell($pdf);
-        
-        // Set the styles for the advanced multicell
-        // Notice: 'base' style is always inherited
-        $multicell->setStyle('base', 11, '', '130,0,30', 'helvetica');
-        $multicell->setStyle('p', null);
-        $multicell->setStyle('b', null, 'B');
-        $multicell->setStyle('i', null, 'I', '80,80,260');
-        $multicell->setStyle('u', null, 'U', '80,80,260');
-        $multicell->setStyle('h1', 14, 'B', '203,0,48');
-        $multicell->setStyle('h3', 12, 'B', '203,0,48');
-        $multicell->setStyle('h4', 11, 'BI', '0,151,200');
-        $multicell->setStyle('hh', 11, 'B', '255,189,12');
-        $multicell->setStyle('ss', 7, '', '203,0,48');
-        $multicell->setStyle('font', 10, '', '0,0,255');
-        $multicell->setStyle('style', 10, 'BI', '0,0,220');
-        $multicell->setStyle('size', 12, 'BI', '0,0,120');
-        $multicell->setStyle('color', 12, 'BI', '0,255,255');
-        
-        //set the style for utf8 texts, use 'dejavusans' fonts
-        $multicell->setStyle('u8', null, '', [0, 45, 179], 'dejavusans');
-        $multicell->setStyle('u8b', null, 'B', null, null, 'u8');
-        
-        $pdf->Ln(10); //line break
-        
-        // create the advanced multicell
-        $title = file_get_contents(PDF_APPLICATION_PATH . '/content/multicell-title.txt');
-        $multicell->multiCell(0, 5, $title, 1, 'J', 1, 3, 3, 3, 3);
-        
-        $pdf->Ln(10); //line break
-        
-        //read TAG formatted text from file
-        $txt = file_get_contents(PDF_APPLICATION_PATH . '/content/multicell.txt');
-        $multicell->multiCell(0, 5, $txt, 1, 'J', 1, 3, 3, 3, 3);
-        
-        // output the pdf
-        $pdf->Output();
-        
+         
     }
 }

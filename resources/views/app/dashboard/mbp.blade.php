@@ -105,12 +105,14 @@
                                 <img src="{{asset('assets/img/icons/lineal/briefcase-2.svg')}}" class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
                                 <h4 class="card-title">Macro business plan</h4>
                                 <div class="prices text-dark my-8">
-                                  <div class="price price-show"><span class="price-currency display-4">₦</span><span class="price-value display-4">10,000</span> </div>
-                                  <p class="text-danger">Unavailable</p>
+                                  <div class="price price-show"><span class="price-currency display-4">₦</span><span class="price-value display-4">5,000</span> </div>
+                                  {{-- <p class="text-danger">Unavailable</p> --}}
                                 </div>
                                 <!--/.prices -->
                                
-                                <a href="#" class="btn btn-grape rounded-pill disabled">Buy now</a>
+                                {{-- <a href="#" class="btn btn-grape rounded-pill disabled">Buy now</a> --}}
+                                <a href="https://paystack.com/pay/smecredits" class="btn btn-grape rounded-pill">Pay
+                                  now</a>
                               </div>
                               <!--/.card-body -->
                             </div>
