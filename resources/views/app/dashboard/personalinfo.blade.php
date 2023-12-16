@@ -3,8 +3,8 @@
 @section('content')
     <style>
         /* *{
-                                        border: 1px solid red;
-                                    } */
+                                            border: 1px solid red;
+                                        } */
     </style>
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
         data-image-src="{{ asset('assets/img/photos/bg20.png') }}">
@@ -66,13 +66,15 @@
                     </div>
 
                 </div> --}}
-                <p class="text-danger">
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                </p>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </center>
             <!-- /section -->
             <div class="row justify-content-center ">

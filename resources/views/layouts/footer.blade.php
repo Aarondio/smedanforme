@@ -81,23 +81,14 @@
     <!-- /.container -->
   </footer>
   <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
-  <script>
-    const beamsClient = new PusherPushNotifications.Client({
-      instanceId: 'fba9a81b-bae6-46e9-a680-3443ba9bb545',
-    });
   
-    beamsClient.start()
-      .then(() => beamsClient.addDeviceInterest('hello'))
-      .then(() => console.log('Successfully registered and subscribed!'))
-      .catch(console.error);
-  </script>
   <div class="progress-wrap">
     <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
       <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
     </svg>
   </div>
-  <script src="{{ asset('assets/js/plugins.js') }}"></script>
-  <script src="{{ asset('assets/js/theme.js') }}"></script>
+  <script src="{{ asset('asset/js/plugins.js') }}"></script>
+  <script src="{{ asset('asset/js/theme.js') }}"></script>
   
   </body>
   

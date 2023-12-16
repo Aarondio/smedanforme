@@ -7,15 +7,15 @@
                     } */
     </style>
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
-        data-image-src="{{ asset('assets/img/photos/bg20.png') }}">
+        data-image-src="{{ asset('asset/img/photos/bg20.png') }}">
         {{-- <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg4.jpg')}}"> --}}
 
         <div class="wrapper ">
             <div class="container py-10 py-md-12">
                 <div class="row justify-content-center">
                     <div class="col-lg-10 col-xxl-8 text-center">
-                        <h1 class="display-2 mb-1 text-white">Business information</h1>
-                        <p>Fill out the form below</p>
+                        <h1 class="display-2 mb-1 text-white text-capitalize">Business information</h1>
+                        <p class="text-capitalize">Fill out the form below</p>
                     </div>
                     <!-- /column -->
                 </div>
@@ -39,7 +39,7 @@
                                 </div>
                             @endif
                         </p>
-                        <h2 class="">Business information</h2>
+                        <h2 class="text-capitalize">Business information</h2>
                         <form action="{{ route('updatebusiness') }}" method="POST">
                             @csrf
                             <input type="text" name="id" value="{{ $businessinfo->id }}" hidden>
@@ -47,31 +47,27 @@
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <label for="business_name" class="mb-3">Business name</label>
-                                        <input id="business_name" value="{{ $businessinfo->business_name ?? '' }}"
-                                            name="business_name" type="text" class="form-control"
-                                            placeholder="Business name" required>
-                                        @error('business_name')
+                                        <input id="business_name" value="{{ old('business_name') ?: ($businessinfo->business_name ?? '') }}"
+                                            name="business_name" type="text" class="form-control @error('business_name') is-invalid @enderror"
+                                            placeholder="Business name" >
+                                        {{-- @error('business_name')
                                             <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <div class="form-select-wrapper mb-4">
                                             <label for="is_registered" class="mb-3">Is your business registered?</label>
-                                            <select class="form-select" name="is_registered" id="is_registered"
-                                                aria-label="is_registered" required>
-                                                <option disabled @if ($businessinfo->is_registered == '') selected @endif>Is your
-                                                    business registered?</option>
-                                                <option value="Yes" @if ($businessinfo->is_registered == 'Yes') selected @endif>Yes
-                                                </option>
-                                                <option value="No" @if ($businessinfo->is_registered == 'No') selected @endif>No
-                                                </option>
-
+                                            <select class="form-select @error('is_registered') is-invalid @enderror" name="is_registered" id="is_registered" aria-label="is_registered">
+                                                <option disabled {{ old('is_registered', $businessinfo->is_registered) == '' ? 'selected' : '' }}>Is your business registered?</option>
+                                                <option value="Yes" {{ old('is_registered', $businessinfo->is_registered) == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                                <option value="No" {{ old('is_registered', $businessinfo->is_registered) == 'No' ? 'selected' : '' }}>No</option>
                                             </select>
-                                            @error('is_registered')
+                                            
+                                            {{-- @error('is_registered')
                                                 <p class="small text-danger"> {{ $message }}</p>
-                                            @enderror
+                                            @enderror --}}
                                         </div>
                                     </div>
                                 </div>
@@ -79,158 +75,120 @@
                                     <div class=" mb-4">
                                         <div class="form-select-wrapper mb-4">
                                             <label for="register_type" class="mb-3">Type of Registration</label>
-                                            <select class="form-select" name="register_type" id="register_type"
-                                                aria-label="register_type" required>
-                                                <option disabled @if ($businessinfo->register_type == '') selected @endif>Is your
-                                                    business registered?</option>
-                                                <option value="Business Name"
-                                                    @if ($businessinfo->register_type == 'Business Name') selected @endif>Business Name</option>
-                                                <option value="Limited Liability Company"
-                                                    @if ($businessinfo->register_type == 'Limited Liability Company') selected @endif>Limited Liability
-                                                    Company</option>
-                                                <option value="Cooperative Society"
-                                                    @if ($businessinfo->register_type == 'Cooperative Society') selected @endif>Cooperative Society
-                                                </option>
-
+                                            <select class="form-select @error('register_type') is-invalid @enderror" name="register_type" id="register_type" aria-label="register_type">
+                                                <option disabled {{ old('register_type', $businessinfo->register_type) == '' ? 'selected' : '' }}>Select Register Type</option>
+                                                <option value="Business Name" {{ old('register_type', $businessinfo->register_type) == 'Business Name' ? 'selected' : '' }}>Business Name</option>
+                                                <option value="Limited Liability Company" {{ old('register_type', $businessinfo->register_type) == 'Limited Liability Company' ? 'selected' : '' }}>Limited Liability Company</option>
+                                                <option value="Cooperative Society" {{ old('register_type', $businessinfo->register_type) == 'Cooperative Society' ? 'selected' : '' }}>Cooperative Society</option>
                                             </select>
-                                            @error('business_type')
+                                            
+                                            {{-- @error('business_type')
                                                 <p class="small text-danger"> {{ $message }}</p>
-                                            @enderror
+                                            @enderror --}}
                                         </div>
                                     </div>
                                 </div>
 
-                                {{-- <div class="col-md-6">
-                                    <div class=" mb-4">
-                                        <label for="business_type" class="mb-3">Type of Business:</label>
-                                        <input id="business_type" value="{{ $businessinfo->business_type ?? '' }}"
-                                            name="business_type" type="text" class="form-control"
-                                            placeholder="E.g Farming" required>
-                                        @error('business_type')
-                                            <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div> --}}
-
-
+              
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <label for="suin" class="mb-3">SMEDAN Unique Identification
                                             Number(SUIN)</label>
-                                        <input id="suin" name="suin" value="{{ $businessinfo->suin ?? '' }}"
-                                            type="text" class="form-control" placeholder="SUIN" required>
-                                        @error('suin')
+                                        <input id="suin" name="suin" value="{{ old('suin') ?: ($businessinfo->suin ?? '') }}"
+                                            type="text" class="form-control @error('suin') is-invalid @enderror" placeholder="SUIN" >
+                                        {{-- @error('suin')
                                             <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <label for="business_age" class="mb-3">How old is your business?</label>
                                         <input id="business_age" name="business_age"
-                                            value="{{ $businessinfo->business_age ?? '' }}" type="number"
-                                            class="form-control" placeholder="E.g 3" required>
-                                        @error('suin')
+                                            value="{{ old('business_age') ?: ($businessinfo->business_age ?? '') }}" type="number"
+                                            class="form-control @error('business_age') is-invalid @enderror" placeholder="E.g 3" >
+                                        {{-- @error('suin')
                                             <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6">
-                                    <div class=" mb-4">
-                                        <label for="register_year" class="mb-3">When was the business registered?</label>
-                                        <input id="register_year" name="register_year" type="date" class="form-control"
-                                            placeholder="E.g 04/05/2020" value="{{ $businessinfo->register_year ?? '' }}"
-                                            required>
-                                        @error('register_year')
-                                            <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div> --}}
+                            
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <label for="sector" class="mb-3">Business Sector</label>
-                                        <select class="form-select" name="sector" id="sector" aria-label="sector"
-                                            required>
-                                            <option disabled @if ($businessinfo->register_type == '') selected @endif>Select
-                                                business sector</option>
-                                            <option value="Agriculture" @if ($businessinfo->sector == 'Agriculture') selected @endif>
-                                                Agriculture</option>
-                                            <option value="Manufacturing"
-                                                @if ($businessinfo->sector == 'Manufacturing') selected @endif>Manufacturing</option>
-                                            <option value="Technology" @if ($businessinfo->sector == 'Technology') selected @endif>
-                                                Technology</option>
-                                            <option value="FMCG" @if ($businessinfo->sector == 'FMCG') selected @endif>FMCG
-                                            </option>
-                                            <option value="Entertainment"
-                                                @if ($businessinfo->sector == 'Entertainment') selected @endif>Entertainment</option>
-                                            <option value="Hospitality"
-                                                @if ($businessinfo->sector == 'Hospitality') selected @endif>Hospitality</option>
-                                            <option value="Mininig" @if ($businessinfo->sector == 'Mininig') selected @endif>
-                                                Mininig</option>
-                                            <option value="Others" @if ($businessinfo->sector == 'Others') selected @endif>
-                                                Others</option>
-
+                                        <select class="form-select @error('sector') is-invalid @enderror" name="sector" id="sector" aria-label="sector">
+                                            <option disabled {{ old('sector', $businessinfo->sector) == '' ? 'selected' : '' }}>Select business sector</option>
+                                            <option value="Agriculture" {{ old('sector', $businessinfo->sector) == 'Agriculture' ? 'selected' : '' }}>Agriculture</option>
+                                            <option value="Manufacturing" {{ old('sector', $businessinfo->sector) == 'Manufacturing' ? 'selected' : '' }}>Manufacturing</option>
+                                            <option value="Technology" {{ old('sector', $businessinfo->sector) == 'Technology' ? 'selected' : '' }}>Technology</option>
+                                            <option value="FMCG" {{ old('sector', $businessinfo->sector) == 'FMCG' ? 'selected' : '' }}>FMCG</option>
+                                            <option value="Entertainment" {{ old('sector', $businessinfo->sector) == 'Entertainment' ? 'selected' : '' }}>Entertainment</option>
+                                            <option value="Hospitality" {{ old('sector', $businessinfo->sector) == 'Hospitality' ? 'selected' : '' }}>Hospitality</option>
+                                            <option value="Mininig" {{ old('sector', $businessinfo->sector) == 'Mininig' ? 'selected' : '' }}>Mininig</option>
+                                            <option value="Others" {{ old('sector', $businessinfo->sector) == 'Others' ? 'selected' : '' }}>Others</option>
                                         </select>
-                                        {{-- <label for="sector" class="mb-3">Business Sector</label>
-                                        <input id="sector" name="sector" value="{{$businessinfo->sector??''}}" type="text" class="form-control"
-                                            placeholder="E.g Agriculture" required> --}}
-                                        @error('sector')
+                                        
+
+                                        {{-- @error('sector')
                                             <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <label for="sector" class="mb-3">Loan Amount</label>
-                                        <select name="loan_amount" id="loan_amount" class="form-select text-dark">
-                                            <option value="" @if ($businessinfo->loan_amount == '') disabled selected @endif>Select loan amount</option>
-                                            <option value="250000" @if ($businessinfo->loan_amount == '250000') selected @endif>250,000</option>
-                                            <option value="500000" @if ($businessinfo->loan_amount == '500000') selected @endif>500,000</option>
-                                            <option value="1000000" @if ($businessinfo->loan_amount == '1000000') selected @endif>1,000,000</option>
-                                            <option value="1500000" @if ($businessinfo->loan_amount == '1500000') selected @endif>1,500,000</option>
-                                            <option value="2000000" @if ($businessinfo->loan_amount == '2000000') selected @endif>2,000,000</option>
-                                            <option value="2500000" @if ($businessinfo->loan_amount == '2500000') selected @endif>2,500,000</option>
+                                        <select name="loan_amount" id="loan_amount" class="form-select text-dark @error('loan_amount') is-invalid @enderror">
+                                            <option value="" @if (old('loan_amount', $businessinfo->loan_amount) == '') disabled selected @endif>Select loan amount</option>
+                                            <option value="250000" @if (old('loan_amount', $businessinfo->loan_amount) == '250000') selected @endif>250,000</option>
+                                            <option value="500000" @if (old('loan_amount', $businessinfo->loan_amount) == '500000') selected @endif>500,000</option>
+                                            <option value="1000000" @if (old('loan_amount', $businessinfo->loan_amount) == '1000000') selected @endif>1,000,000</option>
+                                            <option value="1500000" @if (old('loan_amount', $businessinfo->loan_amount) == '1500000') selected @endif>1,500,000</option>
+                                            <option value="2000000" @if (old('loan_amount', $businessinfo->loan_amount) == '2000000') selected @endif>2,000,000</option>
+                                            <option value="2500000" @if (old('loan_amount', $businessinfo->loan_amount) == '2500000') selected @endif>2,500,000</option>
                                         </select>
-                                        {{-- <label for="sector" class="mb-3">Business Sector</label>
-                                        <input id="sector" name="sector" value="{{$businessinfo->sector??''}}" type="text" class="form-control"
-                                            placeholder="E.g Agriculture" required> --}}
-                                        @error('sector')
+                                        
+                                     
+                                        {{-- @error('sector')
                                             <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <label for="address">Business Locations/Address (with landmarks)</label>
-                                        <textarea id="address" name="address" class="form-control " placeholder="Business Address" required>{{ $businessinfo->address ?? '' }}</textarea>
-                                        @error('address')
+                                        <textarea id="address" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Business Address">{{ old('address', $businessinfo->address) }}</textarea>
+
+                                        {{-- @error('address')
                                             <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <div class="form-select-wrapper mb-4">
                                             <label for="no_emp" class="">Number of Employees</label>
-                                            <select class="form-select" name="emp_no" id="emp_no"
-                                                aria-label="emp_no">
-                                                <option disabled @if ($businessinfo->emp_no == '') selected @endif>Select
-                                                    numbers of Employee</option>
-                                                <option value="0-5" @if ($businessinfo->emp_no === '0-5') selected @endif>
-                                                    0-5</option>
-                                                <option value="6-10" @if ($businessinfo->emp_no === '6-10') selected @endif>
-                                                    6-10</option>
-                                                <option value="11-15" @if ($businessinfo->emp_no === '11-15') selected @endif>
-                                                    11-15</option>
-                                                <option value="16-20" @if ($businessinfo->emp_no === '16-20') selected @endif>
-                                                    16-20</option>
-                                                <option value="Above 20"
-                                                    @if ($businessinfo->emp_no === 'Above 20') selected @endif>
-                                                    Above 20</option>
+                                            <select class="form-select @error('emp_no') is-invalid @enderror" name="emp_no" id="emp_no" aria-label="emp_no">
+                                                <option value="" {{ (old('emp_no') ?? $businessinfo->emp_no) == '' ? 'selected' : '' }}>
+                                                    Select numbers of Employee
+                                                </option>
+                                                <option value="0-5" {{ (old('emp_no') ?? $businessinfo->emp_no) === '0-5' ? 'selected' : '' }}>
+                                                    0-5
+                                                </option>
+                                                <option value="6-10" {{ (old('emp_no') ?? $businessinfo->emp_no) === '6-10' ? 'selected' : '' }}>
+                                                    6-10
+                                                </option>
+                                                <option value="11-15" {{ (old('emp_no') ?? $businessinfo->emp_no) === '11-15' ? 'selected' : '' }}>
+                                                    11-15
+                                                </option>
+                                                <option value="16-20" {{ (old('emp_no') ?? $businessinfo->emp_no) === '16-20' ? 'selected' : '' }}>
+                                                    16-20
+                                                </option>
+                                                <option value="Above 20" {{ (old('emp_no') ?? $businessinfo->emp_no) === 'Above 20' ? 'selected' : '' }}>
+                                                    Above 20
+                                                </option>
                                             </select>
-                                            @error('gender')
-                                                <p class="small text-danger"> {{ $message }}</p>
-                                            @enderror
+                                            
+                                            
 
                                         </div>
                                     </div>

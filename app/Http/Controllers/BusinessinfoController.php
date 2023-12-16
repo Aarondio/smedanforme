@@ -107,38 +107,38 @@ class BusinessinfoController extends Controller
     public function application(Request $request, $bizno)
     {
         // $bizno = $request->input('application_number'); // Not needed anymore
-    
+
         $businessinfo = Businessinfo::where('business_no', $bizno)->first();
-    
+
         if ($businessinfo) {
             $biz_user = $businessinfo->user_id;
             $user = User::where('id', $biz_user)->first();
-    
+
             if ($user) {
                 return view('application', compact('businessinfo', 'user'));
             }
         }
-    
+
         return redirect()->route('application')->withErrors('Invalid application number');
     }
     public function applications(Request $request, $bizno)
     {
         // $bizno = $request->input('application_number'); // Not needed anymore
-    
+
         $businessinfo = Businessinfo::where('business_no', $bizno)->first();
-    
+
         if ($businessinfo) {
             $biz_user = $businessinfo->user_id;
             $user = User::where('id', $biz_user)->first();
-    
+
             if ($user) {
                 return view('application', compact('businessinfo', 'user'));
             }
         }
-    
+
         return redirect()->route('application')->withErrors('Invalid application number');
     }
-    
+
 
     // public function application(Request $request,$bizno)
     // {
@@ -313,26 +313,37 @@ class BusinessinfoController extends Controller
             $businessinfo = Businessinfo::find($request->id);
             $validated = $request->validate([
                 'business_name' => ['required', 'max:255', 'string'],
-                // 'business_type' => ['required', 'max:255', 'string'],
                 'is_registered' => ['required'],
                 'suin' => 'required',
                 'register_type' => 'required',
                 'business_age' => 'required',
-                // 'register_year' => 'required',
                 'emp_no' => 'required',
                 'loan_amount' => 'required',
                 'sector' => 'required',
                 'address' => 'required',
-
+            ], [
+                // Custom error messages can be added here if needed
             ]);
+
+            // Update the business information
             $businessinfo->update($validated);
+
             return redirect()
                 ->route('nanoplan', $businessinfo)
                 ->withSuccess("Business information has been saved successfully");
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()
+                ->back()
+                ->withErrors($e->validator->getMessageBag())
+                ->withInput();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()
+                ->back()
+                ->withErrors(['error' => $e->getMessage()])
+                ->withInput();
         }
     }
+
     public function updatebusinessinfo(Request $request, User $user, Businessinfo $businessinfo)
     {
         try {

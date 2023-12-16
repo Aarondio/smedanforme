@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -13,7 +14,7 @@ return new class extends Migration {
         Schema::create('businessinfos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('business_name')->nullable();
-            
+
             $table->string('business_type')->nullable();
             $table->string('is_registered')->nullable();
             $table->string('register_type')->nullable();
@@ -21,6 +22,8 @@ return new class extends Migration {
             $table->integer('business_age')->nullable();
             $table->string('register_year')->nullable();
             $table->string('sector')->nullable();
+            $table->string('emp_no')->nullable();
+            $table->string('status')->nullable()->default('Pending');
             $table->mediumText('address')->nullable();
 
             $table->unsignedBigInteger('user_id');
@@ -32,6 +35,12 @@ return new class extends Migration {
             $table->longText('management_team')->nullable();
             $table->unsignedBigInteger('loan_amount')->nullable();
             $table->longText('loan_reason')->nullable();
+
+
+        
+
+
+           
 
 
             $table->timestamps();

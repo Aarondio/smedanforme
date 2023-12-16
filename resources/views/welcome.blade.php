@@ -3,7 +3,7 @@
 @section('content')
     {{-- <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300 text-white"
         data-image-src="./assets/img/photos/bg3.jpg"> --}}
-        <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="./assets/img/photos/bg4.jpg">
+        <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{ asset('asset/img/photos/sme.jpg')}}">
         <div class="container pt-10 pb-19 pt-md-12 pb-md-13 text-center">
             <div class="row mb-11">
                 <div class="col-md-9 col-lg-7 col-xxl-6 mx-auto" data-cues="zoomIn" data-group="page-title"

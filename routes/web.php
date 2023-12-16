@@ -6,11 +6,13 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CashflowController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BusinessinfoController;
+use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\LgaController;
 use App\Http\Controllers\PaystackController;
 use App\Http\Controllers\SalesforcastController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\PdfService;
 use App\Models\Businessinfo;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -74,6 +76,7 @@ Route::post('loan_reason',[BusinessinfoController::class,'loan_reason'])->name('
 
 Route::post('add_product',[ProductController::class,'add_product'])->name('add_product');
 
+
 Route::post('updateinfo',[UserController::class,'updateinfo'])->name('updateinfo');
 Route::post('updatepersonalinfo',[UserController::class,'updatepersonalinfo'])->name('updatepersonalinfo');
 Route::post('updatebusinessinfo',[BusinessinfoController::class,'updatebusinessinfo'])->name('updatebusinessinfo');
@@ -81,15 +84,25 @@ Route::post('updatebusiness',[BusinessinfoController::class,'updatebusiness'])->
 // Route::post('audience_need',[BusinessinfoController::class,'audience_need'])->name('audience_need');
 Route::post('saveproductioncost',[SalesforcastController::class,'updatesales'])->name('saveproductioncost');
 Route::get('/get-lgas/{stateId}', [LgaController::class, 'getLGAs'])->name('get-lgas');
+
+
+Route::get('/sme',[SiteController::class, 'sme'])->name('sme');
+Route::get('/loaners',[SiteController::class, 'loaners'])->name('loaners');
 Route::prefix('/')
     ->middleware('auth')
     ->group(function () {
+        Route::get('pdf',[PdfService::class,'viewPdf'])->name('viewPdf');
         Route::resource('businessinfos', BusinessinfoController::class);
         Route::resource('cashlows', CashflowController::class);
         // Route::resource('products', ProductController::class);
         Route::resource('salesforcasts', SalesforcastController::class);
         Route::resource('users', UserController::class);
         Route::get('personal',[SiteController::class,'personal'])->name('personal');
+        Route::post('create-expenses',[ExpensesController::class,'update'])->name('create-expenses');
+        Route::get('employees',[SiteController::class,'employees'])->name('employees');
+        Route::get('finance',[SiteController::class,'finance'])->name('finance');
+        Route::get('financial-record/{id}',[SiteController::class,'financialRecord'])->name('financial-record');
+        Route::get('startup-cost',[SiteController::class,'startupCost'])->name('startup-cost');
         Route::get('personalinfo',[SiteController::class,'personalinfo'])->name('personalinfo');
         Route::get('dashboard',[SiteController::class,'dashboard'])->name('dashboard');
         Route::get('loanamount',[SiteController::class,'loanamount'])->name('loanamount');

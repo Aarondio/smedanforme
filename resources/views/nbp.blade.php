@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg4.jpg')}}">
+<section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('asset/img/photos/bg4.jpg')}}">
         <div class="wrapper">
             <div class="container py-10 py-md-12">
                 <div class="row">
@@ -31,7 +31,7 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="me-5">
-                                    <img src="./assets/img/icons/lineal/search.svg"
+                                    <img src="{{ asset('asset/img/icons/lineal/search.svg')}}"
                                         class="svg-inject icon-svg icon-svg-sm text-primary" alt="" />
                                 </div>
                                 <div>
@@ -47,7 +47,7 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="me-5">
-                                    <img src="{{asset('assets/img/icons/lineal/bar-chart.svg')}}"
+                                    <img src="{{asset('asset/img/icons/lineal/bar-chart.svg')}}"
                                         class="svg-inject icon-svg icon-svg-sm text-primary" alt="" />
                                 </div>
                                 <div>
@@ -63,7 +63,7 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="me-5">
-                                    <img src="{{asset('assets/img/icons/lineal/briefcase-2.svg')}}"
+                                    <img src="{{asset('asset/img/icons/lineal/briefcase-2.svg')}}"
                                         class="svg-inject icon-svg icon-svg-sm text-primary" alt="" />
                                 </div>
                                 <div>
@@ -79,7 +79,7 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="me-5">
-                                    <img src="{{asset('assets/img/icons/lineal/clock-3.svg')}}"
+                                    <img src="{{asset('asset/img/icons/lineal/clock-3.svg')}}"
                                         class="svg-inject icon-svg icon-svg-sm text-primary" alt="" />
                                 </div>
                                 <div>
@@ -95,7 +95,7 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="me-5">
-                                    <img src="{{asset('assets/img/icons/lineal/handshake.svg')}}"
+                                    <img src="{{asset('asset/img/icons/lineal/handshake.svg')}}"
                                         class="svg-inject icon-svg icon-svg-sm text-primary" alt="" />
                                 </div>
                                 <div>

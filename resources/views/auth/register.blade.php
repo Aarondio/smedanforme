@@ -32,7 +32,7 @@
                                 <input id="firstname" type="text"
                                     class="form-control @error('firstname') is-invalid @enderror" name="firstname"
                                     value="{{ old('firstname') }}" placeholder="First name" required
-                                    autocomplete="firstname" autofocus>
+                                    autocomplete="name" autofocus>
                                 <label for="firstname">First Name</label>
                             </div>
                             <p>
@@ -62,7 +62,7 @@
                                 <input id="surname" type="text"
                                     class="form-control @error('surname') is-invalid @enderror" name="surname"
                                     value="{{ old('surname') }}" placeholder="Surname" required
-                                    autocomplete="surname" autofocus>
+                                    autocomplete="name" autofocus>
                                 <label for="surname">Surname</label>
                             </div>
                             <p>

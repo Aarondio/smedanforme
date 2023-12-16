@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Salesforcast;
 use App\Models\State;
+use App\Models\Expenses;
 use Illuminate\Support\Facades\DB;
+
 class SiteController extends Controller
 {
     //
@@ -17,6 +19,13 @@ class SiteController extends Controller
     {
 
         return view('nbp');
+    }
+
+    public function sme(){
+        return view('smedan.index');
+    }
+    public function loaners(){
+        return view('smedan.loaners');
     }
     public function mbp(Request $request)
     {
@@ -34,7 +43,7 @@ class SiteController extends Controller
             ->count();
         $all = Businessinfo::where('plan_type', 2)
             ->count();
-        return view('applicants', compact('businessinfos', 'completed','all','incompleted'));
+        return view('applicants', compact('businessinfos', 'completed', 'all', 'incompleted'));
     }
     public function success(Request $request)
     {
@@ -218,10 +227,90 @@ class SiteController extends Controller
             if (empty($paystack->user_id)) {
                 return view('app.dashboard.nbp');
             } else {
-                return view('app.dashboard.personal', compact('user', 'paystack','states'));
+                return view('app.dashboard.personal', compact('user', 'paystack', 'states'));
             }
         }
     }
+
+
+    public function employees(Request $request)
+    {
+
+        return view('app.dashboard.employees');
+        // $id = $request->input('id');
+        // $user = Auth::user();
+        // $businessinfo = BusinessInfo::find($id);
+
+        // if ($businessinfo->user_id == $user->id) {
+        //     return redirect()->back();
+        // }else{
+
+        // }
+    }
+    public function finance(Request $request)
+    {
+        $user = Auth::user();
+        // $states =  State::all();
+        $businessinfo = Businessinfo::find($request->input('id'));
+        $expenses = Expenses::where('businessinfo_id',$businessinfo->id)->where('expense_type','Annual')->first();
+        if ($user) {
+            $paystack = Paystack::where('user_id', $user->id)->first();
+            if (empty($paystack->user_id)) {
+                return view('app.dashboard.nbp');
+            } else {
+                return view('app.dashboard.finance', compact('businessinfo','expenses'));
+            }
+        }
+    }
+    public function financialRecord(Request $request,$id)
+    {
+        $user = Auth::user();
+        // $expenses = Expenses::where('id',$id)->where('expense_type','Annual')->first();
+        $expenses = Expenses::find($id);
+        if ($user) {
+            $paystack = Paystack::where('user_id', $user->id)->first();
+            $businessinfo = Businessinfo::where('user_id', $user->id)->where('plan_type', 1)->first();
+            $products = Product::where('businessinfo_id', $businessinfo->id)->get();
+            if (empty($paystack->user_id)) {
+                return view('app.dashboard.nbp');
+            } else {
+                return view('app.dashboard.financial-record', compact('expenses','businessinfo','products'));
+            }
+        }
+    }
+    public function expenses(Request $request, Expenses $expenses)
+    {
+        $id = $request->input('id');
+        $user = Auth::user();
+        $businessinfo = BusinessInfo::find($id);
+
+        if ($businessinfo->user_id == $user->id) {
+            return redirect()->back();
+        } else {
+            Expenses::create(['businessinfo_id' => $businessinfo->id]);
+            $expenses = Expenses::where('businessinfo_id', $businessinfo->id)->where('expense_type', 'annual_record')->first();
+            if ($expenses && $expenses->exists()) {
+                return view('app.dashboard.finance', compact('user', 'expenses', 'paystack'));
+            } else {
+                return redirect()->back()->with('error', 'No record found');
+            }
+        }
+    }
+    public function startupCost(Request $request)
+    {
+        $user = Auth::user();
+        $states =  State::all();
+
+        if ($user) {
+            $paystack = Paystack::where('user_id', $user->id)->first();
+            if (empty($paystack->user_id)) {
+                return view('app.dashboard.nbp');
+            } else {
+                return view('app.dashboard.startup-cost', compact('user', 'paystack', 'states'));
+            }
+        }
+    }
+
     public function personalinfo(Request $request)
     {
         // $user = Auth::user();
@@ -235,7 +324,7 @@ class SiteController extends Controller
             if (empty($paystack->user_id)) {
                 return view('app.dashboard.nbp');
             } else {
-                return view('app.dashboard.personalinfo', compact('user', 'paystack','states'));
+                return view('app.dashboard.personalinfo', compact('user', 'paystack', 'states'));
             }
         }
     }

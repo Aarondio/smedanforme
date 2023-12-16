@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('reference');
             $table->unsignedBigInteger('user_id');
+            $table->integer('plan_type');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

@@ -124,8 +124,8 @@ class ProductController extends Controller
             $validated = $request->validate([
                 'name' => 'required|unique:products,name,NULL,id,businessinfo_id,' . $businessinfo->id,
                 'price' => 'required',
-                'cost' => 'required',
-                'quantity'=>'required'
+                // 'cost' => 'required',
+                // 'quantity'=>'required'
             ]);
 
             $validated['businessinfo_id'] = $businessinfo->id;
@@ -138,7 +138,7 @@ class ProductController extends Controller
             }
 
             // return response()->json(['success' => 'Product added']);
-            redirect()->route('myproducts')->withSuccess("Product Added successfully");
+            redirect()->route('myproducts')->withSuccess("$createdProduct->name was added successfully")->with('myproduct',$createdProduct);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 422);
             // redirect()->route('product')->withErrors($e->getMessage());

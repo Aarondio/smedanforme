@@ -6,12 +6,22 @@
 
             <div class="row justify-content-center">
                 <div class="col-md-8 ">
-                    <h1 class="text-left">My Products</h1>
-                    <div class="alert alert-success border-success">
-                        <p>These are the products you have added. Click on add more info to provide more information about
-                            each product added below. If you want to add more product click on the button below.</p>
-                        <a class="btn btn-success btn-sm text-white" href="{{ route('product') }}">Add New product</a>
+                    <h1 class="text-left text-capitalize">Products and services</h1>
+                    <div class="alert alert-info border-success">
+                        <p class="text-dark">All the products and service you add will be available here. You can click on the button below to
+                            add new records</p>
+                         <div class="d-flex justify-content-between flex-column flex-lg-row">
+                            <a class="btn btn-info btn-sm text-white text-capitalize mt-2" href="{{ route('product') }}">Add new
+                                Product/Service</a>
+                            <a class="btn btn-outline-warning btn-sm  text-capitalize mt-2" href="{{ route('preview') }}">Preview Application</a>
+                         </div>
                     </div>
+                    @if (session('success'))
+                        <div class="alert alert-success mt-3">
+                            <p class="text-dark m-0 p-0">{{ session('success') }}</p>
+                        </div>
+                    @endif
+
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -72,11 +82,11 @@
                     @endforeach
                 @else
                     <div class="col-md-8">
-                       
-                            <div class=" alert alert-danger">
-                                <p class="m-0">You have not added a product</p>
-                            </div>
-                      
+
+                        <div class=" alert alert-danger">
+                            <p class="m-0">You have not added a product</p>
+                        </div>
+
                     </div>
                 @endif
                 {{-- @endif --}}

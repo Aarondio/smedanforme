@@ -23,7 +23,7 @@
                         {{-- <p>Click on the button to continue your application</p> --}}
                         <p class="m-0 fw-bold text-dark">Available loan</p>
                         <div class="row">
-                            <div class="col-md-6 col-lg-4 mt-3">
+                            {{-- <div class="col-md-6 col-lg-4 mt-3">
                                 <div class="pricing card text-center" style="height: 250px">
                                     <div class="card-body">
                                         <img src="{{ asset('assets/img/sterlingbank.png') }}" height="70" height="180"
@@ -39,14 +39,14 @@
                                                     now</a>
                                             @endif
                                         @endif
-                                        {{-- <a href="{{ route('personalinfo') }}" class="btn btn-grape">Apply now</a> --}}
+                                       
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6 col-lg-4 mt-3">
                                 <div class="pricing card text-center" style="height: 250px">
                                     <div class="card-body">
-                                        <img src="{{ asset('assets/img/smedan_logo.png') }}" class="" height="70"
+                                        <img src="{{ asset('asset/img/smedan_logo.png') }}" class="" height="70"
                                             alt="" />
                                         <h4 class="card-title mt-5">Matching funds</h4>
                                         @if (empty($plan_one->user_id))

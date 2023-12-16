@@ -7,7 +7,7 @@
                         } */
     </style>
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
-        data-image-src="{{ asset('assets/img/photos/bg20.png') }}">
+        data-image-src="{{ asset('asset/img/photos/bg20.png') }}">
         {{-- <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg4.jpg')}}"> --}}
 
         <div class="wrapper ">
@@ -66,13 +66,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-between">
-                                    <p id="aud" class=" text-muted">Saved</p>
+                                <div class="d-flex justify-content-end">
+                                    {{-- <p id="aud" class=" text-muted">Saved</p> --}}
                                     <p class="text-end fs-14 text-muted"> <span id="counter">0</span>/100</p>
                                 </div>
                             </div>
                             <div id="form-2" class="wrapper">
-                                <h4 class="">Describes how the business plans to generate income</h4>
+                                <h4 class="">Describe how the business intends to generate income</h4>
                                 <div class="card rounded-0">
                                     <div class="form-floating">
                                         <textarea id="business_model" name="business_model" class="form-control rounded-0"
@@ -99,12 +99,12 @@
                                 <p class="text-end fs-14 text-muted"> <span id="counter1">0</span>/100</p>
                             </div>
                             <div id="form-3" class="wrapper">
-                                <h4 class="">Outlines the target audience</h4>
+                                <h4 class="">Outline the target audience</h4>
                                 <div class="card rounded-0">
                                     <div class="form-floating">
                                         <textarea id="target_market" name="target_market" class="form-control rounded-0"
-                                            placeholder="Outlines the target audience" style="height: 150px" required>{{ $businessinfo->target_market ?? '' }}</textarea>
-                                        <label for="target_market">Outlines the target audience</label>
+                                            placeholder="Outline the target audience" style="height: 150px" required>{{ $businessinfo->target_market ?? '' }}</textarea>
+                                        <label for="target_market">Outline the target audience</label>
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
                                         <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
@@ -126,12 +126,12 @@
                                 <p class="text-end fs-14 text-muted"> <span id="counter2">0</span>/100</p>
                             </div>
                             <div id="form-4" class="wrapper">
-                                <h4 class="">Outlines your competitors</h4>
+                                <h4 class="">Outline your competitors</h4>
                                 <div class="card rounded-0">
                                     <div class="form-floating">
                                         <textarea id="competition_ad" name="competition_ad" class="form-control rounded-0"
-                                            placeholder="Outlines the target audience" style="height: 150px" required>{{ $businessinfo->competition_ad ?? '' }}</textarea>
-                                        <label for="competition_ad">Outlines how you can set yourself apart</label>
+                                            placeholder="Outline the target audience" style="height: 150px" required>{{ $businessinfo->competition_ad ?? '' }}</textarea>
+                                        <label for="competition_ad">Outline how you can set yourself apart</label>
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
                                         <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
@@ -156,8 +156,8 @@
                                 <div class="card rounded-0">
                                     <div class="form-floating">
                                         <textarea id="management_team" name="management_team" class="form-control rounded-0"
-                                            placeholder="Outlines the management structure of the business" style="height: 150px" required>{{ $businessinfo->management_team ?? '' }}</textarea>
-                                        <label for="management_team">Outlines the management structure</label>
+                                            placeholder="Outline the management structure of the business" style="height: 150px" required>{{ $businessinfo->management_team ?? '' }}</textarea>
+                                        <label for="management_team">Outline the management structure</label>
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
                                         <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
@@ -182,8 +182,8 @@
                                 <div class="card rounded-0">
                                     <div class="form-floating">
                                         <textarea id="loan_reason" name="loan_reason" class="form-control rounded-0"
-                                            placeholder="Outlines the reason why you need the funding" style="height: 150px" required>{{ $businessinfo->loan_reason ?? '' }}</textarea>
-                                        <label for="loan_reason">Outlines the reasons</label>
+                                            placeholder="Outline the reason why you need the funding" style="height: 150px" required>{{ $businessinfo->loan_reason ?? '' }}</textarea>
+                                        <label for="loan_reason">Outline the reasons</label>
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
                                         <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
@@ -224,7 +224,7 @@
                                         <input type="number" id="loan_amount"
                                             value="{{ $businessinfo->loan_amount ?? '' }}" name="loan_amount"
                                             class="form-control rounded-0"
-                                            placeholder="Outlines the reason why you need the funding" required>
+                                            placeholder="Outline the reason why you need the funding" required>
                                         <label for="loan_amount">E.g 2,500,000</label>
                                     </div>
 
@@ -237,8 +237,12 @@
                                 <a href="{{ route('business') }}" class="btn btn-outline-danger btn-sm">Back</a>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ route('product') }}"
-                                    class="float-end btn btn-outline-primary btn-sm">Next</a>
+                                <form action="{{ route('finance') }}" class="float-end">
+                                    <input type="text" name="id" value="{{ $businessinfo->id }}" hidden>
+                                    <button type="submit" class="btn btn-sm btn-outline-primary">Next</button>
+                                </form>
+                                {{-- <a href="{{ route('finance',$businessinfo->id) }}"
+                                    class="float-end btn btn-outline-primary btn-sm">Next</a> --}}
                             </div>
                         </div>
                     </div>

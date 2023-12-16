@@ -7,12 +7,12 @@
     <meta name="description" content="Book appointment and submit proposal online">
     <meta name="keywords" content="Book, Appointment, Proposal, events booking">
     <meta name="author" content="elemis">
-    <title>Smedanforyou</title>
-    <link rel="shortcut icon" href="{{ asset('assets/img/logo/logo.svg') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <title>SME CREDITS</title>
+    <link rel="shortcut icon" href="{{ asset('asset/img/logo/logo.svg') }}">
+    <link rel="stylesheet" href="{{ asset('asset/css/plugins.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('assets/js/currency.js') }}"></script>
+   
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">

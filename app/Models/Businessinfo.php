@@ -24,6 +24,12 @@ class Businessinfo extends Model
         'loan_reason',
 
         'emp_no',
+        'ceo',
+        'pro_manager',
+        'workers',
+        'marketers',
+        'other_employees',
+
 
 
         // 'business_type',
@@ -37,6 +43,22 @@ class Businessinfo extends Model
         'business_no',
         'status',
    
+        'year',
+        'salary',
+        'securities',
+        'rent',
+        'utilities',
+        'depreciation',
+        'adminexpenses',
+        'marketing',
+        'supplies',
+        'licences',
+        'consultation',
+        'internet',
+        'legal',
+        'miscell' ,
+        'insurance',
+        'other_expenses',
 
     ];
 
@@ -61,5 +83,13 @@ class Businessinfo extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function expenses(){
+        return $this->hasMany(Expenses::class);
+    }
+
+    public function employees(){
+        return $this->belongsTo(Employees::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expenses;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Businessinfo;
+use App\Models\Employees;
 use Illuminate\Support\facades\Auth;
 use Illuminate\Validation\Rule;
 
@@ -110,35 +112,33 @@ class UserController extends Controller
             ->withSuccess("Personal information has been saved successfully");
     }
 
-    public function updateinfo(Request $request, User $user, Businessinfo $businessinfo)
+    public function updateinfo(Request $request, User $user, Businessinfo $businessinfo, Expenses $expenses, Employees $employees)
     {
+        // Validate the incoming request data
+        $user = User::find($request->id);
+        $validated = $request->validate([
+            'firstname' => ['required', 'max:255', 'string'],
+            'surname' => ['required', 'max:255', 'string'],
+            'middlename' => ['nullable'],
+            'gender' => 'required',
+            'nationality' => 'required',
+            'marital_status' => 'required',
+            'state' => 'required',
+            'lga' => 'required',
+            'address' => 'required',
+            'phone' => ['required', 'max:255', 'string'],
+            'password' => ['nullable'],
+        ]);
+    
         try {
-            // Validate the incoming request data
-            $user = User::find($request->id);
-            $validated = $request->validate([
-                'firstname' => ['required', 'max:255', 'string'],
-                'surname' => ['required', 'max:255', 'string'],
-                'middlename' => ['nullable'],
-                'gender' => 'required',
-                'nationality' => 'required',
-                'marital_status' => 'required',
-                'state' => 'required',
-                'lga' => 'required',
-                'address' => 'required',
-                'phone' => ['required', 'max:255', 'string'],
-                'password' => ['nullable'],
-            ]);
-
-            // Handle the password update logic
             if (empty($validated['password'])) {
                 unset($validated['password']);
             } else {
                 $validated['password'] = Hash::make($validated['password']);
             }
-
-            // Update the user's information
+    
             $user->update($validated);
-
+    
             // $check = $request->validate([
             //     'user_id'=>'required'
             // ]);
@@ -147,20 +147,30 @@ class UserController extends Controller
             if (!$businessinfo->exists) {
                 $businessinfo->user_id = $request->id;
                 $businessinfo->save();
+               
+                $expenses = new Expenses(); 
+                $expenses->businessinfo_id = $businessinfo->id;
+                $expenses->expense_type = "Annual";
+                $expenses->save();
+            
+                $employees = new Employees(); 
+                $employees->businessinfo_id = $businessinfo->id;
+                $employees->save();
             }
-
-
+    
             return redirect()
                 ->route('business', $user)
                 ->withSuccess("Personal information has been saved successfully");
         } catch (\Exception $e) {
-            // Log the error for further investigation (optional)
-            // \Log::error('Database error: ' . $e->getMessage());
-
-            // Return an error message to the user
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()
+                ->back()
+                ->withErrors(['error' => $e->getMessage()])
+                ->withInput();
         }
+
+        
     }
+    
     public function updatepersonalinfo(Request $request, User $user, Businessinfo $businessinfo)
     {
         try {
@@ -205,12 +215,10 @@ class UserController extends Controller
             return redirect()
                 ->route('businessinfo', $user)
                 ->withSuccess("Business information has been saved successfully");
+                
         } catch (\Exception $e) {
-            // Log the error for further investigation (optional)
-            // \Log::error('Database error: ' . $e->getMessage());
-
-            // Return an error message to the user
-            return redirect()->back()->with('error', $e->getMessage());
+           
+            return redirect()->back()->withErrors('error', $e->getMessage());
         }
     }
 

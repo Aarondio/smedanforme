@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
-        data-image-src="{{ asset('assets/img/photos/bg4.jpg') }}">
+        data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
         <div class="wrapper ">
             <div class="container py-10 py-md-12">
                 <h1 class="display-2 mb-1 text-white text-center">Contact us</h1>
