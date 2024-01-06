@@ -35,6 +35,12 @@ return new class extends Migration
             $table->longText('management_team')->nullable();
             $table->unsignedBigInteger('loan_amount')->nullable();
             $table->longText('loan_reason')->nullable();
+            $table->longText('about')->nullable();
+            $table->longText('slogan')->nullable();
+            $table->longText('mission')->nullable();
+            $table->longText('website')->nullable();
+            $table->longText('journey')->nullable();
+            $table->string('business_no')->nullable();
 
 
         

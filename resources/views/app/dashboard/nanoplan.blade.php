@@ -3,11 +3,11 @@
 @section('content')
     <style>
         /* *{
-                            border: 1px solid red;
-                        } */
+                                        border: 1px solid red;
+                                    } */
     </style>
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
-        data-image-src="{{ asset('asset/img/photos/bg20.png') }}">
+        data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
         {{-- <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg4.jpg')}}"> --}}
 
         <div class="wrapper ">
@@ -29,26 +29,162 @@
     <section class="wrapper bg-gray py-10 py-md-12">
         <div class="container">
             @if (session('success'))
-               <center>
-                <div class="alert alert-success mb-5 col-md-10">
-                    {{ session('success') }}
-                </div>
-               </center>
+                <center>
+                    <div class="alert alert-success mb-5 col-md-10">
+                        {{ session('success') }}
+                    </div>
+                </center>
             @endif
             <div class="row justify-content-center ">
+                <aside class="col-lg-2 sidebar sticky-sidebar mt-md-0  d-none d-xl-block">
+                    <div class="widget">
+                        {{-- <h6 class="widget-title fs-17 mb-2 ps-xl-5">On this page</h6> --}}
+
+                        <div class="card bg-transparent">
+                            <div class="card-body p-3 m-0">
+                                <nav class="" id="sidebar-nav">
+                                    <ul class="list-unstyled fs-sm lh-sm text-reset fw-light">
+                                        <li><a class="nav-link  fw-normal" href="{{ route('personal') }}">Personal Info</a>
+                                        </li>
+                                        <li><a class="nav-link  my-1 fw-normal " href="{{ route('business') }}">Business
+                                                Info</a></li>
+                                        <li><a class="nav-link fw-normal active text-decoration-underline"
+                                                href="{{ route('nanoplan') }}">Business
+                                                Description</a></li>
+                                        <li><a class="nav-link fw-normal" href="{{ route('finance') }}">Expenses Records</a>
+                                        </li>
+                                        <li><a class="nav-link fw-normal my-1" href="{{ route('product') }}">Add
+                                                Products/Services</a></li>
+                                        <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                </aside>
                 <div class="col-lg-10 col-md-12 card shadow-lg">
 
                     <div class="card-body">
                         <form action="" method="post">
                             @csrf
+                            <div id="form-0" class="wrapper">
+                                {{-- <input type="text" name="plan_type" value="1"> --}}
+                                <h4 class="">Tell us about your business</h4>
+                                <div class="card rounded-0">
+                                    <div class="">
+                                        <textarea id="about" name="about" class="form-control rounded-0" placeholder="Tell us about your business"
+                                            style="height: 150px" required>{{ $businessinfo->about ?? '' }}</textarea>
+                                        {{-- <label for="aumission">State your mission statement</label> --}}
+                                    </div>
+                                    <div class="card-footer position-relative p-0 px-4">
+                                        <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
+                                            href="#collapse-00">View sample</a>
+                                    </div>
+                                    <div id="collapse-00"
+                                        class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
+                                        <div class="code-wrapper">
+                                            <div class=" px-10 py-5">
+                                                We specialize in offering an exhilarating sea experience through our range
+                                                of motorboats and yachts. Catering to individuals seeking relaxation or
+                                                adventure on the water, our rentals promise unforgettable journeys. Whether
+                                                it's a serene escape or an action-packed day, our motorboats ensure a
+                                                thrilling escapade. Embrace activities like wakeboarding and water-skiing,
+                                                creating moments of joy and excitement. At our core, we strive to curate sea
+                                                voyages that leave lasting memories, providing an avenue for both relaxation
+                                                and thrilling aquatic adventures. Join us for an exceptional journey that
+                                                harmonizes leisure and fun on the open water.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    {{-- <p id="aud" class=" text-muted">Saved</p> --}}
+                                    <p class="text-end fs-14 text-muted"> <span id="counter0">0</span>/100</p>
+                                </div>
+                            </div>
+                            <div id="form-01" class="wrapper">
+                                {{-- <input type="text" name="plan_type" value="1"> --}}
+                                <h4 class="">State your mission statement</h4>
+                                <div class="card rounded-0">
+                                    <div class="">
+                                        <textarea id="mission" name="mission" class="form-control rounded-0" placeholder="State your mission statement"
+                                            style="height: 150px" required>{{ $businessinfo->mission ?? '' }}</textarea>
+                                        {{-- <label for="aumission">State your mission statement</label> --}}
+                                    </div>
+                                    <div class="card-footer position-relative p-0 px-4">
+                                        <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
+                                            href="#collapse-0">View sample</a>
+                                    </div>
+                                    <div id="collapse-0"
+                                        class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
+                                        <div class="code-wrapper">
+                                            <div class=" px-10 py-5">
+
+                                                Our mission is to redefine aquatic leisure by delivering exceptional
+                                                experiences through our motorboat and yacht rentals. We aim to provide a
+                                                gateway to unforgettable moments, blending relaxation and adventure
+                                                seamlessly. Committed to excellence, we strive to offer top-tier services,
+                                                ensuring every journey is filled with joy, comfort, and safety. With a
+                                                passion for customer satisfaction, we seek to create a dynamic platform for
+                                                individuals to embrace the sea's beauty. Through innovation and dedication,
+                                                we endeavor to be the foremost choice, enabling our patrons to explore,
+                                                unwind, and create cherished memories on the water.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    {{-- <p id="aud" class=" text-muted">Saved</p> --}}
+                                    <p class="text-end fs-14 text-muted"> <span id="counter01">0</span>/100</p>
+                                </div>
+                            </div>
+                            <div id="form-011" class="wrapper">
+                                {{-- <input type="text" name="plan_type" value="1"> --}}
+                                <h4 class="">State your business challenges and how you have over come them</h4>
+                                <div class="card rounded-0">
+                                    <div class="">
+                                        <textarea id="journey" name="journey" class="form-control rounded-0" placeholder="State your mission statement"
+                                            style="height: 150px" required>{{ $businessinfo->journey ?? '' }}</textarea>
+                                        {{-- <label for="aumission">State your mission statement</label> --}}
+                                    </div>
+                                    <div class="card-footer position-relative p-0 px-4">
+                                        <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
+                                            href="#collapse-01">View sample</a>
+                                    </div>
+                                    <div id="collapse-01"
+                                        class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
+                                        <div class="code-wrapper">
+                                            <div class=" px-10 py-5">
+
+                                                Navigating seasonal demand fluctuations posed a challenge, requiring
+                                                strategic planning to balance peak and off-peak periods. Implementing
+                                                flexible pricing structures and offering diverse packages helped optimize
+                                                boat utilization during slower seasons. Ensuring a well-maintained fleet and
+                                                seamless booking processes bolstered customer trust and retention,
+                                                overcoming initial skepticism about boat conditions and service reliability.
+                                                Partnering with local tourism agencies and leveraging digital marketing
+                                                significantly expanded our reach, mitigating the challenge of market
+                                                penetration. Continuous innovation in onboard amenities and activity
+                                                offerings sustained interest, overcoming stagnation and ensuring consistent
+                                                customer engagement.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    {{-- <p id="aud" class=" text-muted">Saved</p> --}}
+                                    <p class="text-end fs-14 text-muted"> <span id="counter011">0</span>/100</p>
+                                </div>
+                            </div>
                             <div id="form-1" class="wrapper">
                                 {{-- <input type="text" name="plan_type" value="1"> --}}
                                 <h4 class="">Describe the need of your target audience</h4>
                                 <div class="card rounded-0">
-                                    <div class="form-floating">
+                                    <div class="">
                                         <textarea id="audience" name="audience_need" class="form-control rounded-0"
                                             placeholder="Describe the need of your target audience" style="height: 150px" required>{{ $businessinfo->audience_need ?? '' }}</textarea>
-                                        <label for="audenience">Describe target audience needs</label>
+                                        {{-- <label for="audenience">Describe target audience needs</label> --}}
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
                                         <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
@@ -57,7 +193,7 @@
                                     <div id="collapse-1"
                                         class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
                                         <div class="code-wrapper">
-                                            <div class="code-wrapper-inner px-10 py-5">
+                                            <div class="disable-copy-paste px-10 py-5">
                                                 We plan to rent motorboats and yachts to individuals looking for either
                                                 relaxation or pure fun while at sea. Our motorboats aim to provide an
                                                 unforgettable trip and allow for many recreational activities such as
@@ -74,10 +210,10 @@
                             <div id="form-2" class="wrapper">
                                 <h4 class="">Describe how the business intends to generate income</h4>
                                 <div class="card rounded-0">
-                                    <div class="form-floating">
+                                    <div class="">
                                         <textarea id="business_model" name="business_model" class="form-control rounded-0"
                                             placeholder="Describes how the business plans to generate income" style="height: 150px" required>{{ $businessinfo->business_model ?? '' }}</textarea>
-                                        <label for="business_model">Outline income generation plans</label>
+                                        {{-- <label for="business_model">Outline income generation plans</label> --}}
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
                                         <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
@@ -86,7 +222,7 @@
                                     <div id="collapse-2"
                                         class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
                                         <div class="code-wrapper">
-                                            <div class="code-wrapper-inner px-10 py-5">
+                                            <div class="disable-copy-paste px-10 py-5">
                                                 Most of our profit comes from the direct sales of renting motorboats and
                                                 yachts to local and international tourists. But we can also offer
                                                 recreational activities like deep-sea diving at an additional cost. We plan
@@ -101,10 +237,10 @@
                             <div id="form-3" class="wrapper">
                                 <h4 class="">Outline the target audience</h4>
                                 <div class="card rounded-0">
-                                    <div class="form-floating">
+                                    <div class="">
                                         <textarea id="target_market" name="target_market" class="form-control rounded-0"
                                             placeholder="Outline the target audience" style="height: 150px" required>{{ $businessinfo->target_market ?? '' }}</textarea>
-                                        <label for="target_market">Outline the target audience</label>
+                                        {{-- <label for="target_market">Outline the target audience</label> --}}
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
                                         <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
@@ -113,7 +249,7 @@
                                     <div id="collapse-3"
                                         class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
                                         <div class="code-wrapper">
-                                            <div class="code-wrapper-inner px-10 py-5">
+                                            <div class="disable-copy-paste px-10 py-5">
                                                 Our goal is to become part of the large and growing boat rental industry in
                                                 the U.K. Our target market consists of local and international tourists
                                                 visiting the pristine beaches in the sunny town of Eastbourne. They're
@@ -128,10 +264,10 @@
                             <div id="form-4" class="wrapper">
                                 <h4 class="">Outline your competitors</h4>
                                 <div class="card rounded-0">
-                                    <div class="form-floating">
+                                    <div class="">
                                         <textarea id="competition_ad" name="competition_ad" class="form-control rounded-0"
                                             placeholder="Outline the target audience" style="height: 150px" required>{{ $businessinfo->competition_ad ?? '' }}</textarea>
-                                        <label for="competition_ad">Outline how you can set yourself apart</label>
+                                        {{-- <label for="competition_ad">Outline how you can set yourself apart</label> --}}
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
                                         <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
@@ -140,7 +276,7 @@
                                     <div id="collapse-4"
                                         class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
                                         <div class="code-wrapper">
-                                            <div class="code-wrapper-inner px-10 py-5">
+                                            <div class="disable-copy-paste px-10 py-5">
                                                 Our primary competitors are other boat rental companies in the region. These
                                                 companies rent well-equipped motorboats and yachts but at a premium price.
                                                 What sets us apart is our ability to rent boats in all price ranges,
@@ -154,10 +290,10 @@
                             <div id="form-5" class="wrapper">
                                 <h4 class="">Management team</h4>
                                 <div class="card rounded-0">
-                                    <div class="form-floating">
+                                    <div class="">
                                         <textarea id="management_team" name="management_team" class="form-control rounded-0"
                                             placeholder="Outline the management structure of the business" style="height: 150px" required>{{ $businessinfo->management_team ?? '' }}</textarea>
-                                        <label for="management_team">Outline the management structure</label>
+                                        {{-- <label for="management_team">Outline the management structure</label> --}}
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
                                         <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
@@ -166,7 +302,7 @@
                                     <div id="collapse-5"
                                         class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
                                         <div class="code-wrapper">
-                                            <div class="code-wrapper-inner px-10 py-5">
+                                            <div class="disable-copy-paste px-10 py-5">
                                                 Our team consists of three skilled individuals, Oliver, Jacob and Edith.
                                                 Oliver is the HR manager, and they oversee the entire business, with Jacob
                                                 and Edith conducting day-to-day operations such as boat scheduling and
@@ -180,10 +316,10 @@
                             <div id="form-6" class="wrapper">
                                 <h4 class="">Explain why you need the funding</h4>
                                 <div class="card rounded-0">
-                                    <div class="form-floating">
+                                    <div class="">
                                         <textarea id="loan_reason" name="loan_reason" class="form-control rounded-0"
                                             placeholder="Outline the reason why you need the funding" style="height: 150px" required>{{ $businessinfo->loan_reason ?? '' }}</textarea>
-                                        <label for="loan_reason">Outline the reasons</label>
+                                        {{-- <label for="loan_reason">Outline the reasons</label> --}}
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
                                         <a class="collapse-link collapsed stretched-link fs-14" data-bs-toggle="collapse"
@@ -192,7 +328,7 @@
                                     <div id="collapse-6"
                                         class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
                                         <div class="code-wrapper">
-                                            <div class="code-wrapper-inner px-10 py-5">
+                                            <div class="disable-copy-paste px-10 py-5">
                                                 We require a total of 10,000 in financing. Oliver is contributing 1500
                                                 worth of personal savings and seeking an additional investment of 9500. Of
                                                 the total 10,000, we'll use 75% to liaise with boat owners in the region to
@@ -219,7 +355,7 @@
                                 <p class="text-end fs-14 text-muted"> <span id="counter7">0</span>/1</p>
                             </div> --}}
                         </form>
-        {{-- <div class="card rounded-0">
+                        {{-- <div class="card rounded-0">
                                     <div class="form-floating">
                                         <input type="number" id="loan_amount"
                                             value="{{ $businessinfo->loan_amount ?? '' }}" name="loan_amount"
@@ -266,7 +402,7 @@
             //         }
             //     });
             // }
-            function limitWordCount(element, wordLimit, counter, saveRoute, input,plan) {
+            function limitWordCount(element, wordLimit, counter, saveRoute, input, plan) {
                 element.on('input', function() {
                     var content = $(this).val();
                     var words = content.match(/\S+/g) || [];
@@ -303,17 +439,35 @@
 
 
             // Apply the word count limit to specific elements
-            limitWordCount($('#audience'), 100, $('#counter'), '{{ route('audience_need') }}', 'audience_need','plan');
+            limitWordCount($('#audience'), 100, $('#counter'), '{{ route('audience_need') }}', 'audience_need',
+                'plan');
             limitWordCount($('#business_model'), 100, $('#counter1'), '{{ route('business_model') }}',
-                'business_model','plan');
+                'business_model', 'plan');
             limitWordCount($('#target_market'), 100, $('#counter2'), '{{ route('target_market') }}',
-                'target_market','plan');
+                'target_market', 'plan');
             limitWordCount($('#competition_ad'), 100, $('#counter3'), '{{ route('competition_ad') }}',
-                'competition_ad','plan');
+                'competition_ad', 'plan');
             limitWordCount($('#management_team'), 100, $('#counter4'), '{{ route('management_team') }}',
-                'management_team','plan');
-            limitWordCount($('#loan_reason'), 100, $('#counter6'), '{{ route('loan_reason') }}', 'loan_reason','plan');
-            limitWordCount($('#loan_amount'), 1, $('#counter7'), '{{ route('loan_amount') }}', 'loan_amount','plan');
+                'management_team', 'plan');
+            limitWordCount($('#loan_reason'), 100, $('#counter6'), '{{ route('loan_reason') }}', 'loan_reason',
+                'plan');
+            limitWordCount($('#loan_amount'), 100, $('#counter7'), '{{ route('loan_amount') }}', 'loan_amount',
+                'plan');
+            limitWordCount($('#about'), 100, $('#counter0'), '{{ route('about') }}', 'about',
+                'plan');
+            limitWordCount($('#mission'), 100, $('#counter01'), '{{ route('mission') }}', 'mission',
+                'plan');
+            limitWordCount($('#journey'), 100, $('#counter01'), '{{ route('journey') }}', 'journey',
+                'plan');
+
+
+            document.addEventListener('copy', (event) => {
+                const targetElement = event.target;
+                if (targetElement.classList.contains('disable-copy-paste')) {
+                    event.preventDefault();
+                    alert('Copying is disabled for this element.');
+                }
+            });
 
             // limitWordCount($('#competition_ad'), 100, $('#counter3'));
             // limitWordCount($('#management_team'), 100, $('#counter4'));

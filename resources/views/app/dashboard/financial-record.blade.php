@@ -34,13 +34,17 @@
                                 @php $total  = 0; @endphp
    
                                 @foreach ($products as $product)
-                                    @php $total +=$product->price @endphp
+                                    @php 
+                                    
+                                    $total +=($product->quantity*$product->price) - ($product->quantity-$product->cost)
+                                    
+                                    @endphp
                                     <tr>
                                         <td class="text-dark  p-1">
                                             {{'Revenue from '. $product->name }}
                                         </td>
                                         <td class="text-dark text-end p-1">
-                                            {{ '₦' . number_format($product->price) }}
+                                            {{ '₦' . number_format(($product->quantity*$product->price) - ($product->quantity-$product->cost)) }}
                                         </td>
                                     </tr>
                                 @endforeach

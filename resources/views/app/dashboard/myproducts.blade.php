@@ -21,6 +21,11 @@
                             <p class="text-dark m-0 p-0">{{ session('success') }}</p>
                         </div>
                     @endif
+                    @if (session('errors'))
+                        <div class="alert alert-success mt-3">
+                            <p class="text-dark m-0 p-0">{{ session('errors') }}</p>
+                        </div>
+                    @endif
 
                 </div>
             </div>
@@ -52,25 +57,38 @@
                                                 </div>
                                                 <div>
                                                     <p class="text-muted p-0 m-0">Product cost</p>
-                                                    <p class="p-0 m-0"> {{ $product->cost }}</p>
+                                                    <p class="p-0 m-0">₦{{ number_format($product->cost) }}</p>
                                                 </div>
                                                 <div>
                                                     <p class="text-muted p-0 m-0">Product Price</p>
-                                                    <p class="p-0 m-0"> {{ $product->price }}</p>
+                                                    <p class="p-0 m-0">₦{{ number_format($product->price) }}</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-lg-6 align-self-center">
                                             <div class="d-flex justify-content-end">
-                                                <form action="{{ route('fixedprojection') }}" method="GET">
+                                                {{-- <form action="{{ route('fixedprojection') }}" method="GET">
                                                     <input type="text" name="id" value="{{ $product->id }}" hidden>
                                                     <button class="btn btn-dark btn-sm text-white">Fixed projection</button>
-                                                </form>
+                                                </form> --}}
                                                 <form action="{{ route('extrainfo') }}" method="GET">
-                                                    <input type="text" name="id" value="{{ $product->id }}" hidden>
+                                                    <input type="text" name="id" value="{{ base64_encode($product->id) }}" hidden>
+                                                    <input type="text" name="bizid" value="{{ base64_encode($product->businessinfo_id) }}" hidden>
                                                     <button class="btn ms-3 btn-success btn-sm text-white">Add More
                                                         info</button>
                                                 </form>
+                                                <form action="{{ route('product') }}" method="GET">
+                                                    
+                                                    <input type="text" name="id" value="{{ base64_encode($product->id) }}" hidden>
+                                                    <button type="submit" class="btn btn-grape btn-sm ms-2"><i class="uil uil-edit "></i></button>
+                                                </form>
+                                                {{-- <a href="{{ route('deleteProduct',$product->id) }}" class="btn btn-danger btn-sm ms-2" onclick="confirm('Do you want to delete')"><i class="uil uil-trash-alt "></i></a> --}}
+                                                <form action="{{ route('deleteProduct',$product->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm ms-2" onclick="return confirm('Are you sure you want to delete this product?')"><i class="uil uil-trash-alt "></i></button>
+                                                </form>
+                                               
                                                 {{-- <a class="btn btn-success btn-sm text-white" href="{{ route('extrainfo') }}">Add
                                                 More info</a> --}}
                                             </div>

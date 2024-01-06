@@ -93,7 +93,7 @@ class ProductController extends Controller
             if (empty($paystack->user_id)) {
                 return view('app.dashboard.nbp');
             } else {
-                $businessinfo = Businessinfo::where('user_id', $user->id)->where('plan_type',1)->first();
+                $businessinfo = Businessinfo::where('user_id', $user->id)->where('plan_type', 1)->first();
                 $products = Product::where('businessinfo_id', $businessinfo->id)->get();
                 if ($businessinfo && $businessinfo->exists()) {
                     return view('app.dashboard.myproducts', compact('user', 'businessinfo', 'products'));
@@ -105,6 +105,68 @@ class ProductController extends Controller
             return redirect()->route('login')->with('error', 'Please log in to access.');
         }
     }
+
+    // public function add_product(Request $request, Product $product, Salesforcast $salesforcast)
+    // {
+    //     try {
+    //         // Your existing code for user authentication and fetching business info
+    //         $user = Auth::user();
+
+    //         if (!$user) {
+    //             throw new \Exception('User authentication failed');
+    //         }
+
+    //         $businessinfo = Businessinfo::where('user_id', $user->id)->where('plan_type', 1)->first();
+
+    //         if (!$businessinfo) {
+    //             throw new \Exception('Business information not found');
+    //         }
+    //         $validated = $request->validate([
+    //             'name' => 'required|unique:products,name,NULL,id,businessinfo_id,' . $businessinfo->id,
+    //             'price' => 'required',
+    //             'cost' => 'required',
+    //             'quantity' => 'required'
+    //         ]);
+
+
+
+    //         if ($request->has('product_id')) {
+    //             // $existingProduct = Product::where('id', $request->product_id)
+    //             //     ->where('businessinfo_id', $businessinfo->id)
+    //             //     ->first();
+
+
+    //             $existingProduct = Product::find($request->product_id);
+    //             if (!$existingProduct) {
+    //                 throw new \Exception('Product not found for updating');
+    //             }
+
+    //             $existingProduct->update(
+
+    //             );
+    //             $updatedProduct = $existingProduct;
+    //             // return response()->json(['success' => 'Product added']);
+    //             return redirect()->route('myproducts')->withSuccess("$existingProduct->name was updated successfully")->with('myproduct', $updatedProduct);
+    //         } else {
+    //             $validated['businessinfo_id'] = $businessinfo->id;
+    //             $createdProduct = $product->create($validated);
+    //             $salesforcast->create(['product_id' => $createdProduct->id, 'businessinfo_id' => $businessinfo->id]);
+
+    //             if (!$createdProduct) {
+    //                 throw new \Exception('Failed to add product');
+    //             }
+
+    //             $updatedProduct = $createdProduct;
+    //             // return response()->json(['success' => 'Product added']);
+    //             redirect()->route('myproducts')->withSuccess("$createdProduct->name was added successfully")->with('myproduct', $createdProduct);
+    //         }
+
+
+    //     } catch (\Exception $e) {
+    //         return redirect()->route('myproducts')->withErrors($e->getMessage());
+    //     }
+    // }
+
 
     public function add_product(Request $request, Product $product, Salesforcast $salesforcast)
     {
@@ -124,27 +186,72 @@ class ProductController extends Controller
             $validated = $request->validate([
                 'name' => 'required|unique:products,name,NULL,id,businessinfo_id,' . $businessinfo->id,
                 'price' => 'required',
-                // 'cost' => 'required',
-                // 'quantity'=>'required'
+                'cost' => 'required',
+                'quantity' => 'required'
+            ], [
+                'name.unique' => 'You cannot add the same product multiple times',
             ]);
 
             $validated['businessinfo_id'] = $businessinfo->id;
 
             $createdProduct = $product->create($validated);
-            $salesforcast->create(['product_id' => $createdProduct->id,'businessinfo_id' => $businessinfo->id]);
+            $salesforcast->create(['product_id' => $createdProduct->id, 'businessinfo_id' => $businessinfo->id]);
 
             if (!$createdProduct) {
                 throw new \Exception('Failed to add product');
             }
 
             // return response()->json(['success' => 'Product added']);
-            redirect()->route('myproducts')->withSuccess("$createdProduct->name was added successfully")->with('myproduct',$createdProduct);
+            return   redirect()->route('myproducts')->withSuccess("$createdProduct->name was added successfully")->with('myproduct', $createdProduct);
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 422);
-            // redirect()->route('product')->withErrors($e->getMessage());
+            // return response()->json(['error' => $e->getMessage()], 422);
+            return redirect()->route('product')->withErrors($e->getMessage());
         }
     }
 
+
+    public function update_product(Request $request, Product $product)
+    {
+        try {
+            // Your existing code for user authentication and fetching business info
+            $user = Auth::user();
+
+            if (!$user) {
+                throw new \Exception('User authentication failed');
+            }
+
+            $businessinfo = Businessinfo::where('user_id', $user->id)->where('plan_type', 1)->first();
+
+            if (!$businessinfo) {
+                throw new \Exception('Business information not found');
+            }
+            $validated = $request->validate([
+                'name' => 'required|unique:products,name,' . $request->product_id . ',id,businessinfo_id,' . $businessinfo->id,
+                'price' => 'required',
+                'cost' => 'required',
+                'quantity' => 'required'
+            ]);
+
+
+
+            if ($request->has('product_id')) {
+                $existingProduct = Product::where('id', $request->product_id)
+                    ->where('businessinfo_id', $businessinfo->id)
+                    ->first();
+
+                if (!$existingProduct) {
+                    throw new \Exception('Product not found for updating');
+                }
+
+                $existingProduct->update($validated);
+                $updatedProduct = $existingProduct;
+                // return response()->json(['success' => 'Product added']);
+                return redirect()->route('myproducts')->withSuccess("$existingProduct->name was updated successfully")->with('myproduct', $updatedProduct);
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('myproducts')->withErrors($e->getMessage());
+        }
+    }
 
     // public function add_product(Request $request, Product $product,Businessinfo $businessinfo){
     //     $user =  Auth::user();
@@ -187,6 +294,22 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+    public function deleteProduct(
+        Request $request,
+        Product $product,
+        $id,
+    ) {
+
+
+        $product = Product::find($id);
+        $product->delete();
+        if ($product) {
+            return redirect()->back();
+        } else {
+            return redirect()->back()->withErrors("Unable to find product, The prodcuct must have been deleted");
+        }
+    }
     public function destroy(
         Request $request,
         Product $product

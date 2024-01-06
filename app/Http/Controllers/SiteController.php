@@ -250,8 +250,11 @@ class SiteController extends Controller
     public function finance(Request $request)
     {
         $user = Auth::user();
-        // $states =  State::all();
-        $businessinfo = Businessinfo::find($request->input('id'));
+        // if($request->input('id') == null){
+        //     return redirect()->back();
+        // }
+        // $businessinfo = Businessinfo::find($request->input('id'));
+        $businessinfo = Businessinfo::where("user_id",$user->id)->where("plan_type",1)->first();
         $expenses = Expenses::where('businessinfo_id',$businessinfo->id)->where('expense_type','Annual')->first();
         if ($user) {
             $paystack = Paystack::where('user_id', $user->id)->first();
@@ -262,6 +265,7 @@ class SiteController extends Controller
             }
         }
     }
+
     public function financialRecord(Request $request,$id)
     {
         $user = Auth::user();
@@ -393,7 +397,13 @@ class SiteController extends Controller
             } else {
                 $businessinfo = Businessinfo::where('user_id', $user->id)->where('plan_type', 1)->first();
                 if ($businessinfo && $businessinfo->exists()) {
-                    return view('app.dashboard.product', compact('user', 'businessinfo', 'paystack'));
+                    if ($request->has('id') && $request->input('id') != null) {
+                        $product =  Product::find(base64_decode($request->input('id')));
+                        return view('app.dashboard.product', compact('user', 'businessinfo', 'paystack','product'));
+                    }else{
+                        return view('app.dashboard.product', compact('user', 'businessinfo', 'paystack'));
+                    }
+                   
                 } else {
                     return redirect()->back()->with('error', 'Business info not found.');
                 }

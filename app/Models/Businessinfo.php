@@ -60,8 +60,14 @@ class Businessinfo extends Model
         'insurance',
         'other_expenses',
 
-    ];
 
+        'about',
+        'slogan',
+        'mission',
+        'journey',
+        'website',
+
+    ];
 
     protected $searchableFields = ['*'];
     // protected $hidden = [

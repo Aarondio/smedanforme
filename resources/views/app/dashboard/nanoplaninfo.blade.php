@@ -17,12 +17,8 @@
                         <h1 class="display-2 mb-1 text-white">Business Description</h1>
                         <p>Fill out the form below</p>
                     </div>
-                    <!-- /column -->
                 </div>
-                <!-- /.row -->
-
             </div>
-            <!-- /.container -->
         </div>
         <!-- /.wrapper -->
     </section>

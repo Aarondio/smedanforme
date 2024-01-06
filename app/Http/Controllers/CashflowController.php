@@ -11,7 +11,7 @@ use App\Http\Requests\CashflowStoreRequest;
 use App\Http\Requests\CashflowUpdateRequest;
 use App\Models\Salesforcast;
 use App\Models\Product;
-
+use Illuminate\Support\Facades\Auth;
 class CashflowController extends Controller
 {
     /**
@@ -61,22 +61,56 @@ class CashflowController extends Controller
 
     public function extrainfo(Request $request, Salesforcast $salesforcast)
     {
-        $existingSalesForecast = Salesforcast::where('product_id', $request->id)->first();
-        $product = Product::where('id', $request->id)->first();
+        $product = Product::find(base64_decode($request->input('id')));
+        $bizid = base64_decode($request->input('bizid'));
+        if (!$product) {
+            return redirect()->back();
+        }
+
+        $businessInfo = Businessinfo::find($bizid);
+        if (!$businessInfo) {
+            return redirect()->back();
+        }
+
+        if ($businessInfo->id !== $product->businessinfo_id) {
+            return redirect()->back()->with('error', 'You do not have permission to access this product.');
+        }
+
+        $existingSalesForecast = Salesforcast::where('product_id', $product->id)->first();
+
         if (!$existingSalesForecast) {
-
-            $salesforcast->product_id = $request->id;
+            // Create new sales forecast and return view
+            $salesforcast->product_id = $product->id;
             $salesforcast->save();
-            $saleforcast = Salesforcast::where('product_id', $request->id)->first();
+            $salesforcast = Salesforcast::where('product_id', $product->id)->first();
 
-            return view('app.dashboard.extrainfo', compact('product','salesforcast'));
+            return view('app.dashboard.extrainfo', compact('product', 'salesforcast','bizid'));
         } else {
-            // Redirect back with an error message
-            // return redirect()->back()->with('error', 'Sales forecast already exists for this product.');
-            $saleforcast = Salesforcast::where('product_id', $request->id)->first();
-            return view('app.dashboard.extrainfo', compact('product','existingSalesForecast'));
+            // Return view with existing sales forecast
+            return view('app.dashboard.extrainfo', compact('product', 'existingSalesForecast','bizid'));
         }
     }
+
+    // public function extrainfo(Request $request, Salesforcast $salesforcast)
+    // {
+    //     $product = Product::find($request->input('id'));
+    //     if (!$product) {
+    //         return redirect()->back();
+    //     }
+
+    //     $existingSalesForecast = Salesforcast::where('product_id', $product->id)->first();
+
+    //     if (!$existingSalesForecast) {
+    //         $salesforcast->product_id = $product->id;
+    //         $salesforcast->save();
+    //         $salesforcast = Salesforcast::where('product_id', $product->id)->first();
+
+    //         return view('app.dashboard.extrainfo', compact('product', 'salesforcast'));
+    //     } else {
+    //         return view('app.dashboard.extrainfo', compact('product', 'existingSalesForecast'));
+    //     }
+    // }
+
 
     // public function extrainfo(Request $request, Salesforcast $salesforcast){
     //     $salesforcast = Salesforcast::where('product_id', $request->id)->first();

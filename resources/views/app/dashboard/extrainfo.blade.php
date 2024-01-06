@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
-        data-image-src="{{ asset('assets/img/photos/bg20.png') }}">
+        data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
         {{-- <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg4.jpg')}}"> --}}
 
         <div class="wrapper ">
@@ -10,7 +10,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-10 col-xxl-8 text-center">
                         <h1 class="display-2 mb-1 text-white">Additional Production information</h1>
-                        <p>Fill out the form below</p>
+                        <p>Fill out the form below </p>
                     </div>
                     <!-- /column -->
                 </div>
@@ -24,13 +24,7 @@
  
     <section class="wrapper bg-gray py-10 py-md-12">
         <div class="container">
-            <p class="text-danger">
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-            </p>
+            
             <center>
                 <div id="error-msg" class="col-md-10">
                     {{-- @if ($errors->any())

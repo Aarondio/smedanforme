@@ -262,6 +262,60 @@ class BusinessinfoController extends Controller
             }
         }
     }
+    public function about(Request $request, Businessinfo $businessinfo)
+    {
+        $validated = $request->validate([
+            'business_model',
+        ]);
+        $user = Auth::user();
+        if ($user) {
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
+            $businessinfo->update(['about' => $request->about]);
+            if ($businessinfo) {
+                return json_encode(array('statusCode' => 200, 'data' => $request->about));
+            } else {
+                return json_encode(array('statusCode' => 401));
+            }
+        }
+    }
+    public function mission(Request $request, Businessinfo $businessinfo)
+    {
+        $validated = $request->validate([
+            'business_model',
+        ]);
+        $user = Auth::user();
+        if ($user) {
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
+            $businessinfo->update(['mission' => $request->mission]);
+            if ($businessinfo) {
+                return json_encode(array('statusCode' => 200, 'data' => $request->mission));
+            } else {
+                return json_encode(array('statusCode' => 401));
+            }
+        }
+    }
+    public function journey(Request $request, Businessinfo $businessinfo)
+    {
+        $validated = $request->validate([
+            'business_model',
+        ]);
+        $user = Auth::user();
+        if ($user) {
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
+            $businessinfo->update(['journey' => $request->journey]);
+            if ($businessinfo) {
+                return json_encode(array('statusCode' => 200, 'data' => $request->journey));
+            } else {
+                return json_encode(array('statusCode' => 401));
+            }
+        }
+    }
 
     public function finalsubmission(Request $request, Businessinfo $businessinfo)
     {
@@ -314,15 +368,16 @@ class BusinessinfoController extends Controller
             $validated = $request->validate([
                 'business_name' => ['required', 'max:255', 'string'],
                 'is_registered' => ['required'],
-                'suin' => 'required',
+                'suin' => 'required|regex:/^SUIN\d{8}$/',
                 'register_type' => 'required',
                 'business_age' => 'required',
                 'emp_no' => 'required',
                 'loan_amount' => 'required',
                 'sector' => 'required',
                 'address' => 'required',
+                'website' => 'nullable',
             ], [
-                // Custom error messages can be added here if needed
+                'suin.regex' => 'The SUIN provided is invalid',
             ]);
 
             // Update the business information

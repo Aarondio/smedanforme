@@ -5,58 +5,89 @@
         .text-justify {
             text-align: justify;
         }
+        *{
+            /* border: 1px solid red; */
+        }
     </style>
-    <section class="wrapper bg-light my-10">
+
+    @if ($businessinfo->status == 'Completed')
+    <section class=" bg-light">
+        <div class="container">
+            <div class="row  justify-content-center">
+                <div class="col-md-12 col-lg-10">
+
+                    <div class="text-center mb-8">
+                        {!! QrCode::size(200)->generate(asset('applications/' . $businessinfo->business_no)) !!}
+                    </div>
+                    <h3 class="text-center">Application number: {{ $businessinfo->business_no }}</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    @else
+    <section class="wrapper image-wrapper bg-image bg-overlay text-white"
+        data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
+        <div class="wrapper py-10">
+            <div class="container p-0">
+                <div class="row">
+                    <div class="col-lg-12 col-xxl-12 text-center">
+                        <h1 class="display-2 mb-1 text-white">Preview your application before submission</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <section class="wrapper bg-light my-3">
         <div class="container">
             <div class="d-flex  justify-content-between">
-                <div class="">
+                
                     @if ($businessinfo->status == 'Completed')
                         <a href="{{ route('home') }}" class=" btn btn-outline-danger btn-sm">Back</a>
                     @else
-                        <a href="{{ route('personalinfo') }}" class=" btn btn-outline-danger btn-sm">Back</a>
+                        <a href="#" onclick="history.back()" class=" btn btn-outline-danger btn-sm">Back</a>
                     @endif
-                </div>
-                <div class="">
+              
+            
                     @if ($businessinfo->status == 'Completed')
-                        <a href="{{ route('pdf', $businessinfo->business_no) }}" class=" btn btn-grape btn-sm">Download</a>
+                        <a href="{{ route('pdf',$businessinfo->business_no) }}" class=" btn btn-grape btn-sm">Download</a>
+                   
                     @endif
-                </div>
+            
             </div>
     </section>
-    @if ($businessinfo->status == 'Completed')
-        <section class=" bg-light">
-            <div class="container">
-                <div class="row  justify-content-center">
-                    <div class="col-md-12 col-lg-10">
-
-                        <div class="text-center mb-8">
-                            {!! QrCode::size(200)->generate(asset('applications/' . $businessinfo->business_no)) !!}
-                        </div>
-                        <h3 class="text-center">Application number: {{ $businessinfo->business_no }}</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @else
-        <section class="wrapper image-wrapper bg-image bg-overlay text-white"
-            data-image-src="{{ asset('assets/img/photos/bg20.png') }}">
-            <div class="wrapper py-10">
-                <div class="container p-0">
-                    <div class="row">
-                        <div class="col-lg-12 col-xxl-12 text-center">
-                            <h1 class="display-2 mb-1 text-white">Preview your application before submission</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif
-    <section class="wrapper bg-light pb-5 pb-md-5">
+    <section class="wrapper bg-light py-5 pb-md-5">
         <div class="container">
 
-            <div class="row  gy-6 mt-2 justify-content-center">
-
-                <div class="col-md-12 col-lg-10">
+            <div class="row   justify-content-center">
+                <aside class="col-lg-2 sidebar sticky-sidebar mt-md-0  d-none d-xl-block">
+                    <div class="widget">
+                        {{-- <h6 class="widget-title fs-17 mb-2 ps-xl-5">On this page</h6> --}}
+                        
+                            <div class="card bg-transparent">
+                                <div class="card-body p-3 m-0">
+                        <nav class="" id="sidebar-nav">
+                                    <ul class="list-unstyled fs-sm lh-sm text-reset fw-light">
+                                        <li><a class="nav-link  fw-normal"
+                                                href="{{ route('personal') }}">Personal Info</a></li>
+                                        <li><a class="nav-link  my-1 fw-normal" href="{{ route('business') }}">Business
+                                                Info</a></li>
+                                        <li><a class="nav-link fw-normal" href="{{ route('nanoplan') }}">Business
+                                                Description</a></li>
+                                        <li><a class="nav-link fw-normal" href="{{ route('finance') }}">Expenses Records</a>
+                                        </li>
+                                        <li><a class="nav-link fw-normal my-1 " href="{{ route('product') }}">Add
+                                                Products/Services</a></li>
+                                        <li><a class="nav-link fw-normal active text-decoration-underline" href="{{ route('preview') }}">Preview</a></li>
+                                    </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        
+                    </div>
+                </aside>
+                <div class=" col-lg-10">
 
                     <div class="card">
                         <div class="card-body">
@@ -71,11 +102,11 @@
                                             <td><span class="text-dark float-end">{{ $user->firstname ?? '' }}</span></td>
                                         </tr>
                                         <tr>
-                                            <td><span class="text-muted">Middle name</span></td>
+                                            <td><span class="text-muted">Middlename</span></td>
                                             <td><span class="text-dark float-end">{{ $user->middlename ?? '' }}</span></td>
                                         </tr>
                                         <tr>
-                                            <td><span class="text-muted">Surnamee</span></td>
+                                            <td><span class="text-muted">Surname</span></td>
                                             <td><span class="text-dark float-end">{{ $user->surname ?? '' }}</span></td>
                                         </tr>
                                         <tr>

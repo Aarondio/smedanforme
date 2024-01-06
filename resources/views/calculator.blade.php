@@ -47,7 +47,7 @@
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <label for="textInputExample">Loan Duration (years)</label>
-                                        <input id="fundingperiod" min="1" value="5" type="number"
+                                        <input id="fundingperiod" min="1" value="2" type="number"
                                             class="form-control border-gray-800">
                                     </div>
                                 </div>
@@ -324,5 +324,7 @@
                 }]
             });
         }
+
+        
     </script>
 @endsection

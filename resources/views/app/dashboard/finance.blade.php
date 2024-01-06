@@ -7,14 +7,14 @@
                                         } */
     </style>
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
-        data-image-src="{{ asset('asset/img/photos/bg20.png') }}">
+        data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
         {{-- <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg4.jpg')}}"> --}}
 
         <div class="wrapper ">
             <div class="container py-10 py-md-12">
                 <div class="row justify-content-center">
                     <div class="col-lg-10 col-xxl-8 text-center">
-                        <h1 class="display-2 mb-1 text-white">Financial Records</h1>
+                        <h1 class="display-2 mb-1 text-white">Expenses Records</h1>
                         <p>Fill out the form below</p>
                     </div>
                 </div>
@@ -45,7 +45,33 @@
             </center>
             <!-- /section -->
             <div class="row justify-content-center ">
-                <div class="col-md-10 card shadow-lg">
+                <aside class="col-lg-2 sidebar sticky-sidebar mt-md-0  d-none d-xl-block">
+                    <div class="widget">
+                        {{-- <h6 class="widget-title fs-17 mb-2 ps-xl-5">On this page</h6> --}}
+                        
+                            <div class="card bg-transparent">
+                                <div class="card-body p-3 m-0">
+                        <nav class="" id="sidebar-nav">
+                                    <ul class="list-unstyled fs-sm lh-sm text-reset fw-light">
+                                        <li><a class="nav-link  fw-normal"
+                                                href="{{ route('personal') }}">Personal Info</a></li>
+                                        <li><a class="nav-link  my-1 fw-normal " href="{{ route('business') }}">Business
+                                                Info</a></li>
+                                        <li><a class="nav-link fw-normal " href="{{ route('nanoplan') }}">Business
+                                                Description</a></li>
+                                        <li><a class="nav-link fw-normal active text-decoration-underline" href="{{ route('finance') }}">Expenses Records</a>
+                                        </li>
+                                        <li><a class="nav-link fw-normal my-1" href="{{ route('product') }}">Add
+                                                Products/Services</a></li>
+                                        <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview</a></li>
+                                    </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        
+                    </div>
+                </aside>
+                <div class="col-lg-10 card shadow-lg">
                     <div class="card-body">
                         <h2>Most Recent Financial Record </h2>
                         <div class="alert alert-success">
@@ -282,8 +308,7 @@
                             <a href="{{ route('nanoplan') }}" class="btn btn-outline-danger btn-sm">Back</a>
                         </div>
                         <div class="col-md-6">
-                            <a href="{{ route('myproducts') }}" class="float-end btn btn-outline-primary btn-sm">View
-                                Products</a>
+                            <a href="{{ route('product') }}" class="float-end btn btn-outline-primary btn-sm">Next</a>
                         </div>
                     </div>
                 </div>

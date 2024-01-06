@@ -73,8 +73,13 @@ Route::post('competition_ad',[BusinessinfoController::class,'competition_ad'])->
 Route::post('management_team',[BusinessinfoController::class,'management_team'])->name('management_team');
 Route::post('loan_amount',[BusinessinfoController::class,'loan_amount'])->name('loan_amount');
 Route::post('loan_reason',[BusinessinfoController::class,'loan_reason'])->name('loan_reason');
+Route::post('about',[BusinessinfoController::class,'about'])->name('about');
+Route::post('mission',[BusinessinfoController::class,'mission'])->name('mission');
+Route::post('journey',[BusinessinfoController::class,'journey'])->name('journey');
 
 Route::post('add_product',[ProductController::class,'add_product'])->name('add_product');
+Route::post('update_product',[ProductController::class,'update_product'])->name('update_product');
+Route::delete('deleteProduct/{id}',[ProductController::class,'deleteProduct'])->name('deleteProduct');
 
 
 Route::post('updateinfo',[UserController::class,'updateinfo'])->name('updateinfo');
