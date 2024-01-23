@@ -3,8 +3,8 @@
 @section('content')
     <style>
         /* *{
-                            border: 1px solid red;
-                        } */
+                                    border: 1px solid red;
+                                } */
     </style>
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
         data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
@@ -38,11 +38,19 @@
                                                 Info</a></li>
                                         <li><a class="nav-link fw-normal" href="{{ route('nanoplan') }}">Business
                                                 Description</a></li>
-                                        <li><a class="nav-link fw-normal" href="{{ route('finance') }}">Expenses Records</a>
-                                        </li>
+                                        <li><a class="nav-link fw-normal " href="{{ route('swot') }}">Swot
+                                                Analysis</a></li>
                                         <li><a class="nav-link fw-normal my-1" href="{{ route('product') }}">Add
                                                 Products/Services</a></li>
-                                        <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview</a></li>
+                                        <li><a class="nav-link fw-normal" href="{{ route('finance') }}">Expenses Records</a>
+                                        </li>
+
+                                        {{-- <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview finance</a> --}}
+                                        </li>
+                                        @if ($businessinfo->id != null)
+                                            <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview
+                                                    submission</a></li>
+                                        @endif
                                     </ul>
                                 </nav>
                             </div>
@@ -246,7 +254,7 @@
                                         @enderror --}}
                                     </div>
                                 </div>
-                              
+
                                 <div class="col-md-6">
                                     <div class=" mb-4">
                                         <div class="form-select-wrapper mb-4">

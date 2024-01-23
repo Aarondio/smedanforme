@@ -3,8 +3,8 @@
 @section('content')
     <style>
         /* *{
-                                                                        border: 1px solid red;
-                                                                    } */
+                                                                                border: 1px solid red;
+                                                                            } */
     </style>
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
         data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
@@ -16,8 +16,10 @@
                     <div class="col-lg-10 col-xxl-8 text-center">
                         @if (request()->has('id') && request()->query('id') !== null)
                             <h1 class="display-2 mb-1 text-white">Editing {{ $product->name }}</h1>
+                            <p>Fill out the form below</p>
                         @else
                             <h1 class="display-2 mb-1 text-white">Income from products and services</h1>
+                            <p>Fill out the form below</p>
                         @endif
 
                         {{-- <p>Fill out the form below</p> --}}
@@ -69,12 +71,16 @@
                                                 Info</a></li>
                                         <li><a class="nav-link fw-normal" href="{{ route('nanoplan') }}">Business
                                                 Description</a></li>
-                                        <li><a class="nav-link fw-normal" href="{{ route('finance') }}">Expenses Records</a>
-                                        </li>
+                                        <li><a class="nav-link fw-normal " href="{{ route('swot') }}">Swot
+                                                Analysis</a></li>
+
                                         <li><a class="nav-link fw-normal my-1 active text-decoration-underline"
                                                 href="{{ route('product') }}">Add
                                                 Products/Services</a></li>
-                                        <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview</a></li>
+                                        <li><a class="nav-link fw-normal" href="{{ route('finance') }}">Expenses Records</a>
+                                        </li>
+                                        <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview
+                                                submission</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -109,13 +115,12 @@
                                             <p class="small text-danger"> {{ $message }}</p>
                                         @enderror
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="col-md-6">
                                     <div class=" mb-4">
-                                        <label for="price" class="mb-3 ">How much do u sell one <span
-                                                id="pname"></span></label>
+                                        <label for="price" class="mb-3 "> <span id="pname"></span> - Selling price per unit </label>
                                         <input id="price" name="price" type="text"
                                             value="{{ request()->has('id') ? $product->price : '' }}"
                                             class="form-control number-forma" placeholder="Price per unit" required>
@@ -127,7 +132,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class=" mb-4">
-                                        <label for="cost" class="mb-3">Cost of producing one <span
+                                        <label for="cost" class="mb-3">Cost of producing a unit of <span
                                                 id="pname1"></span></label>
                                         <input id="cost" name="cost" type="text"
                                             value="{{ request()->has('id') ? $product->cost : '' }}"
@@ -207,11 +212,40 @@
                     error: function(xhr, status, error) {
                         console.error('Failed to add product:', error);
                         window.location.href = "{{ route('myproducts') }}";
-                        // $('#error-msg').html('<div class="alert alert-danger">' + xhr
-                        //     .responseJSON.error + '</div>');
+                        // $('#error-msg').html('<div class="alert alert-danger">' + xhr.responseJSON.error + '</div>');
                     },
                     complete: function() {
                         $('#add').html('Add product');
+                    }
+                });
+            });
+
+            $('#update').click(function(e) {
+                e.preventDefault();
+                $(this).html(
+                    '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...'
+                );
+
+                var formData = $('#productForm').serialize();
+
+                $.ajax({
+                    url: $('#productForm').attr('action'),
+                    method: 'POST',
+                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        console.log('Product updated successfully:', response);
+                        window.location.href = "{{ route('myproducts') }}";
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Failed to update product:', error);
+                        $('#error-msg').html('<div class="alert alert-danger">' + xhr
+                            .responseJSON.error + '</div>');
+                    },
+                    complete: function() {
+                        $('#update').html('Update product');
                     }
                 });
             });
@@ -223,43 +257,6 @@
             });
         });
 
-
-        $('#update').click(function(e) {
-            e.preventDefault();
-            $(this).html(
-                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...'
-            );
-
-            var formData = $('#productForm').serialize();
-
-            $.ajax({
-                url: $('#productForm').attr('action'),
-                method: 'POST',
-                data: formData,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    console.log('Product added successfully:', response);
-                    window.location.href = "{{ route('myproducts') }}";
-                },
-                error: function(xhr, status, error) {
-                    console.error('Failed to add product:', error);
-                    $('#error-msg').html('<div class="alert alert-danger">' + xhr
-                        .responseJSON.error + '</div>');
-                },
-                complete: function() {
-                    $('#add').html('Add product');
-                }
-            });
-        });
-
-        $('#name').on('input', function() {
-        let productName = $(this).val();
-        $('#pname').text(productName);
-        $('#pname1').text(productName);
-        });
-        });
 
 
         $('form').on('submit', function(event) {

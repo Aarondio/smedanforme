@@ -3,8 +3,8 @@
 @section('content')
     <style>
         /* *{
-                                            border: 1px solid red;
-                                        } */
+                                                    border: 1px solid red;
+                                                } */
     </style>
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
         data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
@@ -48,32 +48,41 @@
                 <aside class="col-lg-2 sidebar sticky-sidebar mt-md-0  d-none d-xl-block">
                     <div class="widget">
                         {{-- <h6 class="widget-title fs-17 mb-2 ps-xl-5">On this page</h6> --}}
-                        
-                            <div class="card bg-transparent">
-                                <div class="card-body p-3 m-0">
-                        <nav class="" id="sidebar-nav">
+
+                        <div class="card bg-transparent">
+                            <div class="card-body p-3 m-0">
+                                <nav class="" id="sidebar-nav">
                                     <ul class="list-unstyled fs-sm lh-sm text-reset fw-light">
-                                        <li><a class="nav-link  fw-normal"
-                                                href="{{ route('personal') }}">Personal Info</a></li>
+                                        <li><a class="nav-link  fw-normal" href="{{ route('personal') }}">Personal Info</a>
+                                        </li>
                                         <li><a class="nav-link  my-1 fw-normal " href="{{ route('business') }}">Business
                                                 Info</a></li>
                                         <li><a class="nav-link fw-normal " href="{{ route('nanoplan') }}">Business
                                                 Description</a></li>
-                                        <li><a class="nav-link fw-normal active text-decoration-underline" href="{{ route('finance') }}">Expenses Records</a>
-                                        </li>
+                                        <li><a class="nav-link fw-normal " href="{{ route('swot') }}">Swot
+                                                Analysis</a></li>
+                                        
                                         <li><a class="nav-link fw-normal my-1" href="{{ route('product') }}">Add
                                                 Products/Services</a></li>
-                                        <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview</a></li>
+                                                <li><a class="nav-link fw-normal active text-decoration-underline"
+                                                    href="{{ route('finance') }}">Expenses Records</a>
+                                            </li>
+                                        {{-- <li><a class="nav-link fw-normal "
+                                                href="{{ route('financial-record',$expenses->id) }}">Preview Finances</a>
+                                        </li> --}}
+
+                                        <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview
+                                                submission</a></li>
                                     </ul>
-                                    </nav>
-                                </div>
+                                </nav>
                             </div>
-                        
+                        </div>
+
                     </div>
                 </aside>
                 <div class="col-lg-10 card shadow-lg">
                     <div class="card-body">
-                        <h2>Most Recent Financial Record </h2>
+                        <h2>Most Recent Annual Financial Expenses </h2>
                         <div class="alert alert-success">
                             <p>Kindly provide the most recent annual financial record of your business. This is a very
                                 sensitive section kindly fill the information correctly. If you do not have any information
@@ -82,14 +91,16 @@
 
                         <form action="{{ route('create-expenses') }}" method="POST">
                             @csrf
-              
+
                             <div class="row text-dark">
                                 <div class="col-md-4">
                                     <div class=" mb-4">
                                         <label for="name" class="mb-1">Year</label>
                                         <select name="year" id="year" class="form-select">
-                                            @for ($i = 2020; $i < 2023; $i++)
-                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @for ($i = 2022; $i < 2024; $i++)
+                                                <option value="{{ $i }}"
+                                                    @if (isset($expenses->year) && $expenses->year == $i) selected @endif>{{ $i }}
+                                                </option>
                                             @endfor
                                         </select>
                                         @error('year')
@@ -101,8 +112,10 @@
                                 <div class="col-md-4">
                                     <div class="mb-4">
                                         <label for="salary" class="mb-1">Salaries</label>
-                                        <input id="salary" name="salary" type="text" value="{{ old('salary') ?: (isset($expenses->salary) ? number_format($expenses->salary) : 0) }}"
-                                            class="form-control number-format @error('salary') is-invalid @enderror" placeholder="E.g. 100,000">
+                                        <input id="salary" name="salary" type="text"
+                                            value="{{ old('salary') ?: (isset($expenses->salary) ? number_format($expenses->salary) : 0) }}"
+                                            class="form-control number-format @error('salary') is-invalid @enderror"
+                                            placeholder="E.g. 100,000">
                                         @error('salary')
                                             <p class="small text-danger"> {{ $message }}</p>
                                         @enderror
@@ -127,8 +140,8 @@
                                     <div class=" mb-4">
                                         <label for="rent" class="mb-1">Rent</label>
                                         <input id="rent" name="rent" type='text'
-                                            value="{{ old('rent') ?: (isset($expenses->rent) ? number_format($expenses->rent) : 0) }}" class="form-control number-format "
-                                            placeholder="E.g 300,000">
+                                            value="{{ old('rent') ?: (isset($expenses->rent) ? number_format($expenses->rent) : 0) }}"
+                                            class="form-control number-format " placeholder="E.g 300,000">
                                         {{-- @error('rent')
                                             <p class="small text-danger"> {{ $message }}</p>
                                         @enderror --}}
@@ -164,7 +177,7 @@
                                     <div class=" mb-4">
                                         <label for="adminexpenses" class="mb-1"> Admininstrative expenses</label>
                                         <input id="adminexpenses" name="adminexpenses" type='text'
-                                            value="{{ old('adminexpenses') ?: (isset($expenses->adminexpenses) ? number_format($expenses->adminexpenses) : 0)}}"
+                                            value="{{ old('adminexpenses') ?: (isset($expenses->adminexpenses) ? number_format($expenses->adminexpenses) : 0) }}"
                                             class="form-control number-format " placeholder="E.g 300,000">
                                         {{-- @error('adminexpenses')
                                             <p class="small text-danger"> {{ $message }}</p>
@@ -177,7 +190,7 @@
                                     <div class=" mb-4">
                                         <label for="marketing" class="mb-1"> Marketing</label>
                                         <input id="marketing" name="marketing" type='text'
-                                            value="{{ old('marketing') ?:(isset($expenses->marketing) ? number_format($expenses->marketing) : 0) }}"
+                                            value="{{ old('marketing') ?: (isset($expenses->marketing) ? number_format($expenses->marketing) : 0) }}"
                                             class="form-control number-format " placeholder="E.g 300,000">
                                         {{-- @error('marketing')
                                             <p class="small text-danger"> {{ $message }}</p>
@@ -238,8 +251,8 @@
                                     <div class=" mb-4">
                                         <label for="legal" class="mb-1">Legal Fees</label>
                                         <input id="legal" name="legal" type='text'
-                                            value="{{ old('legal') ?: (isset($expenses->legal) ? number_format($expenses->legal) : 0) }}" class="form-control number-format "
-                                            placeholder="E.g 300,000">
+                                            value="{{ old('legal') ?: (isset($expenses->legal) ? number_format($expenses->legal) : 0) }}"
+                                            class="form-control number-format " placeholder="E.g 300,000">
                                         @error('legal')
                                             <p class="small text-danger"> {{ $message }}</p>
                                         @enderror
@@ -260,7 +273,7 @@
                                     <div class=" mb-4">
                                         <label for="insurance" class="mb-1">Insurance</label>
                                         <input id="insurance" name="insurance" type='text'
-                                            value="{{ old('insurance') ?: (isset($expenses->insurance) ? number_format($expenses->insurance) : 0)}}"
+                                            value="{{ old('insurance') ?: (isset($expenses->insurance) ? number_format($expenses->insurance) : 0) }}"
                                             class="form-control number-format " placeholder="E.g 300,000">
                                         @error('insurance')
                                             <p class="small text-danger"> {{ $message }}</p>
@@ -271,8 +284,8 @@
                                     <div class=" mb-4">
                                         <label for="insurance" class="mb-1">Website Dev./Maintenance</label>
                                         <input id="website" name="website" type='text'
-                                            value="{{ old('website') ?:(isset($expenses->website) ? number_format($expenses->website) : 0) }}" class="form-control number-format "
-                                            placeholder="E.g 300,000">
+                                            value="{{ old('website') ?: (isset($expenses->website) ? number_format($expenses->website) : 0) }}"
+                                            class="form-control number-format " placeholder="E.g 300,000">
                                         @error('website')
                                             <p class="small text-danger"> {{ $message }}</p>
                                         @enderror
@@ -282,8 +295,8 @@
                                     <div class=" mb-4">
                                         <label for="insurance" class="mb-1">Others</label>
                                         <input id="others" name="others" type='text'
-                                            value="{{ old('others') ?: (isset($expenses->others) ? number_format($expenses->others) : 0) }}" class="form-control number-format "
-                                            placeholder="E.g 300,000">
+                                            value="{{ old('others') ?: (isset($expenses->others) ? number_format($expenses->others) : 0) }}"
+                                            class="form-control number-format " placeholder="E.g 300,000">
                                         @error('others')
                                             <p class="small text-danger"> {{ $message }}</p>
                                         @enderror
@@ -317,31 +330,31 @@
         </div>
     </section>
     <script>
-  $('.number-format').on('input', function(event) {
-        let value = $(this).val().replace(/[^0-9]/g, ''); 
-        let formattedValue = addCommas(value);
-        $(this).val(formattedValue);
-    });
-
-    function addCommas(value) {
-        let parts = value.toString().split(".");
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        return parts.join(".");
-    }
-
-  
-    $('form').on('submit', function(event) {
-        $('.number-format').each(function() {
-            let fieldValue = $(this).val().replace(/,/g, ''); 
-            $(this).val(fieldValue); 
+        $('.number-format').on('input', function(event) {
+            let value = $(this).val().replace(/[^0-9]/g, '');
+            let formattedValue = addCommas(value);
+            $(this).val(formattedValue);
         });
-    });
 
-    $('.number-format').on('keypress', function(event) {
-        var keyCode = event.which ? event.which : event.keyCode;
-        if (keyCode > 31 && (keyCode < 48 || keyCode > 57)) {
-            event.preventDefault();
+        function addCommas(value) {
+            let parts = value.toString().split(".");
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return parts.join(".");
         }
-    });
+
+
+        $('form').on('submit', function(event) {
+            $('.number-format').each(function() {
+                let fieldValue = $(this).val().replace(/,/g, '');
+                $(this).val(fieldValue);
+            });
+        });
+
+        $('.number-format').on('keypress', function(event) {
+            var keyCode = event.which ? event.which : event.keyCode;
+            if (keyCode > 31 && (keyCode < 48 || keyCode > 57)) {
+                event.preventDefault();
+            }
+        });
     </script>
 @endsection

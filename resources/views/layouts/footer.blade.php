@@ -26,7 +26,7 @@
           <div class="widget">
             <h4 class="widget-title ls-sm mb-3 text-white">Get in Touch</h4>
             <address class="pe-xl-15 pe-xxl-17">Garki Area 11, Gimbiya street area 11 Abuja, Nigeria</address>
-            <a href="mailto:#" class="link-body">info@smecredits.com.ng</a><br /> (+234) 803 101 3370
+            <a href="mailto:info@smecredits.com.ng" class="link-body">info@smecredits.com.ng</a><br /> (+234) 803 101 3370
           </div>
           <!-- /.widget -->
         </div>
@@ -35,11 +35,11 @@
           <div class="widget">
             <h4 class="widget-title ls-sm mb-3 text-white">Learn More</h4>
             <ul class="list-unstyled text-reset mb-0">
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Our Story</a></li>
-              <li><a href="#">Projects</a></li>
-              <li><a href="#">Terms of Use</a></li>
-              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="{{ route('contact') }}">Contact Us</a></li>
+              <li><a href="{{ route('nbp') }}">Nano Business Plan</a></li>
+              <li><a href="{{ route('mbp') }}">Micro Business Plan</a></li>
+              {{-- <li><a href="#">Terms of Use</a></li> --}}
+              {{-- <li><a href="#">Privacy Policy</a></li> --}}
             </ul>
           </div>
           <!-- /.widget -->

@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Salesforcast;
 use App\Models\State;
 use App\Models\Expenses;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class SiteController extends Controller
@@ -21,12 +22,8 @@ class SiteController extends Controller
         return view('nbp');
     }
 
-    public function sme(){
-        return view('smedan.index');
-    }
-    public function loaners(){
-        return view('smedan.loaners');
-    }
+   
+   
     public function mbp(Request $request)
     {
         return view('mbp');
@@ -163,11 +160,12 @@ class SiteController extends Controller
         $businessinfo = Businessinfo::where('user_id', $user->id)
             ->where('plan_type', 1)
             ->first();
-
+        $products = Product::where('businessinfo_id', $businessinfo->id)->get();
+        $expenses = Expenses::where('businessinfo_id', $businessinfo->id)->first();
 
         $salesforcasts = Salesforcast::where('businessinfo_id', $businessinfo->id)->get();
 
-        return view('app.dashboard.preview', compact('businessinfo', 'user', 'salesforcasts'));
+        return view('app.dashboard.preview', compact('businessinfo', 'user', 'salesforcasts', 'products', 'expenses'));
     }
 
     public function purchasenbp(Request $request)
@@ -201,6 +199,22 @@ class SiteController extends Controller
             }
         }
     }
+    public function swot(Request $request, Businessinfo $businessinfo)
+    {
+        $user = Auth::user();
+        if ($user) {
+            $paystack = Paystack::where('user_id', $user->id)->first();
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', 1)
+                ->first();
+            $expenses = Expenses::where('businessinfo_id', $businessinfo->id)->where('expense_type', 'Annual')->first();
+            if (empty($paystack->user_id)) {
+                return view('app.dashboard.nbp');
+            } else {
+                return view('app.dashboard.swot', compact('user', 'businessinfo', 'paystack', 'expenses'));
+            }
+        }
+    }
 
     public function nanoplaninfo(Request $request, Businessinfo $businessinfo)
     {
@@ -222,12 +236,29 @@ class SiteController extends Controller
         $user = Auth::user();
         $states =  State::all();
 
+
+
+
         if ($user) {
             $paystack = Paystack::where('user_id', $user->id)->first();
+            $businessinfo = Businessinfo::where("user_id", $user->id)->where("plan_type", 1)->first();
+
             if (empty($paystack->user_id)) {
                 return view('app.dashboard.nbp');
             } else {
-                return view('app.dashboard.personal', compact('user', 'paystack', 'states'));
+
+                if (empty($businessinfo)) {
+                    $expenses = new Expenses();
+                    $expenses->id = null;
+                    $businessinfo = new BusinessInfo();
+                    $businessinfo->id = null;
+                    return view('app.dashboard.personal', compact('user', 'paystack', 'states', 'expenses', 'businessinfo'));
+                } else {
+                    $expenses = Expenses::where('businessinfo_id', $businessinfo->id)
+                        ->where('expense_type', 'Annual')
+                        ->firstOrFail();
+                    return view('app.dashboard.personal', compact('user', 'paystack', 'states', 'expenses', 'businessinfo'));
+                }
             }
         }
     }
@@ -254,19 +285,19 @@ class SiteController extends Controller
         //     return redirect()->back();
         // }
         // $businessinfo = Businessinfo::find($request->input('id'));
-        $businessinfo = Businessinfo::where("user_id",$user->id)->where("plan_type",1)->first();
-        $expenses = Expenses::where('businessinfo_id',$businessinfo->id)->where('expense_type','Annual')->first();
+        $businessinfo = Businessinfo::where("user_id", $user->id)->where("plan_type", 1)->first();
+        $expenses = Expenses::where('businessinfo_id', $businessinfo->id)->where('expense_type', 'Annual')->first();
         if ($user) {
             $paystack = Paystack::where('user_id', $user->id)->first();
             if (empty($paystack->user_id)) {
                 return view('app.dashboard.nbp');
             } else {
-                return view('app.dashboard.finance', compact('businessinfo','expenses'));
+                return view('app.dashboard.finance', compact('businessinfo', 'expenses'));
             }
         }
     }
 
-    public function financialRecord(Request $request,$id)
+    public function financialRecord(Request $request, $id)
     {
         $user = Auth::user();
         // $expenses = Expenses::where('id',$id)->where('expense_type','Annual')->first();
@@ -278,7 +309,7 @@ class SiteController extends Controller
             if (empty($paystack->user_id)) {
                 return view('app.dashboard.nbp');
             } else {
-                return view('app.dashboard.financial-record', compact('expenses','businessinfo','products'));
+                return view('app.dashboard.financial-record', compact('expenses', 'businessinfo', 'products'));
             }
         }
     }
@@ -399,11 +430,10 @@ class SiteController extends Controller
                 if ($businessinfo && $businessinfo->exists()) {
                     if ($request->has('id') && $request->input('id') != null) {
                         $product =  Product::find(base64_decode($request->input('id')));
-                        return view('app.dashboard.product', compact('user', 'businessinfo', 'paystack','product'));
-                    }else{
+                        return view('app.dashboard.product', compact('user', 'businessinfo', 'paystack', 'product'));
+                    } else {
                         return view('app.dashboard.product', compact('user', 'businessinfo', 'paystack'));
                     }
-                   
                 } else {
                     return redirect()->back()->with('error', 'Business info not found.');
                 }

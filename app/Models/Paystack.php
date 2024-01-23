@@ -9,7 +9,7 @@ class Paystack extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['reference', 'user_id','plan_type'];
+    protected $fillable = ['reference', 'user_id','plan_type','year'];
 
     public function user()
     {

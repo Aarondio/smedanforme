@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
-        data-image-src="{{ asset('assets/img/photos/bg20.png') }}">
+        data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
         {{-- <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg20.png"></section> --}}
         <div class="wrapper py-10">
             <div class="container p-0">
@@ -67,7 +67,7 @@
                         <div class="col-md-6 col-lg-3 mt-12">
                             <div class="pricing card text-center">
                                 <div class="card-body">
-                                    <img src="{{ asset('assets/img/icons/lineal/briefcase-2.svg') }}"
+                                    <img src="{{ asset('asset/img/icons/lineal/briefcase-2.svg') }}"
                                         class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
                                     <h4 class="card-title">Credit compare</h4>
                                     <div class="prices text-dark my-8">
@@ -75,7 +75,7 @@
                                     </div>
                                     <!--/.prices -->
 
-                                    <a href="#" class="btn btn-disabled btn-secondary rounded-pill">Coming soon</a>
+                                    <a href="#" class="btn  btn-grape rounded-pill disabled">Coming soon</a>
                                 </div>
                                 <!--/.card-body -->
                             </div>
@@ -87,7 +87,7 @@
                         <div class="col-md-6 col-lg-3 mt-12">
                             <div class="pricing card text-center">
                                 <div class="card-body">
-                                    <img src="{{ asset('assets/img/icons/lineal/briefcase-2.svg') }}"
+                                    <img src="{{ asset('asset/img/icons/lineal/briefcase-2.svg') }}"
                                         class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
                                     <h4 class="card-title">Nano business plan</h4>
                                     <p>We have a loan opportunity for you, click on the link to purchase a business plan.
@@ -98,7 +98,7 @@
                                     </div>
                                     <!--/.prices -->
 
-                                    <a href="https://paystack.com/pay/smecreditsfee" class="btn btn-grape rounded-pill">Pay
+                                    <a href="https://paystack.com/pay/smecredits" class="btn btn-grape rounded-pill">Pay
                                         now</a>
                                 </div>
                                 <!--/.card-body -->
@@ -110,7 +110,7 @@
                         <div class="col-md-6 col-lg-3 mt-12">
                             <div class="pricing card text-center">
                                 <div class="card-body">
-                                    <img src="{{ asset('assets/img/icons/lineal/briefcase-2.svg') }}"
+                                    <img src="{{ asset('asset/img/icons/lineal/briefcase-2.svg') }}"
                                         class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
                                     <h4 class="card-title">Macro business plan</h4>
                                     {{-- <p class="text-danger">We currently do not have any opportunity that requires a Macro plan</p> --}}

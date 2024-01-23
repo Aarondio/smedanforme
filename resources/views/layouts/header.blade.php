@@ -57,7 +57,7 @@
                                 <li class="nav-item"><a class="nav-link fw-normal" href="/nbp">Nano business plan</a>
                                 </li>
                                 {{-- <li class="nav-item"><a class="nav-link" href="/about">Micro buisness plan</a></li> --}}
-                                <li class="nav-item"><a class="nav-link fw-normal" href="/mbp">Macro business
+                                <li class="nav-item"><a class="nav-link fw-normal" href="/mbp">Micro business
                                         plan</a></li>
                                 <li class="nav-item"><a class="nav-link fw-normal" href="/learn">Learning hub</a></li>
                                 <li class="nav-item"><a class="nav-link fw-normal" href="/contact">Contact us</a></li>

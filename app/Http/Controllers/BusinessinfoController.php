@@ -12,7 +12,8 @@ use App\Http\Requests\BusinessinfoUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Paystack;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
+use App\Mail\DownloadPlan;
+use Illuminate\Support\Facades\Mail;
 class BusinessinfoController extends Controller
 {
     /**
@@ -317,24 +318,104 @@ class BusinessinfoController extends Controller
         }
     }
 
+    public function strength(Request $request, Businessinfo $businessinfo)
+    {
+        $validated = $request->validate([
+            'business_model',
+        ]);
+        $user = Auth::user();
+        if ($user) {
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
+            $businessinfo->update(['strength' => $request->strength]);
+            if ($businessinfo) {
+                return json_encode(array('statusCode' => 200, 'data' => $request->strength));
+            } else {
+                return json_encode(array('statusCode' => 401));
+            }
+        }
+    }
+    public function weakness(Request $request, Businessinfo $businessinfo)
+    {
+        $validated = $request->validate([
+            'business_model',
+        ]);
+        $user = Auth::user();
+        if ($user) {
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
+            $businessinfo->update(['weakness' => $request->weakness]);
+            if ($businessinfo) {
+                return json_encode(array('statusCode' => 200, 'data' => $request->weakness));
+            } else {
+                return json_encode(array('statusCode' => 401));
+            }
+        }
+    }
+    public function opportunity(Request $request, Businessinfo $businessinfo)
+    {
+        $validated = $request->validate([
+            'business_model',
+        ]);
+        $user = Auth::user();
+        if ($user) {
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
+            $businessinfo->update(['opportunity' => $request->opportunity]);
+            if ($businessinfo) {
+                return json_encode(array('statusCode' => 200, 'data' => $request->opportunity));
+            } else {
+                return json_encode(array('statusCode' => 401));
+            }
+        }
+    }
+    public function threats(Request $request, Businessinfo $businessinfo)
+    {
+        $validated = $request->validate([
+            'business_model',
+        ]);
+        $user = Auth::user();
+        if ($user) {
+            $businessinfo = Businessinfo::where('user_id', $user->id)
+                ->where('plan_type', $request->plan)
+                ->first();
+            $businessinfo->update(['threats' => $request->threats]);
+            if ($businessinfo) {
+                return json_encode(array('statusCode' => 200, 'data' => $request->threats));
+            } else {
+                return json_encode(array('statusCode' => 401));
+            }
+        }
+    }
+
     public function finalsubmission(Request $request, Businessinfo $businessinfo)
     {
         $user = Auth::user();
         $randomNumber = mt_rand(1000, 9999);
         $randomAlphabet = chr(mt_rand(65, 90));
-        $bizno = 'SB' . $randomNumber . $randomAlphabet;
+        $bizno = 'SME' . $randomNumber . $randomAlphabet;
         $id = $request->id;
         $businessinfo = Businessinfo::where('id', $id)->first();
 
 
         // $paystack = Paystack::where('user_id', $user->id)->first();
         if (empty($businessinfo->business_no)) {
+
             $businessinfo->update(['business_no' => $bizno, 'status' => 'Completed']);
+            Mail::to($user->email)->send(new DownloadPlan($businessinfo));
             return view('app.dashboard.success', compact('user', 'businessinfo'));
+        }else{
+
+            $businessinfo->update(['status' => 'Completed']);
         }
+
         if (empty($businessinfo->status)) {
             $businessinfo->update(['status' => 'Completed']);
         }
+       
         return view('app.dashboard.success', compact('user', 'businessinfo'));
         //    if($businessinfo){
         //      return view('home');

@@ -13,7 +13,7 @@
                          <div class="d-flex justify-content-between flex-column flex-lg-row">
                             <a class="btn btn-info btn-sm text-white text-capitalize mt-2" href="{{ route('product') }}">Add new
                                 Product/Service</a>
-                            <a class="btn btn-outline-warning btn-sm  text-capitalize mt-2" href="{{ route('preview') }}">Preview Application</a>
+                            <a class="btn btn-outline-warning btn-sm  text-capitalize mt-2" href="{{ route('finance') }}">Continue Application</a>
                          </div>
                     </div>
                     @if (session('success'))

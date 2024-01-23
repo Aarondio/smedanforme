@@ -3,8 +3,8 @@
 @section('content')
     <style>
         /* *{
-                                            border: 1px solid red;
-                                        } */
+                                                            border: 1px solid red;
+                                                        } */
     </style>
     <section class="wrapper bg-gradient-blue image-wrapper bg-image bg-overlay text-white"
         data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
@@ -50,27 +50,44 @@
                 <aside class="col-lg-2 sidebar sticky-sidebar mt-md-0  d-none d-xl-block">
                     <div class="widget">
                         {{-- <h6 class="widget-title fs-17 mb-2 ps-xl-5">On this page</h6> --}}
-                        
-                            <div class="card bg-transparent">
-                                <div class="card-body p-3 m-0">
-                        <nav class="" id="sidebar-nav">
+
+                        <div class="card bg-transparent">
+                            <div class="card-body p-3 m-0">
+                                <nav class="" id="sidebar-nav">
                                     <ul class="list-unstyled fs-sm lh-sm text-reset fw-light">
-                                        <li><a class="nav-link active text-decoration-underline fw-normal"
-                                                href="{{ route('personal') }}">Personal Info</a></li>
-                                        <li><a class="nav-link  my-1 fw-normal" href="{{ route('business') }}">Business
-                                                Info</a></li>
-                                        <li><a class="nav-link fw-normal" href="{{ route('nanoplan') }}">Business
-                                                Description</a></li>
-                                        <li><a class="nav-link fw-normal" href="{{ route('finance') }}">Expenses Records</a>
+                                        <li><a class="nav-link  fw-normal active text-decoration-underline"
+                                                href="{{ route('personal') }}">Personal Info</a>
                                         </li>
-                                        <li><a class="nav-link fw-normal my-1" href="{{ route('product') }}">Add
-                                                Products/Services</a></li>
-                                        <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview</a></li>
+                                        @if ($businessinfo->id != null)
+                                            <li><a class="nav-link  my-1 fw-normal " href="{{ route('business') }}">Business
+                                                    Info</a></li>
+
+                                            <li><a class="nav-link fw-normal " href="{{ route('nanoplan') }}">Business
+                                                    Description</a></li>
+                                            <li><a class="nav-link fw-normal " href="{{ route('swot') }}">Swot
+                                                    Analysis</a></li>
+
+                                            <li><a class="nav-link fw-normal my-1" href="{{ route('product') }}">Add
+                                                    Products/Services</a></li>
+                                            <li><a class="nav-link fw-normal " href="{{ route('finance') }}">Expenses
+                                                    Records</a>
+                                            </li>
+                                        @endif
+                                        {{-- @if ($expenses->id != null)
+                                            <li><a class="nav-link fw-normal "
+                                                    href="{{ route('financial-record', $expenses->id) }}">Preview
+                                                    Finances</a>
+                                            </li>
+                                        @endif --}}
+                                        @if ($businessinfo->id != null)
+                                            <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview
+                                                    submission</a></li>
+                                        @endif
                                     </ul>
-                                    </nav>
-                                </div>
+                                </nav>
                             </div>
-                        
+                        </div>
+
                     </div>
                 </aside>
                 <div class="col-lg-10 col-md-12  card shadow-lg">
@@ -263,7 +280,8 @@
                             </div> --}}
                             <div class="col-md-6">
                                 <a href="{{ route('business') }}"
-                                    class="float-end btn btn-outline-primary btn-sm  @if($user->address=="") disabled @endif" id="updateButton">Next</a>
+                                    class="float-end btn btn-outline-primary btn-sm  @if ($user->address == '') disabled @endif"
+                                    id="updateButton">Next</a>
                             </div>
                         </div>
                     </div>
@@ -309,7 +327,5 @@
                 $('#state').trigger('change');
             }
         });
-
-     
     </script>
 @endsection

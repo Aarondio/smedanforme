@@ -50,7 +50,7 @@
                                             alt="" />
                                         <h4 class="card-title mt-5">Matching funds</h4>
                                         @if (empty($plan_one->user_id))
-                                            <a href="{{ route('purchasembp') }}" class="btn btn-grape ">Apply now</a>
+                                            <a href="{{ route('purchasenbp') }}" class="btn btn-grape ">Apply now</a>
                                         @else
                                             @if ($business_one && $business_one->status == 'Completed')
                                                 <a class="btn btn-grape disabled">Application Submitted</a>

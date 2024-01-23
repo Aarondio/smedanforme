@@ -71,7 +71,7 @@
                         <div class="col-md-6 col-lg-3 mt-12">
                             <div class="pricing card text-center">
                               <div class="card-body">
-                                <img src="{{asset('assets/img/icons/lineal/briefcase-2.svg')}}" class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
+                                <img src="{{asset('asset/img/icons/lineal/briefcase-2.svg')}}" class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
                                 <h4 class="card-title">Credit Compare</h4>
                                 <div class="prices text-dark my-8">
                                   <div class="price price-show"><span class="price-value display-4">Free</span> </div>
@@ -90,7 +90,7 @@
                         <div class="col-md-6 col-lg-3 mt-12">
                             <div class="pricing card text-center">
                               <div class="card-body">
-                                <img src="{{asset('assets/img/icons/lineal/briefcase-2.svg')}}" class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
+                                <img src="{{asset('asset/img/icons/lineal/briefcase-2.svg')}}" class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
                                 <h4 class="card-title">Nano business plan</h4>
                                 <div class="prices text-dark my-8">
                                   <div class="price price-show"><span class="price-currency display-4">₦</span><span class="price-value display-4">5,000</span> </div>
@@ -109,7 +109,7 @@
                         <div class="col-md-6 col-lg-3 mt-12">
                             <div class="pricing card text-center">
                               <div class="card-body">
-                                <img src="{{asset('assets/img/icons/lineal/briefcase-2.svg')}}" class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
+                                <img src="{{asset('asset/img/icons/lineal/briefcase-2.svg')}}" class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
                                 <h4 class="card-title">Macro business plan</h4>
                                 <div class="prices text-dark my-8">
                                   <div class="price price-show"><span class="price-currency display-4">₦</span><span class="price-value display-4">10,000</span> </div>

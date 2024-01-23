@@ -15,6 +15,8 @@ class PaystackController extends Controller
         $paystack->reference = $reference;
         $paystack->user_id = $user->id; 
         $paystack->plan_type = 1;
+        $paystack->year = "2023";
+
         $paystack->save();
 
         return redirect()->route('personal')->withSuccess('Congratulations your payment was successful');

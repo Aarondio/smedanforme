@@ -3,8 +3,8 @@
 @section('content')
     <style>
         /* *{
-                                        border: 1px solid red;
-                                    } */
+                                            border: 1px solid red;
+                                        } */
     </style>
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
         data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
@@ -51,11 +51,15 @@
                                         <li><a class="nav-link fw-normal active text-decoration-underline"
                                                 href="{{ route('nanoplan') }}">Business
                                                 Description</a></li>
-                                        <li><a class="nav-link fw-normal" href="{{ route('finance') }}">Expenses Records</a>
-                                        </li>
+                                        <li><a class="nav-link fw-normal " href="{{ route('swot') }}">Swot
+                                                Analysis</a></li>
                                         <li><a class="nav-link fw-normal my-1" href="{{ route('product') }}">Add
                                                 Products/Services</a></li>
-                                        <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview</a></li>
+                                        <li><a class="nav-link fw-normal" href="{{ route('finance') }}">Expenses Records</a>
+                                        </li>
+
+                                        <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview
+                                                submission</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -179,11 +183,11 @@
                             </div>
                             <div id="form-1" class="wrapper">
                                 {{-- <input type="text" name="plan_type" value="1"> --}}
-                                <h4 class="">Describe the need of your target audience</h4>
+                                <h4 class="">Describe the need of your target customers</h4>
                                 <div class="card rounded-0">
                                     <div class="">
                                         <textarea id="audience" name="audience_need" class="form-control rounded-0"
-                                            placeholder="Describe the need of your target audience" style="height: 150px" required>{{ $businessinfo->audience_need ?? '' }}</textarea>
+                                            placeholder="Describe the need of your target customers" style="height: 150px" required>{{ $businessinfo->audience_need ?? '' }}</textarea>
                                         {{-- <label for="audenience">Describe target audience needs</label> --}}
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
@@ -235,11 +239,11 @@
                                 <p class="text-end fs-14 text-muted"> <span id="counter1">0</span>/100</p>
                             </div>
                             <div id="form-3" class="wrapper">
-                                <h4 class="">Outline the target audience</h4>
+                                <h4 class="">Outline the target customers</h4>
                                 <div class="card rounded-0">
                                     <div class="">
                                         <textarea id="target_market" name="target_market" class="form-control rounded-0"
-                                            placeholder="Outline the target audience" style="height: 150px" required>{{ $businessinfo->target_market ?? '' }}</textarea>
+                                            placeholder="Outline the target customers" style="height: 150px" required>{{ $businessinfo->target_market ?? '' }}</textarea>
                                         {{-- <label for="target_market">Outline the target audience</label> --}}
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
@@ -266,7 +270,7 @@
                                 <div class="card rounded-0">
                                     <div class="">
                                         <textarea id="competition_ad" name="competition_ad" class="form-control rounded-0"
-                                            placeholder="Outline the target audience" style="height: 150px" required>{{ $businessinfo->competition_ad ?? '' }}</textarea>
+                                            placeholder="Outline your competitive advantages" style="height: 150px" required>{{ $businessinfo->competition_ad ?? '' }}</textarea>
                                         {{-- <label for="competition_ad">Outline how you can set yourself apart</label> --}}
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
@@ -373,7 +377,7 @@
                                 <a href="{{ route('business') }}" class="btn btn-outline-danger btn-sm">Back</a>
                             </div>
                             <div class="col-md-6">
-                                <form action="{{ route('finance') }}" class="float-end">
+                                <form action="{{ route('swot') }}" class="float-end">
                                     <input type="text" name="id" value="{{ $businessinfo->id }}" hidden>
                                     <button type="submit" class="btn btn-sm btn-outline-primary">Next</button>
                                 </form>

@@ -28,21 +28,22 @@
                                 </div>
                             </div> --}}
                             <div class="form-floating mb-4">
-                                <input type="email" class="form-control @error('email') is-invalid @enderror"  name="email"  value="{{ old('email') }}" placeholder="Email" id="email" required autocomplete="email" autofocus>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{ old('email') }}" placeholder="Email" id="email" required
+                                    autocomplete="email" autofocus>
                                 <label for="email">Email</label>
-                              </div>
-                              <p> @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror</p>
+                            </div>
+                          
+                               
+                           
 
                             <div class="form-floating password-field mb-4">
-                                <input type="password" class="form-control 
-                                @error('password') is-invalid @enderror" placeholder="Password" name="password" id="password" required
+                                <input type="password"
+                                    class="form-control 
+                                @error('password') is-invalid @enderror"
+                                    placeholder="Password" name="password" id="password" required
                                     autocomplete="current-password">
-                                <span class="password-toggle"><i
-                                    class="uil uil-eye"></i></span>
+                                <span class="password-toggle"><i class="uil uil-eye"></i></span>
                                 <label for="password">Password</label>
                             </div>
                             <p> @error('password')
@@ -51,7 +52,11 @@
                                     </span>
                                 @enderror
                             </p>
-
+                            @error('email')
+                            <p class="small text-danger">
+                               {{ $message }}
+                           </p>
+                           @enderror
                             {{-- <div class="">
                                 <label for="password" class="col-md-4 col-form-label ">{{ __('Password') }}</label>
 
@@ -94,19 +99,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6">
+                                <div class="col-md-6">
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
                                             {{ __('Forgot Password?') }}
                                         </a>
                                     @endif
-                                </div> --}}
+                                </div>
                             </div>
 
                         </form>
                     </div>
                 </div>
-                <p class="text-center mt-4">Not yet registered? <a href="{{route('register')}}">Sign up</a></p>
+                <p class="text-center mt-4">Not yet registered? <a href="{{ route('register') }}">Sign up</a></p>
             </div>
         </div>
     </div>

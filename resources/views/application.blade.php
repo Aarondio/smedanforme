@@ -129,6 +129,8 @@
                                             </td>
                                         </tr>
                                     </table>
+
+                                    
                                 </div>
 
                             </div>
@@ -156,6 +158,15 @@
                             <p class="text-dark text-justify">{{ $businessinfo->business_model }}</p>
 
                         
+                            <h3 class="mt-12">S.W.O.T Analysis</h3>
+                            <h3 class="fw-light">Strength</h3>
+                            <p class="text-dark text-justify">{{ $businessinfo->strength }}</p>
+                            <h3 class="fw-light">Weakness</h3>
+                            <p class="text-dark text-justify">{{ $businessinfo->weakness }}</p>
+                            <h3 class="fw-light">Opportunity</h3>
+                            <p class="text-dark text-justify">{{ $businessinfo->opportunity }}</p>
+                            <h3 class="fw-light">Threats</h3>
+                            <p class="text-dark text-justify">{{ $businessinfo->threats }}</p>
                         </div>
 
                     </div>

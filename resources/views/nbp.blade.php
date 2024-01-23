@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('asset/img/photos/bg4.jpg')}}">
+    <section class="wrapper image-wrapper bg-image bg-overlay text-white"
+        data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
         <div class="wrapper">
             <div class="container py-10 py-md-12">
                 <div class="row">
@@ -13,7 +14,7 @@
                 </div>
                 <!-- /.row -->
                 <div class="text-center mt-10">
-                    <a href="{{route('purchasenbp')}}" class="btn btn-white">Get Started <i
+                    <a href="{{ route('purchasenbp') }}" class="btn btn-white">Get Started <i
                             class="uil uil-arrow-right display-6"></i></a>
                 </div>
             </div>
@@ -31,7 +32,7 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="me-5">
-                                    <img src="{{ asset('asset/img/icons/lineal/search.svg')}}"
+                                    <img src="{{ asset('asset/img/icons/lineal/search.svg') }}"
                                         class="svg-inject icon-svg icon-svg-sm text-primary" alt="" />
                                 </div>
                                 <div>
@@ -47,7 +48,7 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="me-5">
-                                    <img src="{{asset('asset/img/icons/lineal/bar-chart.svg')}}"
+                                    <img src="{{ asset('asset/img/icons/lineal/bar-chart.svg') }}"
                                         class="svg-inject icon-svg icon-svg-sm text-primary" alt="" />
                                 </div>
                                 <div>
@@ -63,7 +64,7 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="me-5">
-                                    <img src="{{asset('asset/img/icons/lineal/briefcase-2.svg')}}"
+                                    <img src="{{ asset('asset/img/icons/lineal/briefcase-2.svg') }}"
                                         class="svg-inject icon-svg icon-svg-sm text-primary" alt="" />
                                 </div>
                                 <div>
@@ -79,7 +80,7 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="me-5">
-                                    <img src="{{asset('asset/img/icons/lineal/clock-3.svg')}}"
+                                    <img src="{{ asset('asset/img/icons/lineal/clock-3.svg') }}"
                                         class="svg-inject icon-svg icon-svg-sm text-primary" alt="" />
                                 </div>
                                 <div>
@@ -95,7 +96,7 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="me-5">
-                                    <img src="{{asset('asset/img/icons/lineal/handshake.svg')}}"
+                                    <img src="{{ asset('asset/img/icons/lineal/handshake.svg') }}"
                                         class="svg-inject icon-svg icon-svg-sm text-primary" alt="" />
                                 </div>
                                 <div>
@@ -116,7 +117,7 @@
                 <div class="col-md-4 mt-5">
                     <div class="card p-0 ">
                         <div class="card-header px-5 bg-purple py-1">
-                          <p class="text-white p-0 m-0">  <span class="display-6 text-white"> 1.</span>  Get Started</p>
+                            <p class="text-white p-0 m-0"> <span class="display-6 text-white"> 1.</span> Get Started</p>
                         </div>
                         <div class="card-body px-5 p-0 pt-2">
                             <p>Create a secure account</p>
@@ -136,7 +137,7 @@
                 <div class="col-md-4 mt-5">
                     <div class="card p-0">
                         <div class="card-header px-5 bg-purple text-white py-1">
-                            <p class="text-white p-0 m-0">  <span class="display-6">  3.</span> Receive your NBP Report</p>
+                            <p class="text-white p-0 m-0"> <span class="display-6"> 3.</span> Receive your NBP Report</p>
                         </div>
                         <div class="card-body px-5 p-0 pt-2">
                             <p>Create a secure account</p>
@@ -145,9 +146,8 @@
                 </div>
             </div>
             <div class="text-center mt-10">
-                <a href="{{route('purchasenbp')}}" class="btn btn-outline-grape">Get Started <i
+                <a href="{{ route('purchasenbp') }}" class="btn btn-outline-grape">Get Started <i
                         class="uil uil-arrow-right display-6"></i></a>
-            </div
-        </div>
+            </div </div>
     </section>
 @endsection
