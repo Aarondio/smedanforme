@@ -11,9 +11,11 @@ use App\Http\Requests\BusinessinfoStoreRequest;
 use App\Http\Requests\BusinessinfoUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Paystack;
+use App\Models\Expenses;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Mail\DownloadPlan;
 use Illuminate\Support\Facades\Mail;
+
 class BusinessinfoController extends Controller
 {
     /**
@@ -410,10 +412,12 @@ class BusinessinfoController extends Controller
         }else{
 
             $businessinfo->update(['status' => 'Completed']);
+            Mail::to($user->email)->send(new DownloadPlan($businessinfo));
         }
 
         if (empty($businessinfo->status)) {
             $businessinfo->update(['status' => 'Completed']);
+            Mail::to($user->email)->send(new DownloadPlan($businessinfo));
         }
        
         return view('app.dashboard.success', compact('user', 'businessinfo'));
@@ -449,7 +453,7 @@ class BusinessinfoController extends Controller
             $validated = $request->validate([
                 'business_name' => ['required', 'max:255', 'string'],
                 'is_registered' => ['required'],
-                'suin' => 'required|regex:/^SUIN\d{8}$/',
+                'suin' => 'required',
                 'register_type' => 'required',
                 'business_age' => 'required',
                 'emp_no' => 'required',
@@ -457,6 +461,8 @@ class BusinessinfoController extends Controller
                 'sector' => 'required',
                 'address' => 'required',
                 'website' => 'nullable',
+                'phone' => 'required',
+                'email' => 'required',
             ], [
                 'suin.regex' => 'The SUIN provided is invalid',
             ]);
@@ -475,6 +481,45 @@ class BusinessinfoController extends Controller
         } catch (\Exception $e) {
             return redirect()
                 ->back()
+                ->withErrors(['error' => $e->getMessage()])
+                ->withInput();
+        }
+    }
+    public function updatesuin(Request $request, User $user, Businessinfo $businessinfo)
+    {
+        try {
+
+            // suin 
+            // business_name 
+            // phone 
+            // email 
+            // address
+            // Validate the incoming request data
+            $businessinfo = Businessinfo::find($request->id);
+            $validated = $request->validate([
+                'business_name' => ['required', 'max:255', 'string'],
+                'suin' => 'required|unique:businessinfos,suin,except,id',
+                'phone' => 'required',
+                'email' => 'required',
+                'address' => 'required'
+            ], [
+                'suin.regex' => 'The SUIN provided is invalid',
+            ]);
+
+            // Update the business information
+            $businessinfo->update($validated);
+
+            return redirect()
+                ->route('business', $businessinfo)
+                ->withSuccess("Business information has been saved successfully");
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()
+                ->route('error')
+                ->withErrors($e->validator->getMessageBag())
+                ->withInput();
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('error')
                 ->withErrors(['error' => $e->getMessage()])
                 ->withInput();
         }
@@ -506,6 +551,36 @@ class BusinessinfoController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+    public function updateSheet(Request $request)
+    {
+        $id = $request->id;
+        $validatedData = $request->validate([
+            'capital' => 'required',
+            'debt' => 'nullable',
+            'loan' => 'nullable',
+            'lands' => 'nullable',
+            'plants' => 'nullable',
+            'cash' => 'nullable',
+            'cashown' => 'nullable',
+            'depreciation' => 'nullable',
+            'intangible' => 'nullable',
+            'inventory' => 'nullable',
+            'raw_start' => 'nullable',
+            'raw_end' => 'required',
+            'tax' => 'nullable',
+        ]);
+
+        $businessInfo = BusinessInfo::findOrFail($id);
+        // $expenses = Expenses::where('businessinfo_id', $businessInfo->id)->where('expense_type', 'Annual')->first();
+        if($businessInfo){
+            $businessInfo->update($validatedData);
+            return redirect()->route('preview')->with('success', 'BusinessInfo updated successfully');
+        }else{
+            return redirect()->back()->with('message', 'Unable to process your information. Please try again');
+        }
+
     }
     /**
      * Update the specified resource in storage.

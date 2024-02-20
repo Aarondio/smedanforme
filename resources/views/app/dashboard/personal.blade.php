@@ -3,8 +3,8 @@
 @section('content')
     <style>
         /* *{
-                                                            border: 1px solid red;
-                                                        } */
+                                                                                    border: 1px solid red;
+                                                                                } */
     </style>
     <section class="wrapper bg-gradient-blue image-wrapper bg-image bg-overlay text-white"
         data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
@@ -28,26 +28,11 @@
     </section>
     <section class="wrapper bg-gray py-10 py-md-12">
         <div class="container">
-            <center>
-                <div class="col-md-10">
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            <h3 class="text-success"> {{ session('success') }} </h3>
-                        </div>
-                    @endif
-                </div>
 
-                <p class="text-danger">
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                </p>
-            </center>
             <!-- /section -->
             <div class="row justify-content-center ">
                 <aside class="col-lg-2 sidebar sticky-sidebar mt-md-0  d-none d-xl-block">
+
                     <div class="widget">
                         {{-- <h6 class="widget-title fs-17 mb-2 ps-xl-5">On this page</h6> --}}
 
@@ -58,7 +43,11 @@
                                         <li><a class="nav-link  fw-normal active text-decoration-underline"
                                                 href="{{ route('personal') }}">Personal Info</a>
                                         </li>
-                                        @if ($businessinfo->id != null)
+                                        @if (empty($businessinfo->suin))
+                                        <li><a class="nav-link  fw-normal" href="{{ route('suin') }}">SUIN
+                                            Verification</a>
+                                        @else
+                                           
                                             <li><a class="nav-link  my-1 fw-normal " href="{{ route('business') }}">Business
                                                     Info</a></li>
 
@@ -72,16 +61,12 @@
                                             <li><a class="nav-link fw-normal " href="{{ route('finance') }}">Expenses
                                                     Records</a>
                                             </li>
-                                        @endif
-                                        {{-- @if ($expenses->id != null)
-                                            <li><a class="nav-link fw-normal "
-                                                    href="{{ route('financial-record', $expenses->id) }}">Preview
-                                                    Finances</a>
-                                            </li>
-                                        @endif --}}
-                                        @if ($businessinfo->id != null)
-                                            <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview
-                                                    submission</a></li>
+
+
+                                            @if ($businessinfo->id != null)
+                                                <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview
+                                                        submission</a></li>
+                                            @endif
                                         @endif
                                     </ul>
                                 </nav>
@@ -91,6 +76,23 @@
                     </div>
                 </aside>
                 <div class="col-lg-10 col-md-12  card shadow-lg">
+                    <center>
+                        <p class="text-success">
+                            @if (session('success'))
+                                
+                                    <h3 class="text-success"> {{ session('success') }} </h3>
+                               
+                            @endif
+                        </p>
+
+                        <p class="text-danger">
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+                        </p>
+                    </center>
                     <div class="card-body">
                         <h2 class="text-capitalize">Personal information (Matching funds)</h2>
                         <form action="{{ route('updateinfo') }}" method="POST">

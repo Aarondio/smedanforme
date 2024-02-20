@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('salesforcasts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('businessinfo_id');
             $table->float('jan_price');
             $table->float('feb_price');
             $table->float('mar_price');

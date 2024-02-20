@@ -3,8 +3,8 @@
 @section('content')
     <style>
         /* *{
-                                            border: 1px solid red;
-                                        } */
+                                                            border: 1px solid red;
+                                                        } */
     </style>
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
         data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
@@ -48,18 +48,19 @@
                                         </li>
                                         <li><a class="nav-link  my-1 fw-normal " href="{{ route('business') }}">Business
                                                 Info</a></li>
-                                        <li><a class="nav-link fw-normal "
-                                                href="{{ route('nanoplan') }}">Business
+                                        <li><a class="nav-link fw-normal " href="{{ route('nanoplan') }}">Business
                                                 Description</a></li>
-                                                <li><a class="nav-link fw-normal active text-decoration-underline" href="{{ route('swot') }}">Swot
-                                                    Analysis</a></li>
-                                       
+                                        <li><a class="nav-link fw-normal active text-decoration-underline"
+                                                href="{{ route('swot') }}">Swot
+                                                Analysis</a></li>
+
                                         <li><a class="nav-link fw-normal my-1" href="{{ route('product') }}">Add
                                                 Products/Services</a></li>
-                                                <li><a class="nav-link fw-normal" href="{{ route('finance') }}">Expenses Records</a>
-                                                </li>
-    
-                                            <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview submission</a></li>
+                                        <li><a class="nav-link fw-normal" href="{{ route('finance') }}">Expenses Records</a>
+                                        </li>
+
+                                        <li><a class="nav-link fw-normal " href="{{ route('preview') }}">Preview
+                                                submission</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -88,8 +89,17 @@
                                     <div id="collapse-00"
                                         class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
                                         <div class="code-wrapper">
-                                            <div class=" px-10 py-5">
-                                                Our bean trading business excels in delivering quality beans, forming robust supplier partnerships to ensure a consistent supply. Competitive pricing, achieved through cost-effective strategies, fosters customer loyalty. The emphasis on reliable delivery services sets us apart, prioritizing timely distribution for heightened customer satisfaction.
+                                            <div class=" px-10 py-5 ">
+                                                Our business prides itself on offering premium-quality rice and beans,
+                                                distinguishing us in the market and appealing to customers who prioritize
+                                                freshness and taste. Complementing this, our commitment to ethical and
+                                                sustainable sourcing practices not only enhances our brand image but also
+                                                resonates with environmentally conscious consumers. We prioritize a
+                                                customer-centric approach, focusing on understanding and meeting the diverse
+                                                needs of our clientele, fostering a loyal customer base and generating
+                                                positive word-of-mouth. Furthermore, the collective experience of our
+                                                management team ensures not only effective day-to-day operations but also
+                                                strategic decision-making to drive the success and growth of our business.
                                             </div>
                                         </div>
                                     </div>
@@ -104,8 +114,8 @@
                                 <h4 class="">Weakness</h4>
                                 <div class="card rounded-0">
                                     <div class="">
-                                        <textarea id="weakness" name="weakness" class="form-control rounded-0" placeholder="Describe some of your business weaknesses"
-                                            style="height: 150px" required>{{ $businessinfo->weakness ?? '' }}</textarea>
+                                        <textarea id="weakness" name="weakness" class="form-control rounded-0"
+                                            placeholder="Describe some of your business weaknesses" style="height: 150px" required>{{ $businessinfo->weakness ?? '' }}</textarea>
                                         {{-- <label for="aumission">State your mission statement</label> --}}
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
@@ -115,8 +125,15 @@
                                     <div id="collapse-0"
                                         class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
                                         <div class="code-wrapper">
-                                            <div class=" px-10 py-5">
-                                                Challenges encompass limited initial capital, prompting exploration of additional funding avenues. The dependency on specific suppliers for bean sourcing poses vulnerability, necessitating plans to diversify relationships for a resilient supply chain.
+                                            <div class=" px-10 py-5 ">
+                                                An area for improvement is our limited product range. Expanding offers a
+                                                chance to attract a broader customer base. Also, dependence on a few
+                                                suppliers poses a risk to our supply chain. To mitigate, establishing ties
+                                                with alternative suppliers is crucial.In a competitive market, standing out
+                                                is vital. Developing unique selling
+                                                propositions and targeted marketing differentiates us, capturing our
+                                                audience's attention. This proactive approach not only navigates competition
+                                                but also strengthens our brand presence, ensuring sustained success.
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +148,7 @@
                                 <h4 class="">Opportunity</h4>
                                 <div class="card rounded-0">
                                     <div class="">
-                                        <textarea id="opportunity" name="opportunity" class="form-control rounded-0" placeholder="State your mission statement"
+                                        <textarea id="opportunity" name="opportunity" class="form-control rounded-0" placeholder="Opportunity"
                                             style="height: 150px" required>{{ $businessinfo->opportunity ?? '' }}</textarea>
                                         {{-- <label for="aumission">State your mission statement</label> --}}
                                     </div>
@@ -142,8 +159,18 @@
                                     <div id="collapse-01"
                                         class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
                                         <div class="code-wrapper">
-                                            <div class=" px-10 py-5">
-                                                Strategic opportunities lie in expanding our product range to include specialty beans, enabling us to capture a broader market share. Exploring online sales channels in the digital age enhances customer convenience and extends our reach beyond local markets.
+                                            <div class=" px-10 py-5 ">
+                                                Expanding into the online market aligns with the trend of online shopping,
+                                                offering a significant opportunity to tap into a wider customer base. This
+                                                move enhances convenience and accessibility, catering to a broader audience.
+                                                Collaborating with local businesses, including restaurants and catering
+                                                services, provides a strategic avenue for creating new revenue streams and
+                                                elevating brand visibility within the community. Aligning marketing efforts
+                                                with health and wellness trends capitalizes on the increasing number of
+                                                health-conscious consumers, emphasizing the nutritional benefits of our rice
+                                                and beans. This strategic positioning not only aligns with current
+                                                preferences but also positions our products as a healthy and wholesome
+                                                choice.
                                             </div>
                                         </div>
                                     </div>
@@ -159,7 +186,7 @@
                                 <div class="card rounded-0">
                                     <div class="">
                                         <textarea id="threats" name="threats" class="form-control rounded-0"
-                                            placeholder="Describe the need of your target audience" style="height: 150px" required>{{ $businessinfo->threats ?? '' }}</textarea>
+                                            placeholder="Threats" style="height: 150px" required>{{ $businessinfo->threats ?? '' }}</textarea>
                                         {{-- <label for="audenience">Describe target audience needs</label> --}}
                                     </div>
                                     <div class="card-footer position-relative p-0 px-4">
@@ -169,8 +196,15 @@
                                     <div id="collapse-1"
                                         class="card-footer bg-soft-grape p-0 accordion-collapse collapse rounded-0">
                                         <div class="code-wrapper">
-                                            <div class="disable-copy-paste px-10 py-5">
-                                                Vigilance against market competition and proactive strategies to address potential fluctuations in bean prices due to external factors are essential for navigating challenges effectively.
+                                            <div class=" px-10 py-5">
+                                                Market fluctuations, like economic downturns or commodity price changes,
+                                                pose a potential impact on profitability. Unforeseen events such as natural
+                                                disasters, political instability, could disrupt our supply chain, affecting
+                                                product availability. Moreover, the evolving consumer preferences or market
+                                                trends necessitate continuous adaptation to remain relevant. These
+                                                challenges highlight the importance of a robust strategy and flexibility in
+                                                our operations to navigate external uncertainties and ensure the resilience
+                                                and adaptability of our business in a dynamic market.
                                             </div>
                                         </div>
                                     </div>
@@ -219,8 +253,9 @@
                             </div>
                             <div class="col-md-6">
                                 {{-- <form action="{{ route('product') }}" class="float-end"> --}}
-                                    {{-- <input type="text" name="id" value="{{ $businessinfo->id }}" hidden> --}}
-                                    <a href="{{ route('product') }}" type="submit" class="btn btn-sm btn-outline-primary float-end">Next</a>
+                                {{-- <input type="text" name="id" value="{{ $businessinfo->id }}" hidden> --}}
+                                <a href="{{ route('product') }}" type="submit"
+                                    class="btn btn-sm btn-outline-primary float-end">Next</a>
                                 {{-- </form> --}}
                                 {{-- <a href="{{ route('finance',$businessinfo->id) }}"
                                     class="float-end btn btn-outline-primary btn-sm">Next</a> --}}
@@ -277,7 +312,7 @@
 
             document.addEventListener('copy', (event) => {
                 const targetElement = event.target;
-                if (targetElement.classList.contains('disable-copy-paste')) {
+                if (targetElement.classList.contains('')) {
                     event.preventDefault();
                     alert('Copying is disabled for this element.');
                 }

@@ -131,24 +131,29 @@ class StaffController extends Controller
         $approvals = history::where('staff_id', $id)
             ->where('action', 'Business plan approval')
             ->take(10)
+            ->latest()
             ->get();
 
         $approvalcount = history::where('staff_id', $id)
             ->where('action', 'Business plan approval')
             ->take(10)
+            // ->latest()
             ->count();
 
         $disapprovals = history::where('staff_id', $id)
             ->where('action', 'Business plan disqualified')
             ->take(10)
+            ->latest()
             ->get();
             
         $disapprovalcount = history::where('staff_id', $id)
             ->where('action', 'Business plan disqualified')
+            // ->latest()
             ->count();
 
         $logins = history::where('staff_id', $id)
             ->where('action', 'Login')
+            ->latest()
             ->get();
 
         $logincount = history::where('staff_id', $id)

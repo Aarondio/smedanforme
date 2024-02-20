@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg20.png')}}">
-    {{-- <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg20.png"></section> --}}
+
         <div class="wrapper py-10">
             <div class="container p-0">
                 <div class="row">
@@ -63,7 +63,7 @@
                         <div class="col-md-6 col-lg-3 mt-12">
                             <div class="pricing card text-center">
                               <div class="card-body">
-                                <img src="{{asset('asset/img/icons/lineal/briefcase-2.svg')}}" class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
+                                <img src="{{asset("asset/img/icons/lineal/briefcase-2.svg")}}" class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
                                 <h4 class="card-title">Credit compare</h4>
                                 <div class="prices text-dark my-8">
                                   <div class="price price-show"><span class="price-value display-4">Free</span> </div>

@@ -42,7 +42,7 @@ class Businessinfo extends Model
         'address',
         'business_no',
         'status',
-   
+
         // 'year',
         // 'salary',
         // 'securities',
@@ -66,6 +66,8 @@ class Businessinfo extends Model
         'mission',
         'journey',
         'website',
+        'email',
+        'phone',
         'business_model',
 
         'strength',
@@ -73,6 +75,22 @@ class Businessinfo extends Model
         'opportunity',
         'threats',
         'approval',
+
+        'capital',
+        'debt',
+        'loan',
+
+       
+        'lands',
+        'plants',
+        
+        'cash',
+        'cashown',
+        'intangible',
+        'inventory',
+        'raw_start',
+        'raw_end',
+        'tax',
 
     ];
 
@@ -89,7 +107,8 @@ class Businessinfo extends Model
     {
         return $this->hasMany(Cashflow::class);
     }
-    public function salesforcast(){
+    public function salesforcast()
+    {
         return $this->hasMany(Product::class);
     }
 
@@ -98,11 +117,13 @@ class Businessinfo extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function expenses(){
+    public function expenses()
+    {
         return $this->hasMany(Expenses::class);
     }
 
-    public function employees(){
+    public function employees()
+    {
         return $this->belongsTo(Employees::class);
     }
 }

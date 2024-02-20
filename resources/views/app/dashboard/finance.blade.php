@@ -123,19 +123,18 @@
 
                                 </div>
                                 <input type="text" name="id" value="{{ $expenses->id }}" hidden>
-                                <div class="col-md-4">
+                                <input type="text" name="securities" value="{{ $expenses->securities ?? 0 }}" hidden>
+                                {{-- <div class="col-md-4">
                                     <div class=" mb-4">
                                         <label for="securities" class="mb-1">Social securities</label>
                                         <input id="securities" name="securities" type='text'
                                             value="{{ old('securities') ?: (isset($expenses->securities) ? number_format($expenses->securities) : 0) }}"
                                             class="form-control number-format @error('securities') is-invalid @enderror"
                                             placeholder="E.g 300,000">
-                                        {{-- @error('securities')
-                                            <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror --}}
+                                     
                                     </div>
 
-                                </div>
+                                </div> --}}
                                 <div class="col-md-4">
                                     <div class=" mb-4">
                                         <label for="rent" class="mb-1">Rent</label>
@@ -161,7 +160,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <div class=" mb-4">
                                         <label for="depreciation" class="mb-1">Depreciation</label>
                                         <input id="depreciation" name="depreciation" type='text'
@@ -172,7 +171,7 @@
                                         @enderror
                                     </div>
 
-                                </div>
+                                </div> --}}
                                 <div class="col-md-4">
                                     <div class=" mb-4">
                                         <label for="adminexpenses" class="mb-1"> Admininstrative expenses</label>
@@ -305,7 +304,7 @@
 
 
 
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <button class="btn btn-grape" id="add" type="submit">Update Record</button>
 
                                 </div>

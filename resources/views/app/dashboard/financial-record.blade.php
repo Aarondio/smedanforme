@@ -159,6 +159,10 @@
                                     <td class="text-dark text-end p-1">{{ '₦' . number_format($expenses->internet) }}</td>
                                 </tr>
                                 <tr>
+                                    <td class="text-dark text-capitalize p-1">Depreciation</td>
+                                    <td class="text-dark text-end p-1">{{ '₦' . number_format($expenses->depreciation) }}</td>
+                                </tr>
+                                <tr>
                                     <td class="text-dark text-capitalize p-1">legal fees</td>
                                     <td class="text-dark text-end p-1">{{ '₦' . number_format($expenses->legal) }}</td>
                                 </tr>
@@ -190,6 +194,7 @@
                                                     $expenses->website +
                                                     $expenses->adminexpenses +
                                                     $expenses->marketing +
+                                                    $expenses->depreciation +
                                                     $expenses->supplies +
                                                     $expenses->licences +
                                                     $expenses->internet +
@@ -295,6 +300,10 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="pb-15 pt-5">
+                <a class="btn btn-grape btn-sm float-end" href="{{ route('preview') }}">Preview
+                    submission</a>
             </div>
             @else 
             <div class="alert alert-danger my-5">

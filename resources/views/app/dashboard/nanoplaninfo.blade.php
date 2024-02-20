@@ -1,11 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        /* *{
-                            border: 1px solid red;
-                        } */
-    </style>
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
         data-image-src="{{ asset('assets/img/photos/bg20.png') }}">
         {{-- <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg4.jpg')}}"> --}}
@@ -25,11 +20,11 @@
     <section class="wrapper bg-gray py-10 py-md-12">
         <div class="container">
             @if (session('success'))
-               <center>
-                <div class="alert alert-success mb-5 col-md-10">
-                    {{ session('success') }}
-                </div>
-               </center>
+                <center>
+                    <div class="alert alert-success mb-5 col-md-10">
+                        {{ session('success') }}
+                    </div>
+                </center>
             @endif
             <div class="row justify-content-center ">
                 <div class="col-lg-10 col-md-12 card shadow-lg">
@@ -62,7 +57,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            
+
                                 <p class="text-end fs-14 text-muted"> <span id="counter">0</span>/100</p>
                             </div>
                             <div id="form-2" class="wrapper">
@@ -201,13 +196,20 @@
                             <div id="form-7" class="wrapper">
                                 <h4 class="">Loan Amount </h4>
                                 <select name="loan_amount" id="loan_amount" class="form-select text-dark">
-                                    <option value="" @if ($businessinfo->loan_amount == '') disabled selected @endif>Select loan amount</option>
-                                    <option value="250000" @if ($businessinfo->loan_amount == '250000') selected @endif>250,000</option>
-                                    <option value="500000" @if ($businessinfo->loan_amount == '500000') selected @endif>500,000</option>
-                                    <option value="1000000" @if ($businessinfo->loan_amount == '1000000') selected @endif>1,000,000</option>
-                                    <option value="1500000" @if ($businessinfo->loan_amount == '1500000') selected @endif>1,500,000</option>
-                                    <option value="2000000" @if ($businessinfo->loan_amount == '2000000') selected @endif>2,000,000</option>
-                                    <option value="2500000" @if ($businessinfo->loan_amount == '2500000') selected @endif>2,500,000</option>
+                                    <option value="" @if ($businessinfo->loan_amount == '') disabled selected @endif>
+                                        Select loan amount</option>
+                                    <option value="250000" @if ($businessinfo->loan_amount == '250000') selected @endif>250,000
+                                    </option>
+                                    <option value="500000" @if ($businessinfo->loan_amount == '500000') selected @endif>500,000
+                                    </option>
+                                    <option value="1000000" @if ($businessinfo->loan_amount == '1000000') selected @endif>1,000,000
+                                    </option>
+                                    <option value="1500000" @if ($businessinfo->loan_amount == '1500000') selected @endif>1,500,000
+                                    </option>
+                                    <option value="2000000" @if ($businessinfo->loan_amount == '2000000') selected @endif>2,000,000
+                                    </option>
+                                    <option value="2500000" @if ($businessinfo->loan_amount == '2500000') selected @endif>2,500,000
+                                    </option>
                                 </select>
                                 {{-- <div class="card rounded-0">
                                     <div class="form-floating">
@@ -231,8 +233,8 @@
                                 <a href="{{ route('businessinfo') }}" class="btn btn-outline-danger btn-sm">Back</a>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ route('previewinfo') }}"
-                                    class="float-end btn btn-grape btn-sm">Preview Application</a>
+                                <a href="{{ route('previewinfo') }}" class="float-end btn btn-grape btn-sm">Preview
+                                    Application</a>
                             </div>
                         </div>
                     </div>
@@ -256,7 +258,7 @@
             //         }
             //     });
             // }
-            function limitWordCount(element, wordLimit, counter, saveRoute, input,plan) {
+            function limitWordCount(element, wordLimit, counter, saveRoute, input, plan) {
                 element.on('input', function() {
                     var content = $(this).val();
                     var words = content.match(/\S+/g) || [];
@@ -293,17 +295,20 @@
 
 
             // Apply the word count limit to specific elements
-            limitWordCount($('#audience'), 100, $('#counter'), '{{ route('audience_need') }}', 'audience_need','plan');
+            limitWordCount($('#audience'), 100, $('#counter'), '{{ route('audience_need') }}', 'audience_need',
+                'plan');
             limitWordCount($('#business_model'), 100, $('#counter1'), '{{ route('business_model') }}',
-                'business_model','plan');
+                'business_model', 'plan');
             limitWordCount($('#target_market'), 100, $('#counter2'), '{{ route('target_market') }}',
-                'target_market','plan');
+                'target_market', 'plan');
             limitWordCount($('#competition_ad'), 100, $('#counter3'), '{{ route('competition_ad') }}',
-                'competition_ad','plan');
+                'competition_ad', 'plan');
             limitWordCount($('#management_team'), 100, $('#counter4'), '{{ route('management_team') }}',
-                'management_team','plan');
-            limitWordCount($('#loan_reason'), 100, $('#counter6'), '{{ route('loan_reason') }}', 'loan_reason','plan');
-            limitWordCount($('#loan_amount'), 1, $('#counter7'), '{{ route('loan_amount') }}', 'loan_amount','plan');
+                'management_team', 'plan');
+            limitWordCount($('#loan_reason'), 100, $('#counter6'), '{{ route('loan_reason') }}', 'loan_reason',
+                'plan');
+            limitWordCount($('#loan_amount'), 1, $('#counter7'), '{{ route('loan_amount') }}', 'loan_amount',
+                'plan');
 
             // limitWordCount($('#competition_ad'), 100, $('#counter3'));
             // limitWordCount($('#management_team'), 100, $('#counter4'));

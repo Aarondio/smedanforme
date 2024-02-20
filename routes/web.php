@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountStatementController;
 use App\Http\Controllers\Auth\VerificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -93,28 +94,9 @@ Route::get('comingsoon', [SiteController::class, 'comingsoon'])->name('comingsoo
 Route::get('myproducts', [ProductController::class, 'myproducts'])->name('myproducts');
 Route::get('extrainfo', [CashflowController::class, 'extrainfo'])->name('extrainfo');
 Route::get('fixedprojection', [SiteController::class, 'fixedprojection'])->name('fixedprojection');
-Route::get('success', [SiteController::class, 'success'])->name('success');
-
-
-Route::get('business', [SiteController::class, 'business'])->name('business');
-Route::get('businessinfo', [SiteController::class, 'businessinfo'])->name('businessinfo');
-Route::get('payment', [PaystackController::class, 'store'])->name('payment');
-Route::get('sbpayment', [PaystackController::class, 'sbpayment'])->name('sbpayment');
 
 
 
-Route::post('add_product', [ProductController::class, 'add_product'])->name('add_product');
-Route::post('update_product', [ProductController::class, 'update_product'])->name('update_product');
-Route::delete('deleteProduct/{id}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
-
-
-Route::post('updateinfo', [UserController::class, 'updateinfo'])->name('updateinfo');
-Route::post('updatepersonalinfo', [UserController::class, 'updatepersonalinfo'])->name('updatepersonalinfo');
-Route::post('updatebusinessinfo', [BusinessinfoController::class, 'updatebusinessinfo'])->name('updatebusinessinfo');
-Route::post('updatebusiness', [BusinessinfoController::class, 'updatebusiness'])->name('updatebusiness');
-// Route::post('audience_need',[BusinessinfoController::class,'audience_need'])->name('audience_need');
-Route::post('saveproductioncost', [SalesforcastController::class, 'updatesales'])->name('saveproductioncost');
-Route::get('/get-lgas/{stateId}', [LgaController::class, 'getLGAs'])->name('get-lgas');
 
 
 
@@ -168,14 +150,68 @@ Route::prefix('/smedan')->middleware(['auth:staff'])->group(function () {
     
 });
 
+
+
+
+
+
+
+
+
+
+Route::get('purchase/nbp', [SiteController::class, 'purchasenbp'])->name('purchasenbp');
+Route::get('sbpayment', [PaystackController::class, 'sbpayment'])->name('sbpayment');
+Route::get('payment', [PaystackController::class, 'store'])->name('payment');
+Route::get('/get-lgas/{stateId}', [LgaController::class, 'getLGAs'])->name('get-lgas');
+
 Route::prefix('/')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified','paystack','check.suin'])
     ->group(function () {
-        Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::get('home', [HomeController::class, 'index'])->name('home');
+     
+        Route::get('success', [SiteController::class, 'success'])->name('success');
+        Route::get('business', [SiteController::class, 'business'])->name('business');
+        Route::get('error', function(){
+            return view('app.dashboard.error');
+        })->name('error');
+        Route::get('businessinfo', [SiteController::class, 'businessinfo'])->name('businessinfo');
+
+        Route::post('upload-pdf', [AccountStatementController::class, 'uploadPdf'])->name('uploadPdf');
+        Route::get('statement',[AccountStatementController::class, 'index'])->name('statement');
+        Route::get('sheet',[AccountStatementController::class, 'balanceSheet'])->name('balance');
+        Route::post('updatesheet', [BusinessinfoController::class, 'updateSheet'])->name('updatesheet');
+        
+        
+        
+        Route::post('add_product', [ProductController::class, 'add_product'])->name('add_product');
+        Route::post('update_product', [ProductController::class, 'update_product'])->name('update_product');
+        Route::delete('deleteProduct/{id}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
+        
+        
+        Route::post('updateinfo', [UserController::class, 'updateinfo'])->name('updateinfo');
+        Route::post('updatepersonalinfo', [UserController::class, 'updatepersonalinfo'])->name('updatepersonalinfo');
+        Route::post('updatebusinessinfo', [BusinessinfoController::class, 'updatebusinessinfo'])->name('updatebusinessinfo');
+        Route::post('updatebusiness', [BusinessinfoController::class, 'updatebusiness'])->name('updatebusiness');
+        Route::post('activatesuin', [BusinessinfoController::class, 'updatesuin'])->name('activatesuin');
+        // Route::post('audience_need',[BusinessinfoController::class,'audience_need'])->name('audience_need');
+        Route::post('saveproductioncost', [SalesforcastController::class, 'updatesales'])->name('saveproductioncost');
+ 
+        
+        
+
+
+
+
+        
+        Route::post('/get-smedan-user', [SiteController::class,'getSmedanUser'])->name('getSmedanUser');
+        Route::get('showsuin',[SiteController::class, 'showsuin'])->name('showsuin');
+
+        Route::get('/suindetail',[SiteController::class, 'suindetail'] )->name('suindetail');
+        Route::get('/suin',[SiteController::class, 'suin'] )->name('suin');
 
         Route::get('purchase', [SiteController::class, 'purchase'])->name('purchase');
         Route::get('purchase/mbp', [SiteController::class, 'purchasembp'])->name('purchasembp');
-        Route::get('purchase/nbp', [SiteController::class, 'purchasenbp'])->name('purchasenbp');
+       
 
 
 

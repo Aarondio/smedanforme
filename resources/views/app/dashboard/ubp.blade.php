@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg20.png')}}">
-    {{-- <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg20.png"></section> --}}
+
         <div class="wrapper py-10">
             <div class="container p-0">
                 <div class="row">

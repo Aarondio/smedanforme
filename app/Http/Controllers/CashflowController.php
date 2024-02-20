@@ -81,6 +81,7 @@ class CashflowController extends Controller
         if (!$existingSalesForecast) {
             // Create new sales forecast and return view
             $salesforcast->product_id = $product->id;
+            $salesforcast->businessinfo_id = $businessInfo->id;
             $salesforcast->save();
             $salesforcast = Salesforcast::where('product_id', $product->id)->first();
 

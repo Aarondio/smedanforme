@@ -17,6 +17,13 @@ return new class extends Migration {
                 ->on('products')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
+            $table
+                ->foreign('businessinfo_id')
+                ->references('id')
+                ->on('products')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+
         });
     }
 

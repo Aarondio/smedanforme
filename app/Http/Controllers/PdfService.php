@@ -587,6 +587,7 @@ class PdfService extends Controller
                                      <td class="text-dark text-capitalize p-1 fw-bold" style="font-weight:bold">Total Expenses</td>
                                      <td class="text-dark text-end p-1" style="font-weight:bold">
                                          <strong>' . "₦" .
+                                         
 
                 number_format(
                     $totalexp =
@@ -792,9 +793,148 @@ class PdfService extends Controller
                                      </tr>';
             }
 
-            $htmlContentpands .= '   </tbody>
+            $htmlContentpands .= '   </tbody></table>';
 
-                                 </table>
+            $htmlContentpands .= ' <table class="table table-bordered ">
+            <thead class="bg-success">
+                <th class="text-dark px-2 py-1 border-0">Asset</th>
+                <th class="text-dark px-2 py-1 text-end border-0">{{ $revyear }}</th>
+            </thead>
+            <tbody>';
+            $htmlContentpands .= '   <tr class="border-0">
+                    <td class="fw-bold text-black border-0 px-2 py-1" colspan="2">Curent Asset
+                    </td>
+                </tr>';
+
+                $htmlContentpands .= '   <tr class="border-0">
+                    <td class="border-0 px-2 py-1">Cash and cash Equivalent </td>
+                    <td class="text-end border-0 px-2 py-1">'.
+                        number_format($businessinfo->cash) ?? "Not specified" .'</td>
+                </tr>';
+
+            $htmlContentpands .= '    <tr class="border-0 ">
+                    <td class="border-0 px-2 py-1">Account Recievable </td>
+                    <td class="text-end border-0 px-2 py-1">
+                      '. number_format($businessinfo->cashown) ?? "Not specified" .'</td>
+                </tr>';
+                $htmlContentpands .= '  <tr class="border-0">
+                    <td class="border-0 px-2 py-1">Inventories </td>
+                    <td class="text-end border-0 px-2 py-1">
+                        '. number_format($businessinfo->inventory) ?? "Not specified" .'</td>
+                </tr>';
+                
+                $totalCurrentAsset = $businessinfo->cash + $businessinfo->cashown + $businessinfo->inventory;
+              
+                $htmlContentpands .= '  <tr class="border-bottom-0">
+                    <td class="fw-bold px-2 py-1 border-0">Total Current Asset </td>
+                    <td class="fw-bold px-2 py-1 border-0"><span
+                          
+                            class="float-end">'. number_format($totalCurrentAsset) .'
+                        </span> </td>
+
+                </tr>';
+
+               
+                    $totalCurrent = $businessinfo->cash + $businessinfo->cashown + $businessinfo->inventory;
+             
+                    $htmlContentpands .='  <tr class="border-0">
+                    <td class="border-0 py-2"></td>
+                </tr>';
+                $htmlContentpands .='   <tr class="border-0">
+                    <td class="fw-bold border-0 px-2 py-1" colspan="2">Fixed Asset</td>
+                </tr>
+                <tr class="border-0">
+                    <td class="px-2 py-1 border-0">Plants and Machineries </td>
+                    <td class="text-end px-2 py-1 border-0">'. number_format($businessinfo->plants) ?? "Not specified" .'</td>
+                </tr>';
+
+                $htmlContentpands .='     <tr class="border-0">
+                    <td class="px-2 py-1 border-0">Lands</td>
+                    <td class="text-end px-2 py-1 border-0">
+                        '.number_format($businessinfo->lands) ?? "Not specified" .'</td>
+                </tr> ';
+              
+                $htmlContentpands .='   <tr class="border-0">
+                    <td class="px-2 py-1 border-0">Intangible Asset</td>
+                    <td class="text-end px-2 py-1 border-0">
+                        '. number_format($businessinfo->intangible) ?? "Not specified" .'</td>
+                </tr>';
+
+                $totalFixedAsset = ($businessinfo->plants + $businessinfo->lands + $businessinfo->intangible + $totalCurrent) - ($businessinfo->depreciation);
+                $htmlContentpands .='   <tr class="bg-soft-primary border-0">
+                   
+                    <td class="fw-bold border-0 px-2 py-1" colspan="2">Total Assets<span
+                            class="float-end">'. number_format($totalFixedAsset) .'
+                        </span> </td>
+
+
+                </tr>';
+                    $totalAsset = $totalCurrentAsset + $totalFixedAsset;
+                
+                    $htmlContentpands .='   <tr class="border-0">
+                    <td class="border-0 py-2"></td>
+                </tr>
+                <tr class="border-0 px-2 py-1">
+                    <td class=" border-0 px-2 py-1 fw-bold">Liabilities and Capitals</td>
+
+                </tr>
+                <tr class="border-0 px-2 py-1">
+                    <td class="border-0 px-2 py-1">Account Payable</td>
+                    <td class="border-0 px-2 py-1"> <span
+                            class="float-end">'. number_format($businessinfo->debt) ?? "Not specified" .'
+                        </span> </td>
+                </tr>';
+
+                $htmlContentpands .='  <tr class="border-0 px-2 py-1">
+                    <td class="border-0 px-2 py-1">Taxes payable </td>
+                    <td class="border-0 px-2 py-1"><span
+                            class="float-end">'.number_format($businessinfo->tax) ?? "Not specified" .'
+                        </span> </td>
+                </tr>';
+
+                $htmlContentpands .='  <tr class="border-0 px-2 py-1">
+                    <td class="border-0 px-2 py-1">Long term Loans </td>
+                    <td class="border-0 px-2 py-1"><span
+                            class="float-end">'. number_format($businessinfo->loan) ?? "Not specified".'
+                        </span> </td>
+                </tr>';
+                
+                $totalCurrentLiabilities = $businessinfo->debt + $businessinfo->tax + $businessinfo->loan;
+               $htmlContentpands .='   <tr class="border-bottom-0">
+                   
+                       
+                   
+                    <td class="fw-bold px-2 py-1 border-0">Total Liabilities</td>
+                    <td class="fw-bold px-2 py-1 border-0 text-end">
+                        '.number_format($totalCurrentLiabilities) .'</td>
+                </tr>';
+                $htmlContentpands .='     <tr class="border-0">
+                    <td class="border-0 py-2"></td>
+                </tr>
+                <tr class="border-0 px-2 py-1">
+                    <td class="border-0 px-2 py-1">Capital </td>
+                    <td class="border-0 px-2 py-1"><span
+                            class="float-end">'. number_format($businessinfo->capital) ?? "Not specified".'
+                        </span> </td>
+                </tr>';
+                
+                $htmlContentpands .='  <td class="border-0 px-2 py-1">Net Profit </td>
+                <td class="border-0 px-2 py-1"><span
+                        class="float-end">'. number_format($revenue) ?? "Not specified".'
+                    </span> </td>
+                </tr>';
+
+                $totalSharedEquity  = $totalCurrentLiabilities + $businessinfo->capital + $revenue;  
+                $htmlContentpands .='  <tr class="bg-soft-primary">
+                   
+                    <td class="fw-bold">Liabilities and shareholder Equities </td>
+                    <td class="fw-bold text-end">'.
+                         number_format($totalSharedEquity) .'
+                    </td>
+                </tr>';
+
+                $htmlContentpands .='   </tbody>
+                        </table>
 
 
 
@@ -837,7 +977,7 @@ class PdfService extends Controller
             </html>';
             $document->WriteHTML($profit);
             // Output the PDF as a download (change 'I' to 'D' if you want to force download)
-            return response($document->Output($businessinfo->business_name.' '.'Business plan.pdf', 'D'), 200, $header);
+            return response($document->Output($businessinfo->business_name.' '.'Business plan.pdf', 'I'), 200, $header);
         }
     }
 

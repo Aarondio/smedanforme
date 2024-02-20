@@ -3,7 +3,6 @@
 @section('content')
     <section class="wrapper image-wrapper bg-image bg-overlay text-white"
         data-image-src="{{ asset('asset/img/photos/bg4.jpg') }}">
-        {{-- <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{asset('assets/img/photos/bg20.png"></section> --}}
         <div class="wrapper py-10">
             <div class="container p-0">
                 <div class="row">
@@ -98,7 +97,7 @@
                                     </div>
                                     <!--/.prices -->
 
-                                    <a href="https://paystack.com/pay/smecredits" class="btn btn-grape rounded-pill">Pay
+                                    <a href="https://paystack.com/pay/smecredits" target="blank" class="btn btn-grape rounded-pill">Pay
                                         now</a>
                                 </div>
                                 <!--/.card-body -->

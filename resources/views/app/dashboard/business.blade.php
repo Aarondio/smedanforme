@@ -33,6 +33,10 @@
                                     <ul class="list-unstyled fs-sm lh-sm text-reset fw-light">
                                         <li><a class="nav-link  fw-normal" href="{{ route('personal') }}">Personal Info</a>
                                         </li>
+                                        @if(empty($businessinfo->suin))
+                                        <li><a class="nav-link  fw-normal" href="{{ route('suin') }}">SUIN Verification</a>
+                                        @endif
+                                        </li>
                                         <li><a class="nav-link  my-1 fw-normal active text-decoration-underline"
                                                 href="{{ route('business') }}">Business
                                                 Info</a></li>
@@ -91,10 +95,8 @@
                                             value="{{ old('business_name') ?: $businessinfo->business_name ?? '' }}"
                                             name="business_name" type="text"
                                             class="form-control @error('business_name') is-invalid @enderror"
-                                            placeholder="Business name">
-                                        {{-- @error('business_name')
-                                            <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror --}}
+                                            placeholder="Business name" readonly>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -114,9 +116,7 @@
                                                     No</option>
                                             </select>
 
-                                            {{-- @error('is_registered')
-                                                <p class="small text-danger"> {{ $message }}</p>
-                                            @enderror --}}
+                                         
                                         </div>
                                     </div>
                                 </div>
@@ -140,9 +140,7 @@
                                                     Cooperative Society</option>
                                             </select>
 
-                                            {{-- @error('business_type')
-                                                <p class="small text-danger"> {{ $message }}</p>
-                                            @enderror --}}
+                                      
                                         </div>
                                     </div>
                                 </div>
@@ -154,10 +152,8 @@
                                             Number(SUIN)</label>
                                         <input id="suin" name="suin"
                                             value="{{ old('suin') ?: $businessinfo->suin ?? 'SUIN' }}" type="text"
-                                            class="form-control @error('suin') is-invalid @enderror" placeholder="SUIN">
-                                        {{-- @error('suin')
-                                            <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror --}}
+                                            class="form-control @error('suin') is-invalid @enderror" placeholder="SUIN" readonly>
+                                      
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -167,9 +163,7 @@
                                             value="{{ old('business_age') ?: $businessinfo->business_age ?? '' }}"
                                             type="number" class="form-control @error('business_age') is-invalid @enderror"
                                             placeholder="E.g 3">
-                                        {{-- @error('suin')
-                                            <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror --}}
+                                      
                                     </div>
                                 </div>
 
@@ -208,9 +202,6 @@
                                         </select>
 
 
-                                        {{-- @error('sector')
-                                            <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -236,9 +227,29 @@
                                         </select>
 
 
-                                        {{-- @error('sector')
-                                            <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror --}}
+                                   
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class=" mb-4">
+                                        <label for="website" class="mb-3">Business Email</label>
+                                        <input id="phone"
+                                            value="{{ old('email') ?: $businessinfo->email ?? '' }}"
+                                            name="email" type="text"
+                                            class="form-control @error('email') is-invalid @enderror"
+                                            placeholder="hkfenterprise@gmail..com">
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class=" mb-4">
+                                        <label for="website" class="mb-3">Business Phone</label>
+                                        <input id="phone"
+                                            value="{{ old('phone') ?: $businessinfo->phone ?? '' }}"
+                                            name="phone" type="text"
+                                            class="form-control @error('phone') is-invalid @enderror"
+                                            placeholder="hkfenterprise@gmail..com">
+                                        
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -249,9 +260,7 @@
                                             name="website" type="text"
                                             class="form-control @error('business_name') is-invalid @enderror"
                                             placeholder="www.hkfenterprise.com">
-                                        {{-- @error('business_name')
-                                            <p class="small text-danger"> {{ $message }}</p>
-                                        @enderror --}}
+                                        
                                     </div>
                                 </div>
 

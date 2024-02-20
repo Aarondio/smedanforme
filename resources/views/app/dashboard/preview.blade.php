@@ -224,27 +224,37 @@
                             <h3>Executive Summary</h3>
                             {{-- <h3>Problem & Solution</h3> --}}
                             <h3 class="fw-light">Problem Worth Solving</h3>
-                            <p class="text-dark text-justify">{{ $businessinfo->audience_need }}</p>
+                            <p class="text-dark text-justify ">
+                                {{ $businessinfo->audience_need ?? 'No information was provided' }}</p>
                             <h3 class="fw-light">Our Advantages</h3>
-                            <p class="text-dark text-justify">{{ $businessinfo->competition_ad }}</p>
+                            <p class="text-dark text-justify">
+                                {{ $businessinfo->competition_ad ?? 'No information was provided' }}</p>
                             <h3 class="fw-light">Target Market</h3>
-                            <p class="text-dark text-justify">{{ $businessinfo->target_market }}</p>
+                            <p class="text-dark text-justify">
+                                {{ $businessinfo->target_market ?? 'No information was provided' }}</p>
                             <h3 class="fw-light">Management Team</h3>
-                            <p class="text-dark text-justify">{{ $businessinfo->management_team }}</p>
+                            <p class="text-dark text-justify">
+                                {{ $businessinfo->management_team ?? 'No information was provided' }}</p>
                             <h3 class="fw-light">Loan Reason</h3>
-                            <p class="text-dark text-justify">{{ $businessinfo->loan_reason }}</p>
+                            <p class="text-dark text-justify">
+                                {{ $businessinfo->loan_reason ?? 'No information was provided' }}</p>
                             <h3 class="fw-light">Profit Generation</h3>
-                            <p class="text-dark text-justify">{{ $businessinfo->business_model }}</p>
+                            <p class="text-dark text-justify">
+                                {{ $businessinfo->business_model ?? 'No information was provided' }}</p>
 
                             <h3 class="mt-12">S.W.O.T Analysis</h3>
                             <h3 class="fw-light">Strength</h3>
-                            <p class="text-dark text-justify">{{ $businessinfo->strength }}</p>
+                            <p class="text-dark text-justify">
+                                {{ $businessinfo->strength ?? 'No information was provided' }}</p>
                             <h3 class="fw-light">Weakness</h3>
-                            <p class="text-dark text-justify">{{ $businessinfo->weakness }}</p>
+                            <p class="text-dark text-justify">
+                                {{ $businessinfo->weakness ?? 'No information was provided' }}</p>
                             <h3 class="fw-light">Opportunity</h3>
-                            <p class="text-dark text-justify">{{ $businessinfo->opportunity }}</p>
+                            <p class="text-dark text-justify">
+                                {{ $businessinfo->opportunity ?? 'No information was provided' }}</p>
                             <h3 class="fw-light">Threats</h3>
-                            <p class="text-dark text-justify">{{ $businessinfo->threats }}</p>
+                            <p class="text-dark text-justify">
+                                {{ $businessinfo->threats ?? 'No information was provided' }}</p>
 
 
                             @if ($products->isNotEmpty())
@@ -264,7 +274,7 @@
                                         @foreach ($products as $product)
                                             @php
 
-                                                $total += $product->quantity * $product->price - ($product->quantity - $product->cost);
+                                                $total += ($product->quantity * $product->price) - ($product->quantity - $product->cost);
 
                                             @endphp
                                             <tr>
@@ -313,12 +323,12 @@
                                             <td class="text-dark text-end p-1">
                                                 {{ '₦' . number_format($expenses->salary) }}</td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="text-dark text-capitalize p-1">Social securities</td>
                                             <td class="text-dark text-end p-1">
                                                 {{ '₦' . number_format($expenses->securities) }}
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td class="text-dark text-capitalize p-1">website / Softwares</td>
                                             <td class="text-dark text-end p-1">
@@ -382,6 +392,7 @@
                                                         $totalexp =
                                                             $expenses->rent +
                                                             $expenses->utilities +
+                                                            // $expenses->depreciation +
                                                             $expenses->salary +
                                                             $expenses->securities +
                                                             $expenses->website +
@@ -485,6 +496,201 @@
                                         @endfor
                                     </tbody>
                                 </table>
+                                <h3 class="mt-12">Balance sheet</h3>
+                                <table class="table table-bordered ">
+                                    <thead class="bg-success">
+                                        <th class="text-dark px-2 py-1 border-0">Asset</th>
+                                        <th class="text-dark px-2 py-1 text-end border-0">{{ $revyear }}</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-0">
+                                            <td class="fw-bold text-black border-0 px-2 py-1" colspan="2">Curent Asset
+                                            </td>
+                                            {{-- <td>Machineries: {{number_format($businessinfo->equipment) ?? 'Not specified'}}</td> --}}
+                                        </tr>
+                                        <tr class="border-0">
+                                            <td class="border-0 px-2 py-1">Cash and cash Equivalent </td>
+                                            <td class="text-end border-0 px-2 py-1">
+                                                {{ number_format($businessinfo->cash) ?? 'Not specified' }}</td>
+                                        </tr>
+                                        <tr class="border-0 ">
+                                            <td class="border-0 px-2 py-1">Account Recievable </td>
+                                            <td class="text-end border-0 px-2 py-1">
+                                                {{ number_format($businessinfo->cashown) ?? 'Not specified' }}</td>
+                                        </tr>
+                                        <tr class="border-0">
+                                            <td class="border-0 px-2 py-1">Inventories </td>
+                                            <td class="text-end border-0 px-2 py-1">
+                                                {{ number_format($businessinfo->inventory) ?? 'Not specified' }}</td>
+                                        </tr>
+                                        <tr class="border-bottom-0">
+                                            <td class="fw-bold px-2 py-1 border-0">Total Current Asset </td>
+                                            <td class="fw-bold px-2 py-1 border-0"><span
+                                                  @php   
+                                                   $totalCurrentAsset = $businessinfo->cash + $businessinfo->cashown + $businessinfo->inventory;
+                                                  @endphp
+                                                    class="float-end">{{  number_format($totalCurrentAsset) }}
+                                                </span> </td>
+
+                                        </tr>
+                                        @php
+                                            $totalCurrent = $businessinfo->cash + $businessinfo->cashown + $businessinfo->inventory;
+                                        @endphp
+                                        <tr class="border-0">
+                                            <td class="border-0 py-2"></td>
+                                        </tr>
+                                        <tr class="border-0">
+                                            <td class="fw-bold border-0 px-2 py-1" colspan="2">Fixed Asset</td>
+                                            {{-- <td>Machineries: {{number_format($businessinfo->equipment) ?? 'Not specified'}}</td> --}}
+                                        </tr>
+                                        <tr class="border-0">
+                                            <td class="px-2 py-1 border-0">Plants and Machineries </td>
+                                            <td class="text-end px-2 py-1 border-0">
+                                                {{ number_format($businessinfo->plants) ?? 'Not specified' }}</td>
+                                        </tr>
+                                        <tr class="border-0">
+                                            <td class="px-2 py-1 border-0">Lands</td>
+                                            <td class="text-end px-2 py-1 border-0">
+                                                {{ number_format($businessinfo->lands) ?? 'Not specified' }}</td>
+                                        </tr>
+                                        {{-- <tr class="border-0">
+                                            <td  class="px-2 py-1 border-0">Depreciation</td>
+                                             <td class="text-end px-2 py-1 border-0">{{number_format($businessinfo->cashown) ?? 'Not specified'}}</td>
+                                        </tr> --}}
+                                        <tr class="border-0">
+                                            <td class="px-2 py-1 border-0">Intangible Asset</td>
+                                            <td class="text-end px-2 py-1 border-0">
+                                                {{ number_format($businessinfo->intangible) ?? 'Not specified' }}</td>
+                                        </tr>
+                                        <tr class="bg-soft-primary border-0">
+                                            @php
+                                                $totalFixedAsset = ($businessinfo->plants + $businessinfo->lands + $businessinfo->intangible + $totalCurrent) - ($businessinfo->depreciation)
+                                            @endphp
+                                            <td class="fw-bold border-0 px-2 py-1" colspan="2">Total Assets<span
+                                                    class="float-end">{{ number_format($totalFixedAsset) }}
+                                                </span> </td>
+
+
+                                        </tr>
+                                        @php
+                                            $totalAsset = $totalCurrentAsset + $totalFixedAsset;
+                                        @endphp
+                                        <tr class="border-0">
+                                            <td class="border-0 py-2"></td>
+                                        </tr>
+                                        <tr class="border-0 px-2 py-1">
+                                            <td class=" border-0 px-2 py-1 fw-bold">Liabilities and Capitals</td>
+
+                                        </tr>
+                                        <tr class="border-0 px-2 py-1">
+                                            <td class="border-0 px-2 py-1">Account Payable</td>
+                                            <td class="border-0 px-2 py-1"> <span
+                                                    class="float-end">{{ number_format($businessinfo->debt) ?? 'Not specified' }}
+                                                </span> </td>
+                                        </tr>
+                                        <tr class="border-0 px-2 py-1">
+                                            <td class="border-0 px-2 py-1">Taxes payable </td>
+                                            <td class="border-0 px-2 py-1"><span
+                                                    class="float-end">{{ number_format($businessinfo->tax) ?? 'Not specified' }}
+                                                </span> </td>
+                                        </tr>
+                                        <tr class="border-0 px-2 py-1">
+                                            <td class="border-0 px-2 py-1">Long term Loans </td>
+                                            <td class="border-0 px-2 py-1"><span
+                                                    class="float-end">{{ number_format($businessinfo->loan) ?? 'Not specified' }}
+                                                </span> </td>
+                                        </tr>
+                                        <tr class="border-bottom-0">
+                                            @php
+                                                $totalCurrentLiabilities = $businessinfo->debt + $businessinfo->tax + $businessinfo->loan;
+                                            @endphp
+                                            <td class="fw-bold px-2 py-1 border-0">Total Liabilities</td>
+                                            <td class="fw-bold px-2 py-1 border-0 text-end">
+                                                {{ number_format($totalCurrentLiabilities) }}</td>
+                                        </tr>
+                                        <tr class="border-0">
+                                            <td class="border-0 py-2"></td>
+                                        </tr>
+                                        <tr class="border-0 px-2 py-1">
+                                            <td class="border-0 px-2 py-1">Capital </td>
+                                            <td class="border-0 px-2 py-1"><span
+                                                    class="float-end">{{ number_format($businessinfo->capital) ?? 'Not specified' }}
+                                                </span> </td>
+                                        </tr>
+                                        <td class="border-0 px-2 py-1">Net Profit </td>
+                                        <td class="border-0 px-2 py-1"><span
+                                                class="float-end">{{ number_format($result) ?? 'Not specified' }}
+                                            </span> </td>
+                                        </tr>
+                                        <tr class="bg-soft-primary">
+                                            @php $totalSharedEquity  = $totalCurrentLiabilities + $businessinfo->capital + $result;  @endphp
+                                            <td class="fw-bold">Liabilities and shareholder Equities </td>
+                                            <td class="fw-bold text-end">
+                                                {{ number_format($totalSharedEquity) }}
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                <div class="">
+                                    @php
+                                         $averageInventory = (($businessinfo->raw_start + $businessinfo->raw_end)*365)/2;
+                                        
+                                         $costOfGoodsSold = 0;
+                                         foreach ($products as $product) {
+                                            $costOfGoodsSold += $product->price * $product->quantity;
+                                         }
+                                         $costOfGoodsSold *= 365;
+                                         $dio = ($averageInventory / $costOfGoodsSold);
+                                         $quickratio = ($businessinfo->cash + $businessinfo->cashown)/$totalCurrentLiabilities;
+                                         $dso = ((($businessinfo->cashown* 1.2)/2)/$total) * 365;
+                                         $dpo = ((($businessinfo->debt* 1.2)/2)/$total) *365;
+                                         $ccc = $dio + $dso -$dpo;
+                                         $pp =  $businessinfo->capital / $result;
+                                    @endphp
+                                    <h4>Indicators</h4>
+                                    <table class="table">
+                                        <thead>
+                                            <th class="px-2 py-1">Indicator</th>
+                                            <th class="px-2 py-1">Value</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Quick Ration (QR)</td>
+                                                <td>{{ number_format($quickratio,2) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Days Inventory Outstanding (DIO)</td>
+                                                <td>{{ number_format($dio,2) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Days Sales Outstanding (DSO) </td>
+                                                {{-- <td>{{ (($businessinfo->cashown/2)/$total) * 365 }}</td> --}}
+                                                <td>{{ number_format($dso,2) }}</td>
+                              
+                                            </tr>
+                                            <tr>
+                                                <td>Days Payable Outstanding (DPO) </td>
+                                                {{-- <td>{{ (($businessinfo->cashown/2)/$total) * 365 }}</td> --}}
+                                                <td>{{ number_format($dpo,2) }}</td>
+                              
+                                            </tr>
+                                            <tr>
+                                                <td>Cash conversion cycle (CCC) </td>
+                                                {{-- <td>{{ (($businessinfo->cashown/2)/$total) * 365 }}</td> --}}
+                                                <td>{{ number_format($ccc,2) }}</td>
+                              
+                                            </tr>
+                                            <tr>
+                                                <td>Payback period </td>
+                                                {{-- <td>{{ (($businessinfo->cashown/2)/$total) * 365 }}</td> --}}
+                                                <td>{{ number_format($pp,2) }}</td>
+                              
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                
+                                </div>
                             @else
                                 <div class="alert alert-danger my-5">
                                     <h3 class="text-danger m-0 p-0">You have not added your income information</h3>
@@ -499,6 +705,8 @@
                         </div>
 
                     </div>
+
+
 
                     {{-- @if (!$salesforcasts->isEmpty())
                         <div class="card mt-8">

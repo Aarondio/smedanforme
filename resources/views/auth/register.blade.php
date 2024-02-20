@@ -5,10 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="card">
-                  
+
 
                     <div class="card-body">
                         <h3 class="mb-4 text-center">Create an account</h3>
+
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
 
@@ -31,14 +32,14 @@
                             <div class="form-floating mb-4">
                                 <input id="firstname" type="text"
                                     class="form-control @error('firstname') is-invalid @enderror" name="firstname"
-                                    value="{{ old('firstname') }}" placeholder="First name" required
-                                    autocomplete="name" autofocus>
+                                    value="{{ old('firstname') }}" placeholder="First name" required autocomplete="name"
+                                    autofocus>
                                 <label for="firstname">First Name</label>
                             </div>
                             <p>
                                 @error('firstname')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                    <span class="" role="alert">
+                                        {{ $message }}
                                     </span>
                                 @enderror
                             </p>
@@ -61,14 +62,14 @@
                             <div class="form-floating mb-4">
                                 <input id="surname" type="text"
                                     class="form-control @error('surname') is-invalid @enderror" name="surname"
-                                    value="{{ old('surname') }}" placeholder="Surname" required
-                                    autocomplete="name" autofocus>
+                                    value="{{ old('surname') }}" placeholder="Surname" required autocomplete="name"
+                                    autofocus>
                                 <label for="surname">Surname</label>
                             </div>
                             <p>
                                 @error('surname')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                    <span class="" role="alert">
+                                        {{ $message }}
                                     </span>
                                 @enderror
                             </p>
@@ -89,15 +90,18 @@
 
                             </div> --}}
 
-                            <div class="form-floating mb-4">
-                                <input type="email" class="form-control @error('email') is-invalid @enderror""  name="email"  value="{{ old('email') }}" placeholder="Email" id="email" required autocomplete="email" autofocus>
+                            <div class="form-floating ">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror""
+                                    name="email" value="{{ old('email') }}" placeholder="Email" id="email" required
+                                    autocomplete="email" autofocus>
                                 <label for="email">Email</label>
-                              </div>
-                              <p> @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror</p>
+                            </div>
+                            <p class="m-0 p-0 mb-4"> @error('email')
+                                    <span class="small text-danger" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </p>
 
                             {{-- <div class="mb-0">
                                 <label for="password" class="col-md-4 col-form-label ">{{ __('Password') }}</label>
@@ -115,19 +119,19 @@
 
                             </div> --}}
                             <div class="form-floating password-field mb-4">
-                                <input type="password" class="form-control 
-                                @error('password') is-invalid @enderror" placeholder="Password" name="password" id="password" required
+                                <input type="password"
+                                    class="form-control  "
+                                    placeholder="Password" name="password" id="password" required
                                     autocomplete="current-password">
-                                <span class="password-toggle"><i
-                                    class="uil uil-eye"></i></span>
+                                <span class="password-toggle"><i class="uil uil-eye"></i></span>
                                 <label for="password">Password</label>
                             </div>
-                            <p> @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                            {{-- <p> @error('password')
+                                    <span class="small text-danger" role="alert">
+                                      {{ $message }}
                                     </span>
                                 @enderror
-                            </p>
+                            </p> --}}
 
                             {{-- <div class="mb-0">
                                 <label for="password-confirm"
@@ -139,16 +143,15 @@
 
                             </div> --}}
 
-                            <div class="form-floating password-field mb-4">
-                                <input type="password" class="form-control" placeholder="Password" name="password_confirmation" id="password-confirm" required
-                                    autocomplete="new-password">
-                                <span class="password-toggle"><i
-                                    class="uil uil-eye"></i></span>
-                                <label for="password-confirm">Password</label>
+                            <div class="form-floating password-field ">
+                                <input type="password" class="form-control" placeholder="Password"
+                                    name="password_confirmation" id="password-confirm" required autocomplete="new-password">
+                                <span class="password-toggle"><i class="uil uil-eye"></i></span>
+                                <label for="password-confirm">Confirm password</label>
                             </div>
-                            <p> @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                            <p class="m-0 p-0 mb-4"> @error('password')
+                                    <span class="small text-danger" role="alert">
+                                        {{ $message }}
                                     </span>
                                 @enderror
                             </p>
@@ -163,7 +166,7 @@
                         </form>
                     </div>
                 </div>
-                <p class="text-center mt-4">Already registered? <a href="{{route('login')}}">Sign in</a></p>
+                <p class="text-center mt-4">Already registered? <a href="{{ route('login') }}">Sign in</a></p>
             </div>
         </div>
     </div>

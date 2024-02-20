@@ -21,9 +21,9 @@ class LoginStaffController extends Controller
 
     public function showLoginForm()
     {
-        if (Auth::guard('staff')->check()) {
-            return redirect()->route('admindashboard');
-        }
+        // if (Auth::guard('staff')->check()) {
+        //     return redirect()->route('admindashboard');
+        // }
 
         return view('smedan.login');
     }

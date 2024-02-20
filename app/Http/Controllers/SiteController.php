@@ -12,6 +12,7 @@ use App\Models\State;
 use App\Models\Expenses;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class SiteController extends Controller
 {
@@ -22,11 +23,50 @@ class SiteController extends Controller
         return view('nbp');
     }
 
-   
-   
+
+
     public function mbp(Request $request)
     {
         return view('mbp');
+    }
+
+    public function suin(User $user)
+    {
+        $user = Auth::user();
+        $businessinfo = Businessinfo::where('user_id', $user->id)->where('plan_type', 1)->first();
+        if($businessinfo){
+            $suin = $businessinfo->suin;
+            if(empty($suin)){
+                return view('app.dashboard.suin');
+            }else{
+                return redirect()->route('business');
+            }
+        }
+
+        return redirect()->route('personal');
+     
+    }
+    public function suindetail()
+    {
+        return view('app.dashboard.response');
+    }
+
+    public function showsuin(){
+        return view('app.dashboard.response');
+    }
+    public function getSmedanUser(Request $request,User $user)
+    {
+        $response = Http::get('https://api.smedanregister.ng/api/get-smedan-user', [
+            'smedan_number' => $request->input('smedan_number'),
+        ]);
+        $user = Auth::user();
+        $businessinfo = Businessinfo::where('user_id', $user->id)->where('plan_type', 1)->first();
+        $res = $response->json();
+        if ($res['success']) {
+            return view('app.dashboard.response', ['response' => $response->json()],compact('businessinfo'));
+        } else {
+            return redirect()->back()->with('message', 'Invalid Smedan unique identification number.');
+        }
     }
 
     public function applicants(Request $request, Businessinfo $businessinfos)

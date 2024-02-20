@@ -158,8 +158,11 @@ class UserController extends Controller
                 $employees->save();
             }
     
+            // return redirect()
+            //     ->route('business', $user)
+            //     ->withSuccess("Personal information has been saved successfully");
             return redirect()
-                ->route('business', $user)
+                ->route('suin')
                 ->withSuccess("Personal information has been saved successfully");
         } catch (\Exception $e) {
             return redirect()
